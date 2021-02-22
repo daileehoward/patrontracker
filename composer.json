@@ -1,0 +1,12 @@
+{
+  "name": "dclemmer2/328/midterm1",
+  "authors": [
+    {
+      "name": "Dana Clemmer",
+      "email": "dclemmer2@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
