@@ -16,6 +16,7 @@ $f3 = Base::instance();
 
 //add classes
 $controller = new Controller($f3);
+$dataLayer = new DataLayer();
 
 //Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);

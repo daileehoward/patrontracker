@@ -31,6 +31,17 @@ class Controller
     /** Display form page */
     function form()
     {
+        global $dataLayer;
+
+        //get arrays
+        $this->_f3->set('questions', $dataLayer->getQuestions());
+        $this->_f3->set('locations', $dataLayer->getLocations());
+        $this->_f3->set('positions', $dataLayer->getPositions());
+        $this->_f3->set('methods', $dataLayer->getContactMethods());
+        $this->_f3->set('incidentReports', $dataLayer->getIncidentReportOptions());
+
+
+
         //Display a view
         $view = new Template();
         echo $view->render('views/form.html');
