@@ -40,12 +40,16 @@
             <select id="location" name="location">
                 <option selected>Choose...</option>
                 <repeat group="{{ @locations }}" value = "{{ @location }}">
-                    <option  value="location">{{ ucfirst(@location) }}</option>
+                    <option value="{{ @location }}" <check if="{{ @location == @userLocation }}">selected</check>>
+                    {{ ucfirst(@location) }}</option>
                 </repeat>
             </select><br>
 
             &emsp;<label for="locationOther">Other: </label>
-            <input type="text" id="locationOther" name="locationOther">
+            <input type="text" id="locationOther" name="locationOther" value="{{ @userLocationOther }}">
+            <check if="{{ isset(@errors['userLocationOther']) }}">
+                {{ @errors['userLocationOther'] }}
+            </check>
             <br>
 
             <label for="question">Question: </label>
@@ -57,7 +61,10 @@
             </select><br>
 
             &emsp;<label for="questionOther">Other: </label>
-            <input type="text" id="questionOther" name="questionOther">
+            <input type="text" id="questionOther" name="questionOther" value="{{ @userQuestionOther }}">
+            <check if="{{ isset(@errors['userQuestionOther']) }}">
+                {{ @errors['userQuestionOther'] }}
+            </check>
             <br>
 
             <label>Incident Report:</label>
@@ -71,16 +78,23 @@
             </check>
             <br>
 
-            &emsp;<label for="incNum">Incident Report Number: </label>
-            <input type="number" id="incNum" name="incNum">
+            &emsp;<label for="incidentNum">Incident Report Number: </label>
+            <input type="number" id="incidentNum" name="incidentNum" value="{{ @userIncReportNum }}">
+            <check if="{{ isset(@errors['userIncReportNum']) }}">
+                {{ @errors['userIncReportNum'] }}
+            </check>
             <br>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="incReportComments">Comments:</label>
+                    <label for="comments">Comments:</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <textarea id="incReportComments" name="incReportComments" rows="2"></textarea>
+                    <textarea id="comments" name="comments" rows="2" value="{{ @userComments }}"></textarea>
+                    <check if="{{ isset(@errors['comments']) }}">
+                        {{ @errors['comments'] }}
+                    </check>
+
                 </div>
             </div>
             <br><br>
