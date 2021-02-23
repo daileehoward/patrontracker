@@ -22,4 +22,28 @@ class DataLayer
     {
         return array("l1", "l2", "l3");
     }
+
+    /** getPositions() returns an array of positions
+     *  @return array
+     */
+    function getPositions()
+    {
+        return array("SHD-1", "SHD-2");
+    }
+
+    /** getContactMethods() returns an array of contact methods
+     *  @return array
+     */
+    function getContactMethods()
+    {
+        return array("zoom", "phone");
+    }
+
+    /** getIncidentReportOptions() returns an array of incident report options
+     *  @return array
+     */
+    function getIncidentReportOptions()
+    {
+        return array("yes", "no");
+    }
 }
