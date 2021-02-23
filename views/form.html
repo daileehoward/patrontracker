@@ -13,33 +13,35 @@
 
             <label>Time:</label><br>
             <label>Date:</label><br>
+
             <label>Position:</label>
-            <label class="radioFormat"><input type="radio" name="position" id="position" value="{{ @positionOption }}"
-                <check if="{{ @positionOption == @userPosition }}">checked</check>
-                > {{ucfirst(@positionOption) }}
-                </input>SHD-1</label>&emsp;
-            <label class="radioFormat"><input type="radio" name="position" id="position" value="{{ @positionOption }}"
-                <check if="{{ @positionOption == @userPosition }}">checked</check>
-                > {{ucfirst(@positionOption) }}
-                </input>SHD-2</label>&emsp;
+            <repeat group = "{{ @positions }}" value="{{ @position }}">
+                <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
+                    <check if="{{ @position == @userPosition }}">checked</check>> {{ucfirst(@position) }}
+                    </input></label>&emsp;
+            </repeat>
+            <check if="{{ isset(@errors['position']) }}">
+                {{ @errors['position'] }}
+            </check>
             <br>
 
             <label>Contact Method: </label>
-            <label class="radioFormat"><input type="radio" name="method" id="method" value="{{ @methodOption }}"
-                <check if="{{ @methodOption == @userMethod }}">checked</check>
-                > {{ucfirst(@methodOption) }}
-                </input>Zoom</label>&emsp;
-            <label class="radioFormat"><input type="radio" name="method" id="method" value="{{ @methodOption }}"
-                <check if="{{ @methodOption == @userMethod }}">checked</check>
-                > {{ucfirst(@methodOption) }}
-                </input>Phone</label>&emsp;
+            <repeat group = "{{ @methods }}" value="{{ @method }}">
+                <label><input type="radio" name="method" id="{{ @method }}" value="{{ @method }}"
+                    <check if="{{ @method == @userMethod }}">checked</check>> {{ucfirst(@method) }}
+                    </input></label>&emsp;
+            </repeat>
+            <check if="{{ isset(@errors['method']) }}">
+                {{ @errors['method'] }}
+            </check>
             <br>
 
             <label for="location">Location: </label>
             <select id="location" name="location">
                 <option selected>Choose...</option>
-                <option  value="l1">Location 1</option>
-                <option value="l2">Location 2</option>
+                <repeat group="{{ @locations }}" value = "{{ @location }}">
+                    <option  value="location">{{ ucfirst(@location) }}</option>
+                </repeat>
             </select><br>
 
             &emsp;<label for="locationOther">Other: </label>
@@ -49,8 +51,9 @@
             <label for="question">Question: </label>
             <select id="question" name="question">
                 <option selected>Choose...</option>
-                <option  value="q1">Question 1</option>
-                <option value="q2">Question 2</option>
+            <repeat group="{{ @questions }}" value = "{{ @question }}">
+                <option  value="question">{{ ucfirst(@question) }}</option>
+            </repeat>
             </select><br>
 
             &emsp;<label for="questionOther">Other: </label>
@@ -58,14 +61,14 @@
             <br>
 
             <label>Incident Report:</label>
-            <label class="radioFormat"><input type="radio" name="incReport" id="incReport" value="{{ @incReportOption }}"
-                <check if="{{ @incReportOption == @userIncReport }}">checked</check>
-                > {{ucfirst(@incReportOption) }}
-                </input>Yes</label>&emsp;
-            <label class="radioFormat"><input type="radio" name="incReport" id="incReport" value="{{ @incReportOption }}"
-                <check if="{{ @incReportOption == @userIncReport }}">checked</check>
-                > {{ucfirst(@incReportOption) }}
-                </input>No</label>&emsp;
+            <repeat group = "{{ @incidentReports }}" value="{{ @incidentReport }}">
+                <label><input type="radio" name="incidentReport" id="{{ @incidentReport }}" value="{{ @incidentReport }}"
+                    <check if="{{ @incidentReport == @userIncidentReport }}">checked</check>> {{ucfirst(@incidentReport) }}
+                    </input></label>&emsp;
+            </repeat>
+            <check if="{{ isset(@errors['incidentReport']) }}">
+                {{ @errors['incidentReport'] }}
+            </check>
             <br>
 
             &emsp;<label for="incNum">Incident Report Number: </label>
