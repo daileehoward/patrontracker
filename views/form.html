@@ -7,17 +7,19 @@
         <div class="p-5">
 
             <label for="name">Employee Name: </label>
-            <input type="text" id="name" name="name" value="{{ @userName }}">
+            <input type="text" id="name" name="name" value="{{ @employeeName }}">
             <check if="{{ isset(@errors['name']) }}">{{ @errors['name'] }}</check>
             <br>
 
-            <label>Time:</label><br>
-            <label>Date:</label><br>
+            <label>Time:</label>
+            <input type="time" name="time" value="{{ @clientTime }}"><br>
+            <label>Date:</label>
+            <input type="date" name="date" value ="{{ $clientDate }}"><br>
 
             <label>Position:</label>
             <repeat group = "{{ @positions }}" value="{{ @position }}">
                 <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
-                    <check if="{{ @position == @userPosition }}">checked</check>> {{ucfirst(@position) }}
+                    <check if="{{ @position == @employeePosition }}">checked</check>> {{ucfirst(@position) }}
                     </input></label>&emsp;
             </repeat>
             <check if="{{ isset(@errors['position']) }}">
@@ -28,7 +30,7 @@
             <label>Contact Method: </label>
             <repeat group = "{{ @methods }}" value="{{ @method }}">
                 <label><input type="radio" name="method" id="{{ @method }}" value="{{ @method }}"
-                    <check if="{{ @method == @userMethod }}">checked</check>> {{ucfirst(@method) }}
+                    <check if="{{ @method == @clientMethod }}">checked</check>> {{ucfirst(@method) }}
                     </input></label>&emsp;
             </repeat>
             <check if="{{ isset(@errors['method']) }}">
@@ -40,15 +42,15 @@
             <select id="location" name="location">
                 <option selected>Choose...</option>
                 <repeat group="{{ @locations }}" value = "{{ @location }}">
-                    <option value="{{ @location }}" <check if="{{ @location == @userLocation }}">selected</check>>
+                    <option value="{{ @location }}" <check if="{{ @location == @clientLocation }}">selected</check>>
                     {{ ucfirst(@location) }}</option>
                 </repeat>
             </select><br>
 
             &emsp;<label for="locationOther">Other: </label>
-            <input type="text" id="locationOther" name="locationOther" value="{{ @userLocationOther }}">
-            <check if="{{ isset(@errors['userLocationOther']) }}">
-                {{ @errors['userLocationOther'] }}
+            <input type="text" id="locationOther" name="locationOther" value="{{ @clientLocationOther }}">
+            <check if="{{ isset(@errors['clientLocationOther']) }}">
+                {{ @errors['clientLocationOther'] }}
             </check>
             <br>
 
@@ -61,16 +63,16 @@
             </select><br>
 
             &emsp;<label for="questionOther">Other: </label>
-            <input type="text" id="questionOther" name="questionOther" value="{{ @userQuestionOther }}">
-            <check if="{{ isset(@errors['userQuestionOther']) }}">
-                {{ @errors['userQuestionOther'] }}
+            <input type="text" id="questionOther" name="questionOther" value="{{ @clientQuestionOther }}">
+            <check if="{{ isset(@errors['clientQuestionOther']) }}">
+                {{ @errors['clientQuestionOther'] }}
             </check>
             <br>
 
             <label>Incident Report:</label>
             <repeat group = "{{ @incidentReports }}" value="{{ @incidentReport }}">
                 <label><input type="radio" name="incidentReport" id="{{ @incidentReport }}" value="{{ @incidentReport }}"
-                    <check if="{{ @incidentReport == @userIncidentReport }}">checked</check>> {{ucfirst(@incidentReport) }}
+                    <check if="{{ @incidentReport == @clientIncidentReport }}">checked</check>> {{ucfirst(@incidentReport) }}
                     </input></label>&emsp;
             </repeat>
             <check if="{{ isset(@errors['incidentReport']) }}">
@@ -79,9 +81,9 @@
             <br>
 
             &emsp;<label for="incidentNum">Incident Report Number: </label>
-            <input type="number" id="incidentNum" name="incidentNum" value="{{ @userIncReportNum }}">
-            <check if="{{ isset(@errors['userIncReportNum']) }}">
-                {{ @errors['userIncReportNum'] }}
+            <input type="number" id="incidentNum" name="incidentNum" value="{{ @clientIncReportNum }}">
+            <check if="{{ isset(@errors['clientIncReportNum']) }}">
+                {{ @errors['clientIncReportNum'] }}
             </check>
             <br>
 
@@ -90,7 +92,7 @@
                     <label for="comments">Comments:</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <textarea id="comments" name="comments" rows="2" value="{{ @userComments }}"></textarea>
+                    <textarea id="comments" name="comments" rows="2" value="{{ @clientComments }}"></textarea>
                     <check if="{{ isset(@errors['comments']) }}">
                         {{ @errors['comments'] }}
                     </check>

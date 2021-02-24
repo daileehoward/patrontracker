@@ -34,14 +34,17 @@ class Controller
         global $dataLayer;
 
         //Get the data from the POST array
-        $userQuestion = $_POST['question'];
+        $employeeName = $_POST['name'];
+        $time = $_POST['time'];
+        $date = $_POST['date'];
+        $clientQuestion = $_POST['question'];
         $questionOther = $_POST['questionOther'];
-        $userLocation = $_POST['location'];
+        $clientLocation = $_POST['location'];
         $locationOther = $_POST['locationOther'];
-        $position = $_POST['position'];
-        $userMethod = $_POST['method'];
-        $userIncidentReport = $_POST['incidentReport'];
-        $userIncReportNum = $_POST['incidentNum'];
+        $employeePosition = $_POST['position'];
+        $clientMethod = $_POST['method'];
+        $clientIncidentReport = $_POST['incidentReport'];
+        $clientIncReportNum = $_POST['incidentNum'];
         $comments = $_POST['comments'];
 
         //get arrays
@@ -52,15 +55,18 @@ class Controller
         $this->_f3->set('incidentReports', $dataLayer->getIncidentReportOptions());
 
         //make form sticky
-        $this->_f3->set('userQuestion', isset($userQuestion) ? $userQuestion : "");
-        $this->_f3->set('userQuestionOther', isset($questionOther) ? $questionOther : "");
-        $this->_f3->set('userLocation', isset($userLocation) ? $userLocation : "");
-        $this->_f3->set('userLocationOther', isset($locationOther) ? $locationOther : "");
-        $this->_f3->set('userPosition', isset($position) ? $position : "");
-        $this->_f3->set('userMethod', isset($userMethod) ? $userMethod : "");
-        $this->_f3->set('userIncidentReport', isset($userIncidentReport) ? $userIncidentReport : "");
-        $this->_f3->set('userIncReportNum', isset($userIncReportNum) ? $userIncReportNum : "");
-        $this->_f3->set('userComments', isset($comments) ? $comments : "");
+        $this->_f3->set('employeeName', isset($employeeName) ? $employeeName : "");
+        $this->_f3->set('clientTime', isset($time) ? $time : "");
+        $this->_f3->set('clientDate', isset($date) ? $date : "");
+        $this->_f3->set('clientQuestion', isset($clientQuestion) ? $clientQuestion : "");
+        $this->_f3->set('clientQuestionOther', isset($questionOther) ? $questionOther : "");
+        $this->_f3->set('clientLocation', isset($clientLocation) ? $clientLocation : "");
+        $this->_f3->set('clientLocationOther', isset($locationOther) ? $locationOther : "");
+        $this->_f3->set('employeePosition', isset($employeePosition) ? $employeePosition : "");
+        $this->_f3->set('clientMethod', isset($clientMethod) ? $clientMethod : "");
+        $this->_f3->set('clientIncidentReport', isset($clientIncidentReport) ? $clientIncidentReport : "");
+        $this->_f3->set('clientIncReportNum', isset($clientIncReportNum) ? $clientIncReportNum : "");
+        $this->_f3->set('clientComments', isset($comments) ? $comments : "");
 
         //Display a view
         $view = new Template();
