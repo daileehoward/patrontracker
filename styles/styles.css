@@ -9,3 +9,28 @@ body {
 .center-text {
     text-align: center;
 }
+
+.right-text {
+    text-align: right;
+}
+
+.thick-border {
+    border: 3px solid black;
+}
+
+.skinny-border {
+    border: 2px solid black;
+}
+
+.width-80 {
+    width: 80%;
+}
+
+.center-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.large-font {
+    font-size: 30px;
+}
