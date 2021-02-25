@@ -5,3 +5,7 @@ body {
 #formpg {
     width: 60%;
 }
+
+.center-text {
+    text-align: center;
+}

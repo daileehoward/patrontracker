@@ -1,14 +1,17 @@
 {
   "name": "dclemmer2/328/midterm1",
+
   "authors": [
     {
-      "name": "Dana Clemmer",
+      "name": "Dana Clemmer, Dailee Howard",
       "email": "dclemmer2@mail.greenriver.edu"
     }
   ],
+
   "require": {
     "bcosca/fatfree-core": "dev-master"
   },
+
   "autoload": {
     "classmap": ["model/", "controllers/"]
   }
