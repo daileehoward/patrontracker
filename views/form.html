@@ -1,5 +1,5 @@
-<include href="views/header.html"></include>
-
+<include href="views/header.php"></include>
+<include href="views/includes/loginPath.php"></include>
 
 <div class="content-wrap pt-4 pb-5">
     <h1 class="text-center">Form</h1>
@@ -57,9 +57,9 @@
             <label for="question">Question: </label>
             <select id="question" name="question">
                 <option selected>Choose...</option>
-            <repeat group="{{ @questions }}" value = "{{ @question }}">
-                <option  value="question">{{ ucfirst(@question) }}</option>
-            </repeat>
+                <repeat group="{{ @questions }}" value = "{{ @question }}">
+                    <option  value="question">{{ ucfirst(@question) }}</option>
+                </repeat>
             </select><br>
 
             &emsp;<label for="questionOther">Other: </label>

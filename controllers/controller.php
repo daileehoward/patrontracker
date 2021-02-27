@@ -14,6 +14,38 @@ class Controller
     /** Display login page */
     function login()
     {
+        global $validator;
+
+        //If the form has been submitted
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            //set error flag
+            $err = false;
+
+            //Get the data from the POST array
+            $patronUsername = strtolower(trim($_POST['username']));
+            $patronPassword = strtolower(trim($_POST['password']));
+
+            //get login credentials
+            require($_SERVER['HOME'] . '/logincredspatrontracker.php');
+
+            //check if username and password are valid
+            if ($validator->validUsername($patronUsername, $adminUser)
+                && $validator->validPassword($patronPassword, $adminPassword)) {
+                //If they are correct
+                $_SESSION['loggedin'] = true;
+                $this->_f3->reroute('/status');
+            } else //Login is not valid -> Set an error in F3 hive
+            {
+                //Set an error flag
+                $err = true;
+                $this->_f3->set('errors["login"]', "*Incorrect login");
+            }
+        }
+
+        //Make form sticky
+        $this->_f3->set('patronUsername', isset($patronUsername) ? $patronUsername : "");
+
         //Display a view
         $view = new Template();
         echo $view->render('views/login.html');
@@ -24,7 +56,7 @@ class Controller
     {
         //Display a view
         $view = new Template();
-        echo $view->render('views/status.html');
+        echo $view->render('views/status.php');
     }
 
 
@@ -74,3 +106,4 @@ class Controller
     }
 
 }
+

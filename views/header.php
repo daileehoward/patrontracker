@@ -1,4 +1,4 @@
-<!--header.html header file for app-->
+<!--header.php header file for app-->
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,9 +25,13 @@
             <li class="nav-item ml-auto">
                 <a class="nav-link" href="form">Form</a>
             </li>
-            <li class="nav-item ml-auto">
-                <a class="nav-link" href="{{ @BASE }}">Logout</a>
-            </li>
+            <?php
+            if (isset($_SESSION['loggedin'])) {
+                echo '<li id="logout" class="nav-item ml-auto">
+            <a href="{{ @BASE }}">Logout</a>
+            </li>';
+            }
+            ?>
         </ul>
     </div>
 </nav>

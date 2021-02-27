@@ -8,6 +8,9 @@ error_reporting(E_ALL);
 //Require files
 require_once('vendor/autoload.php');
 
+//Connect to database using PDO
+//require $_SERVER['DOCUMENT_ROOT'] . '/../config.php';
+
 //Start a session
 session_start();
 
@@ -17,12 +20,15 @@ $f3 = Base::instance();
 //add classes
 $controller = new Controller($f3);
 $dataLayer = new DataLayer();
+//$dataLayer = new DataLayer($dbh);
+$validator = new Validate();
+//$validator = new Validate($dataLayer);
 
 //Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);
 
 //Define a default route (login page)
-$f3->route('GET /', function () {
+$f3->route('GET|POST /', function () {
     global $controller;
     $controller->login();
 });
