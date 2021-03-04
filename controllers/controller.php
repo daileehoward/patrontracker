@@ -19,9 +19,6 @@ class Controller
         //If the form has been submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            //set error flag
-            $err = false;
-
             //Get the data from the POST array
             $patronUsername = strtolower(trim($_POST['username']));
             $patronPassword = strtolower(trim($_POST['password']));
@@ -37,8 +34,6 @@ class Controller
                 $this->_f3->reroute('/status');
             } else //Login is not valid -> Set an error in F3 hive
             {
-                //Set an error flag
-                $err = true;
                 $this->_f3->set('errors["login"]', "*Incorrect login");
             }
         }
@@ -54,6 +49,11 @@ class Controller
     /** Display status page */
     function status()
     {
+        //if not logged in, take user to login page
+        if (!isset($_SESSION['loggedin'])) {
+            //Redirect to login
+            $this->_f3->reroute('/login');
+        }
         //Display a view
         $view = new Template();
         echo $view->render('views/status.php');
@@ -64,6 +64,12 @@ class Controller
     function form()
     {
         global $dataLayer;
+
+        //if not logged in, take user to login page
+        if (!isset($_SESSION['loggedin'])) {
+            //Redirect to login
+            $this->_f3->reroute('/login');
+        }
 
         //Get the data from the POST array
         $employeeName = $_POST['name'];
@@ -103,6 +109,15 @@ class Controller
         //Display a view
         $view = new Template();
         echo $view->render('views/form.html');
+    }
+
+    /** Logout */
+    function logout()
+    {
+        session_destroy();
+
+        //Redirect to login
+        $this->_f3->reroute('/');
     }
 
 }

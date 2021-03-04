@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="navbar-site">
-    <a class="navbar-brand" href="status">GRC SHD Patron Tracker</a>
+    <a class="navbar-brand" href="#">GRC SHD Patron Tracker</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
             aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -25,13 +25,9 @@
             <li class="nav-item ml-auto">
                 <a class="nav-link" href="form">Form</a>
             </li>
-            <?php
-            if (isset($_SESSION['loggedin'])) {
-                echo '<li id="logout" class="nav-item ml-auto">
-            <a href="{{ @BASE }}">Logout</a>
-            </li>';
-            }
-            ?>
+            <li id="logout" class="nav-item ml-auto">
+                <a href="logout">Logout</a>
+            </li>
         </ul>
     </div>
 </nav>

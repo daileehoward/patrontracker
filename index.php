@@ -45,5 +45,11 @@ $f3->route('GET|POST /form', function () {
     $controller->form();
 });
 
+//Define a "logout" route
+$f3->route('GET|POST /logout', function () {
+    global $controller;
+    $controller->logout();
+});
+
 //Run fat free
 $f3->run();
