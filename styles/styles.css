@@ -34,3 +34,22 @@ body {
 .large-font {
     font-size: 30px;
 }
+
+/***** Logout Button Styles ******/
+li#logout {
+    line-height: 40px;
+}
+
+li#logout a {
+    margin-left: 13px;
+    color: #c50c0c!important;
+}
+
+li#logout a:hover {
+    color: #b75151!important;
+    text-decoration: none;
+}
+
+.fa-sign-out {
+    color: #c50c0c!important;
+}
