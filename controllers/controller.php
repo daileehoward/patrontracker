@@ -56,7 +56,7 @@ class Controller
         }
         //Display a view
         $view = new Template();
-        echo $view->render('views/status.php');
+        echo $view->render('views/status.html');
     }
 
 
