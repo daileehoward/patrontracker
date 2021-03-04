@@ -53,3 +53,9 @@ li#logout a:hover {
 .fa-sign-out {
     color: #c50c0c!important;
 }
+
+@media(min-width: 1200px) {
+    #formpg {
+        width: 50%;
+    }
+}
