@@ -7,6 +7,12 @@
 
 class DataLayer
 {
+    private $_dbh;
+    function __construct($dbh)
+    {
+        $this->_dbh = $dbh;
+    }
+
     /** getQuestions() returns an array of questions
      *  @return array
      */
