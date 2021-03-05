@@ -52,7 +52,7 @@ class Controller
         //if not logged in, take user to login page
         if (!isset($_SESSION['loggedin'])) {
             //Redirect to login
-            $this->_f3->reroute('/login');
+            $this->_f3->reroute('/');
         }
         //Display a view
         $view = new Template();
@@ -68,7 +68,7 @@ class Controller
         //if not logged in, take user to login page
         if (!isset($_SESSION['loggedin'])) {
             //Redirect to login
-            $this->_f3->reroute('/login');
+            $this->_f3->reroute('/');
         }
 
         //Get the data from the POST array
