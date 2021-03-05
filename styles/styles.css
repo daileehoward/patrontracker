@@ -54,6 +54,12 @@ li#logout a:hover {
     color: #c50c0c!important;
 }
 
+input.submit-login {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media(min-width: 1200px) {
     #formpg {
         width: 50%;

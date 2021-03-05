@@ -97,11 +97,11 @@
             <check if="{{ isset(@errors['incidentReport']) }}">
                 {{ @errors['incidentReport'] }}
             </check>
-            <br>
+            <br><br>
 
-            <div id="incNumDiv" class="d-none">
-                &emsp;<label for="incidentNum">Incident Report Number: </label>
-                <input type="number" id="incidentNum" name="incidentNum" value="{{ @clientIncReportNum }}">
+            <div id="incNumDiv">
+                <label for="incidentNum">Incident Report Number: </label>
+                <input class="form-control" type="text" id="incidentNum" name="incidentNum" value="{{ @clientIncReportNum }}">
                 <check if="{{ isset(@errors['clientIncReportNum']) }}">
                     {{ @errors['clientIncReportNum'] }}
                 </check>
