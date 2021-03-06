@@ -12,11 +12,15 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark green-color fixed-top" id="navbar-site">
+    <div class="pr-3">
+        <img class="rounded" src="images/green-river-logo.jpg" alt="Green River College Logo">
+    </div>
+
     <a class="navbar-brand" href="#">GRC SHD Patron Tracker</a>
 </nav>
 
 <div class="content-wrap pt-5 pb-5">
-    <form class="container border login" action="#" method="post">
+    <form class="container border login shadow" action="#" method="post">
         <h1 class="font-weight-bold text-center">Green River Help Desk Login</h1><br>
         <div class="form-group">
             <label class="font-weight-bold" for="username">Username</label>
@@ -28,7 +32,8 @@
         </div>
         <check if="{{ @errors['login'] }}"><span class="text-danger">{{ @errors['login'] }}</span></check>
         <br>
-        <input type="submit" class="submit-login rounded" value="Login">
+        <input type="submit" class="btn btn-primary submit-login rounded" value="Login">
+        <br>
     </form>
 </div>
 <include href="views/footer.html"></include>

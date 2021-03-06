@@ -46,4 +46,49 @@ class Validate
     {
         return !empty($time);
     }
+
+    function validDate($data)
+    {
+        return !empty($data);
+    }
+
+    function validPosition($position)
+    {
+        return !empty($position);
+    }
+
+    function validContactMethod($contactMethod)
+    {
+        return !empty($contactMethod);
+    }
+
+    function validLocation($location)
+    {
+        return !empty($location);
+    }
+
+    function validLocationOther($locationOther)
+    {
+        return !empty($locationOther);
+    }
+
+    function validQuestion($question)
+    {
+        return !empty($question);
+    }
+
+    function validQuestionOther($questionOther)
+    {
+        return !empty($questionOther);
+    }
+
+    function validIncidentReport($incidentReport)
+    {
+        return !empty($incidentReport);
+    }
+
+    function validIncidentReportNumber($incidentReportNumber)
+    {
+        return !empty($incidentReportNumber);
+    }
 }

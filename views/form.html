@@ -1,11 +1,12 @@
 <include href="views/header.html"></include>
 
 <div class="content-wrap pt-4 pb-5">
-    <h1 class="text-center">Form</h1>
-    <form id="formpg" class="container border mt-4" method="post" action="#">
-        <div class="p-5">
+    <form id="formpg" class="container border mt-4 shadow" method="post" action="#">
+        <h1 class="pt-3 text-center">Incident Form</h1>
+        <hr>
 
-            <label for="name">Employee Name: </label>
+        <div class="pl-5 pr-5 pb-5 pt-2">
+            <label for="name"><strong>Employee Name:</strong></label>
             <input class="form-control" type="text" id="name" name="name" value="{{ @employeeName }}">
 
             <check if="{{ isset(@errors['employeeName']) }}">
@@ -15,7 +16,7 @@
 
             <div class="row">
                 <div class="col">
-                    <label>Time:</label>
+                    <label><strong>Time:</strong></label>
                     <input class="form-control" type="time" name="time" value="{{ @clientTime }}"><br>
 
                     <check if="{{ isset(@errors['time']) }}">
@@ -23,36 +24,42 @@
                     </check>
                 </div>
                 <div class="col">
-                    <label>Date:</label>
+                    <label><strong>Date:</strong></label>
                     <input class="form-control" type="date" name="date" value="{{ $clientDate }}"><br>
+
+                    <check class="text-danger" if="{{ isset(@errors['date']) }}">
+                        {{ @errors['date'] }}
+                    </check>
                 </div>
             </div>
 <br>
-            <label>Position:</label>
+            <label><strong>Position:</strong></label>
             <repeat group="{{ @positions }}" value="{{ @position }}">
                 <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
                     <check if="{{ @position == @employeePosition }}">checked</check>
                     > {{ucfirst(@position) }}
                     </input></label>&emsp;
             </repeat>
+
             <check if="{{ isset(@errors['position']) }}">
                 {{ @errors['position'] }}
             </check>
             <br><br>
 
-            <label>Contact Method: </label>
+            <label><strong>Contact Method: </strong></label>
             <repeat group="{{ @methods }}" value="{{ @method }}">
                 <label><input type="radio" name="method" id="{{ @method }}" value="{{ @method }}"
                     <check if="{{ @method == @clientMethod }}">checked</check>
                     > {{ucfirst(@method) }}
                     </input></label>&emsp;
             </repeat>
+
             <check if="{{ isset(@errors['method']) }}">
                 {{ @errors['method'] }}
             </check>
             <br><br>
 
-            <label for="location">Location: </label>
+            <label for="location"><strong>Location:</strong></label>
             <select class="form-control" id="location" name="location">
                 <option selected>Choose...</option>
                 <repeat group="{{ @locations }}" value="{{ @location }}">
@@ -65,7 +72,7 @@
             </select><br>
 
             <div id="otherLocation" class="d-none">
-                <label for="locationOther">Other Location: </label>
+                <label for="locationOther"><strong>Other Location: </strong></label>
                 <input class="form-control" type="text" id="locationOther" name="locationOther"
                        value="{{ @clientLocationOther }}">
                 <check if="{{ isset(@errors['clientLocationOther']) }}">
@@ -74,7 +81,7 @@
                 <br>
             </div>
 
-            <label for="question">Question: </label>
+            <label for="question"><strong>Question:</strong></label>
             <select class="form-control" id="question" name="question">
                 <option selected>Choose...</option>
                 <repeat group="{{ @questions }}" value="{{ @question }}">
@@ -84,7 +91,7 @@
             </select><br>
 
             <div id="otherQuestion" class="d-none">
-                <label for="questionOther">Other Question: </label>
+                <label for="questionOther"><strong>Other Question: </strong></label>
                 <input class="form-control" type="text" id="questionOther" name="questionOther"
                        value="{{ @clientQuestionOther }}">
                 <check if="{{ isset(@errors['clientQuestionOther']) }}">
@@ -93,7 +100,7 @@
                 <br>
             </div>
 
-            <label>Incident Report:</label>
+            <label><strong>Incident Report:</strong></label>
             <repeat group="{{ @incidentReports }}" value="{{ @incidentReport }}">
                 <label><input type="radio" name="incidentReport" id="{{ @incidentReport }}"
                               value="{{ @incidentReport }}"
@@ -101,23 +108,26 @@
                     > {{ucfirst(@incidentReport) }}
                     </input></label>&emsp;
             </repeat>
+
             <check if="{{ isset(@errors['incidentReport']) }}">
                 {{ @errors['incidentReport'] }}
             </check>
             <br><br>
 
             <div id="incNumDiv">
-                <label for="incidentNum">Incident Report Number: </label>
+                <label for="incidentNum"><strong>Incident Report Number:</strong></label>
                 <input class="form-control" type="text" id="incidentNum" name="incidentNum" value="{{ @clientIncReportNum }}">
+
                 <check if="{{ isset(@errors['clientIncReportNum']) }}">
                     {{ @errors['clientIncReportNum'] }}
                 </check>
                 <br>
             </div>
             <br>
-                <label for="comments">Comments:</label>
+            <label for="comments"><strong>Comments:</strong></label>
                 <textarea class="form-control" id="comments" name="comments" rows="2" value="{{ @clientComments }}">{{ @clientComments }}</textarea>
-                <check if="{{ isset(@errors['comments']) }}">
+
+            <check if="{{ isset(@errors['comments']) }}">
                     {{ @errors['comments'] }}
                 </check>
             <br><br>

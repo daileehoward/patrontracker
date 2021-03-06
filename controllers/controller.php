@@ -75,6 +75,16 @@ class Controller
         //Get the data from the POST array
         $employeeName = trim($_POST['name']);
         $time = $_POST['time'];
+        $date = $_POST['date'];
+        $employeePosition = trim($_POST['position']);
+        $clientMethod = trim($_POST['method']);
+        $clientLocation = trim($_POST['location']);
+        $locationOther = trim($_POST['locationOther']);
+        $clientQuestion = trim($_POST['question']);
+        $questionOther = trim($_POST['questionOther']);
+        $clientIncidentReport = trim($_POST['incidentReport']);
+        $clientIncReportNum = trim($_POST['incidentNum']);
+        $comments = trim($_POST['comments']);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($validator->validName($employeeName)) {
@@ -91,21 +101,45 @@ class Controller
                 $this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
             }
 
+            if ($validator->validDate($date)) {
+                $_SESSION['date'] = $date;
+            }
+            else {
+                $this->_f3->set("errors[date]", "*Date is required and needs to follow the correct format");
+            }
+
+            if ($validator->validPosition($employeePosition)) {
+                $_SESSION['employeePosition'] = $employeePosition;
+            }
+            else {
+                $this->_f3->set("errors[employeePosition]", "*Position is required");
+            }
+
+            if ($validator->validContactMethod($clientMethod)) {
+                $_SESSION['clientMethod'] = $clientMethod;
+            }
+            else {
+                $this->_f3->set("errors[clientMethod]", "*Contact method is required");
+            }
+
+            if ($validator->validLocation($clientLocation)) {
+                $_SESSION['clientLocation'] = $clientLocation;
+            }
+            else {
+                $this->_f3->set("errors[clientLocation]", "*Location is required");
+            }
+
+            if ($validator->validQuestion($clientQuestion)) {
+                $_SESSION['clientQuestion'] = $clientQuestion;
+            }
+            else {
+                $this->_f3->set("errors[clientQuestion]", "*Question is required");
+            }
+
             if (empty($this->_f3->get('errors'))) {
                 echo "Form has been submitted!";
             }
         }
-
-        $date = $_POST['date'];
-        $clientQuestion = $_POST['question'];
-        $questionOther = $_POST['questionOther'];
-        $clientLocation = $_POST['location'];
-        $locationOther = $_POST['locationOther'];
-        $employeePosition = $_POST['position'];
-        $clientMethod = $_POST['method'];
-        $clientIncidentReport = $_POST['incidentReport'];
-        $clientIncReportNum = $_POST['incidentNum'];
-        $comments = $_POST['comments'];
 
         //get arrays
         $this->_f3->set('questions', $dataLayer->getQuestions());
