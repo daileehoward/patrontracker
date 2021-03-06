@@ -36,4 +36,14 @@ class Validate
     {
         return !empty($password) && $password == $adminPassword;
     }
+
+    function validName($name)
+    {
+        return !empty($name) && preg_match("/^[a-zA-z]*$/", $name);
+    }
+
+    function validTime($time)
+    {
+        return !empty($time);
+    }
 }

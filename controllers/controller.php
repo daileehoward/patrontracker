@@ -63,6 +63,7 @@ class Controller
     /** Display form page */
     function form()
     {
+        global $validator;
         global $dataLayer;
 
         //if not logged in, take user to login page
@@ -72,8 +73,29 @@ class Controller
         }
 
         //Get the data from the POST array
-        $employeeName = $_POST['name'];
+        $employeeName = trim($_POST['name']);
         $time = $_POST['time'];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($validator->validName($employeeName)) {
+                $_SESSION['employeeName'] = $employeeName;
+            }
+            else {
+                $this->_f3->set("errors[employeeName]", "*Employee name is required and can only contain characters");
+            }
+
+            if ($validator->validTime($time)) {
+                $_SESSION['time'] = $time;
+            }
+            else {
+                $this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+            }
+
+            if (empty($this->_f3->get('errors'))) {
+                echo "Form has been submitted!";
+            }
+        }
+
         $date = $_POST['date'];
         $clientQuestion = $_POST['question'];
         $questionOther = $_POST['questionOther'];

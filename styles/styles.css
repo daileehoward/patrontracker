@@ -35,6 +35,11 @@ body {
     font-size: 30px;
 }
 
+.green-color {
+    background-color: #2c882b;
+    border: 2px solid black;
+}
+
 /***** Logout Button Styles ******/
 li#logout {
     line-height: 40px;

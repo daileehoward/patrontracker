@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 require_once('vendor/autoload.php');
 
 //Connect to database using PDO
-require $_SERVER['DOCUMENT_ROOT'] . '/../config.php';
+require($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 
 //Start a session
 session_start();
