@@ -1,9 +1,13 @@
-body {
-    padding-top: 3em;
+nav.navbar a.navbar-brand {
+    font-size: 25px;
 }
 
-#formpg {
-    width: 60%;
+nav.navbar ul {
+    font-size: 20px;
+}
+
+h1, nav.navbar {
+    font-family: BigNoodleTitling,Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
 }
 
 .center-text {
@@ -40,33 +44,133 @@ body {
     border: 2px solid black;
 }
 
-/***** Logout Button Styles ******/
-li#logout {
-    line-height: 40px;
+body {
+    background-color: #80808029;
 }
 
-li#logout a {
-    margin-left: 13px;
-    color: #c50c0c!important;
+/***** Status Pg Styles ******/
+header#status-header {
+    height: 45vh;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0.2)
+    ),
+    url(../images/Misty-Forest.jpg) no-repeat fixed;
+    background-size: cover;
 }
 
-li#logout a:hover {
-    color: #b75151!important;
-    text-decoration: none;
+header h1 {
+    font-size: 6em;
+    text-shadow: 3px 3px black;
+    margin: auto;
+    position: absolute;
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.fa-sign-out {
-    color: #c50c0c!important;
+input#status-submit {
+    padding: 7px;
+    background-color: white;
+    border: 1px solid grey;
+}
+
+input#status-submit:hover, input.submit-form:hover {
+    background-color: #2c882b;
+}
+
+
+/***** Form Pg Styles ******/
+input.submit-form {
+    background-color: white;
+    border: 1px solid grey;
+    padding: 4px;
+    width: 5em;
+}
+
+#formpg {
+    width: 60%;
+}
+
+div.content-wrap {
+    padding-top: 6em;
+}
+
+form#formpg h1 {
+    font-size: 3em;
+}
+
+/***** Login Pg Styles ******/
+form#login {
+    width: 20em;
+    border: 13px solid #000000d9;
+    background-color: #2c882bc4;
+}
+
+div.login {
+    padding-top: 10em;
+    height: 100vh;
+    background-image: url(../images/grc.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+
+@media (max-height: 620px) {
+    div.login {
+        height: 100%;
+    }
 }
 
 input.submit-login {
+    background-color: black;
+    border: none;
+}
+
+input.submit-login:hover {
+    background-color: white;
+    color: black;
+    border: none;
+}
+
+/***** Logout Button Styles ******/
+li#logout {
+    width: 5em;
+}
+
+li#logout a {
+    text-decoration: none;
+    color: black;
+}
+li#logout button {
+    background-color: white;
+    border: 2px solid black;
+}
+
+li#logout button:hover {
+    background-color: #749974;
+}
+
+.fa-sign-out {
+    color: black;
+}
+
+
+
+input.submit-login, input.submit-form {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-@media(min-width: 1200px) {
+@media (min-width: 1200px) {
     #formpg {
         width: 50%;
     }
+}
+
+/***** Footer Styles ******/
+footer {
+    margin-top: 0;
 }
