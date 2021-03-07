@@ -39,7 +39,7 @@ class Validate
 
     function validName($name)
     {
-        return !empty($name) && preg_match("/^[a-zA-z]*$/", $name);
+        return !empty($name) && preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $name);
     }
 
     function validTime($time)
