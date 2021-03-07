@@ -2,6 +2,8 @@ document.getElementById("location").onclick = otherLocation;
 document.getElementById("question").onclick = otherQuestion;
 document.getElementsByName("incidentReport").onclick = incidentReport;
 
+document.getElementById("formpg").onclick = submissionResults;
+
 
 //This function will show other location textbox if "other" selected from dropdown
 function otherLocation() {
@@ -44,4 +46,11 @@ function incidentReport() {
             }
         }
     }
+}
+
+
+//Repopulates form page with submission results
+function submissionResults() {
+    document.getElementById("formpg").classList.add("d-none");
+    document.getElementById("submitted-form").classList.remove("d-none");
 }

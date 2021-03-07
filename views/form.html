@@ -32,7 +32,7 @@
                     </check>
                 </div>
             </div>
-<br>
+            <br>
             <label><strong>Position:</strong></label>
             <repeat group="{{ @positions }}" value="{{ @position }}">
                 <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
@@ -116,7 +116,8 @@
 
             <div id="incNumDiv">
                 <label for="incidentNum"><strong>Incident Report Number:</strong></label>
-                <input class="form-control" type="text" id="incidentNum" name="incidentNum" value="{{ @clientIncReportNum }}">
+                <input class="form-control" type="text" id="incidentNum" name="incidentNum"
+                       value="{{ @clientIncReportNum }}">
 
                 <check if="{{ isset(@errors['clientIncReportNum']) }}">
                     {{ @errors['clientIncReportNum'] }}
@@ -125,17 +126,75 @@
             </div>
             <br>
             <label for="comments"><strong>Comments:</strong></label>
-                <textarea class="form-control" id="comments" name="comments" rows="2" value="{{ @clientComments }}">{{ @clientComments }}</textarea>
+            <textarea class="form-control" id="comments" name="comments" rows="2" value="{{ @clientComments }}">{{ @clientComments }}</textarea>
 
             <check if="{{ isset(@errors['comments']) }}">
-                    {{ @errors['comments'] }}
-                </check>
+                {{ @errors['comments'] }}
+            </check>
             <br><br>
 
-            <input type="submit" class="submit-form rounded" value="Submit">
+            <input type="button" class="submit-form rounded" value="Submit">
         </div>
-
     </form>
+
+    <div id="submitted-form" class="d-none">
+        <div class="card bg-white shadow mx-auto">
+            <div class="card-body">
+                <h1 class="text-center">Thank You for Your Submission!</h1>
+                <hr>
+                <h5 class="text-center">You and Your Manager Should Receive a Confirmation Email Shortly. View Your Submission Summary
+                    Below:</h5>
+            </div>
+        </div>
+        <br>
+
+        <div class="card bg-white shadow mx-auto">
+            <div class="card-body">
+                <h4 class="text-center">Submission Summary:</h4>
+                <hr>
+                <table>
+                    <tbody>
+                    <tr>
+                        <th class="pb-1 pl-3">Name:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="pb-1 pl-3">Date:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="pb-1 pl-3">Position:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="pb-1 pl-3">Contact Method:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="pb-1 pl-3">Location:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="pb-1 pl-3">Question:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="pb-1 pl-3">Incident Report:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="pb-1 pl-3">Incident Report Number:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="pb-1 pl-3">Comments:</th>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <include href="views/footer.html"></include>

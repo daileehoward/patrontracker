@@ -88,8 +88,14 @@ input.submit-form {
     width: 5em;
 }
 
-#formpg {
+#formpg, #submitted-form div.card {
     width: 60%;
+}
+
+@media (max-width: 850px) {
+    #formpg, #submitted-form div.card {
+        width: 80%;
+    }
 }
 
 div.content-wrap {
