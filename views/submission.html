@@ -1,0 +1,71 @@
+<include href="views/header.html"></include>
+
+<div id="submitted-form" class="content-wrap pb-5">
+    <div class="card bg-white shadow mx-auto">
+        <div class="card-body">
+            <h1 class="text-center">Thank You for Your Submission!</h1>
+            <hr>
+            <h5 class="text-center">You and Your Manager Should Receive a Confirmation Email Shortly. View Your
+                Submission Summary
+                Below:</h5>
+        </div>
+    </div>
+    <br>
+
+    <div class="card bg-white shadow mx-auto">
+        <div class="card-body">
+            <h4 class="text-center">Submission Summary:</h4>
+            <hr>
+            <table>
+                <tbody>
+                <tr>
+                    <th class="pb-1 pl-3">Name:</th>
+                    <td>{{ @employeeName }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Date:</th>
+                    <td>{{ @clientDate }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Position:</th>
+                    <td>{{ @employeePosition }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Contact Method:</th>
+                    <td>{{ @clientMethod }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Location:</th>
+                    <td>{{ @SESSION.clientLocation }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Location Other:</th>
+                    <td>{{ @clientLocationOther }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Question:</th>
+                    <td>{{ @SESSION.clientQuestion }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Question Other:</th>
+                    <td>{{ @clientQuestionOther }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Incident Report:</th>
+                    <td>{{ @clientIncidentReport }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Incident Report Number:</th>
+                    <td>{{ @clientIncReportNum }}</td>
+                </tr>
+                <tr>
+                    <th class="pb-1 pl-3">Comments:</th>
+                    <td>{{ @clientComments }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<include href="views/footer.html"></include>

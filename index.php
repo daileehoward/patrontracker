@@ -43,6 +43,12 @@ $f3->route('GET|POST /form', function () {
     $controller->form();
 });
 
+//Define a "submission" route
+$f3->route('GET|POST /submission', function () {
+    global $controller;
+    $controller->submission();
+});
+
 //Define a "logout" route
 $f3->route('GET|POST /logout', function () {
     global $controller;

@@ -2,7 +2,7 @@ document.getElementById("location").onclick = otherLocation;
 document.getElementById("question").onclick = otherQuestion;
 document.getElementsByName("incidentReport").onclick = incidentReport;
 
-document.getElementById("formpg").onclick = submissionResults;
+//document.getElementById("formpg").onsubmit = submissionResults;
 
 
 //This function will show other location textbox if "other" selected from dropdown

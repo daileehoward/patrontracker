@@ -89,55 +89,56 @@ class Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($validator->validName($employeeName)) {
                 $_SESSION['employeeName'] = $employeeName;
-            }
-            else {
+            } else {
                 $this->_f3->set("errors[employeeName]", "*Employee name is required and can only contain characters");
             }
 
             if ($validator->validTime($time)) {
                 $_SESSION['time'] = $time;
-            }
-            else {
+            } else {
                 $this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
             }
 
             if ($validator->validDate($date)) {
                 $_SESSION['date'] = $date;
-            }
-            else {
+            } else {
                 $this->_f3->set("errors[date]", "*Date is required and needs to follow the correct format");
             }
 
             if ($validator->validPosition($employeePosition)) {
                 $_SESSION['employeePosition'] = $employeePosition;
-            }
-            else {
+            } else {
                 $this->_f3->set("errors[employeePosition]", "*Position is required");
             }
 
             if ($validator->validContactMethod($clientMethod)) {
                 $_SESSION['clientMethod'] = $clientMethod;
-            }
-            else {
+            } else {
                 $this->_f3->set("errors[clientMethod]", "*Contact method is required");
             }
 
             if ($validator->validLocation($clientLocation)) {
                 $_SESSION['clientLocation'] = $clientLocation;
-            }
-            else {
+                if ($clientLocation == "Choose...") {
+                    $_SESSION['clientLocation'] = "";
+                }
+            } else {
                 $this->_f3->set("errors[clientLocation]", "*Location is required");
             }
 
             if ($validator->validQuestion($clientQuestion)) {
                 $_SESSION['clientQuestion'] = $clientQuestion;
-            }
-            else {
+                if ($clientQuestion == "Choose...") {
+                    $_SESSION['clientQuestion'] = "";
+                }
+            } else {
                 $this->_f3->set("errors[clientQuestion]", "*Question is required");
             }
 
             if (empty($this->_f3->get('errors'))) {
-                echo "Form has been submitted!";
+                //echo "Form has been submitted!";
+                //Redirect to sumbssion pg
+                $this->_f3->reroute('/submission');
             }
         }
 
@@ -165,6 +166,14 @@ class Controller
         //Display a view
         $view = new Template();
         echo $view->render('views/form.html');
+    }
+
+    /** Submission page */
+    function submission()
+    {
+        //Display a view
+        $view = new Template();
+        echo $view->render('views/submission.html');
     }
 
     /** Logout */
