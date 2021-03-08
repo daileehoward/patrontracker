@@ -190,3 +190,12 @@ input.submit-login, input.submit-form {
 footer {
     margin-top: 0;
 }
+
+hr.background-white {
+    background-color: white;
+}
+
+a.hyperlink-removed {
+    text-decoration: none;
+    color: white;
+}
