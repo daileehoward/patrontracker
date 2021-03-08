@@ -118,26 +118,55 @@ class Controller
             }
 
             if ($validator->validLocation($clientLocation)) {
-                $_SESSION['clientLocation'] = $clientLocation;
-                if ($clientLocation == "Choose...") {
-                    $_SESSION['clientLocation'] = "";
+                if ($validator->validOtherLocationChosen($clientLocation)) {
+                    if ($validator->validLocationOther($locationOther)) {
+                        if ($validator->validLocationOtherNoDuplicates($locationOther)) {
+                            $_SESSION['clientLocation'] = "";
+                            $_SESSION['otherLocation'] = $locationOther;
+                            $dataLayer->addLocation($locationOther);
+                        } else {
+                            $_SESSION['clientLocation'] = $locationOther;
+                        }
+                    } else {
+                        $this->_f3->set("errors[otherLocation]", "Other location is required and can only contain 
+                        characters");
+                    }
+                } else {
+                    $_SESSION['clientLocation'] = $clientLocation;
                 }
             } else {
                 $this->_f3->set("errors[clientLocation]", "*Location is required");
             }
 
             if ($validator->validQuestion($clientQuestion)) {
-                $_SESSION['clientQuestion'] = $clientQuestion;
-                if ($clientQuestion == "Choose...") {
-                    $_SESSION['clientQuestion'] = "";
+                if ($validator->validOtherQuestionChosen($clientQuestion)) {
+                    if ($validator->validQuestionOther($questionOther)) {
+                        if ($validator->validQuestionOtherNoDuplicates($questionOther)) {
+                            $_SESSION['clientQuestion'] = "";
+                            $_SESSION['questionOther'] = $questionOther;
+                            $dataLayer->addQuestion($questionOther);
+                        } else {
+                            $_SESSION['clientQuestion'] = $questionOther;
+                        }
+                    } else {
+                        $this->_f3->set("errors[otherQuestion]", "Other question is required");
+                    }
+                } else {
+                    $_SESSION['clientQuestion'] = $clientQuestion;
                 }
             } else {
                 $this->_f3->set("errors[clientQuestion]", "*Question is required");
             }
 
+            if ($validator->validIncidentReport($clientIncidentReport)) {
+                $_SESSION['clientIncidentReport'] = $clientIncidentReport;
+            } else {
+                $this->_f3->set("errors['clientIncidentReport']", "*Specify if an incident report was created for this 
+                incident");
+            }
+
             if (empty($this->_f3->get('errors'))) {
-                //echo "Form has been submitted!";
-                //Redirect to sumbssion pg
+                //Redirect to sumbmission page
                 $this->_f3->reroute('/submission');
             }
         }

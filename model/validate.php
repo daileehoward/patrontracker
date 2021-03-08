@@ -10,12 +10,12 @@ require($_SERVER['HOME'] . '/logincredspatrontracker.php');
 
 class Validate
 {
- /*   private $_dataLayer;
+    private $_dataLayer;
 
     function __construct($dataLayer)
     {
         $this->_dataLayer = $dataLayer;
-    }*/
+    }
 
     /** validUsername() returns true if username is not empty and
      * equals username in logincredspatrontracker.php
@@ -39,7 +39,7 @@ class Validate
 
     function validName($name)
     {
-        return !empty($name) && preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $name);
+        return !empty($name) && preg_match("/^[a-zA-Z ]*$/", $name);
     }
 
     function validTime($time)
@@ -59,27 +59,47 @@ class Validate
 
     function validContactMethod($contactMethod)
     {
-        return !empty($contactMethod);
+        return !empty($contactMethod) and in_array();
     }
 
     function validLocation($location)
     {
-        return !empty($location);
+        return !empty($location) && in_array($location, $this->_dataLayer->getLocations());
+    }
+
+    function validOtherLocationChosen($location)
+    {
+        return $location == "Other...";
     }
 
     function validLocationOther($locationOther)
     {
-        return !empty($locationOther);
+        return !empty($locationOther) && preg_match("/^[a-zA-Z ]*$/", $locationOther);
+    }
+
+    function validLocationOtherNoDuplicates($locationOther)
+    {
+        return !in_array($locationOther, $this->_dataLayer->getLocations());
     }
 
     function validQuestion($question)
     {
-        return !empty($question);
+        return !empty($question) && in_array($question, $this->_dataLayer->getQuestions());
+    }
+
+    function validOtherQuestionChosen($question)
+    {
+        return $question == "Other...";
     }
 
     function validQuestionOther($questionOther)
     {
         return !empty($questionOther);
+    }
+
+    function validQuestionOtherNoDuplicates($questionOther)
+    {
+        return !in_array($questionOther, $this->_dataLayer->getQuestions());
     }
 
     function validIncidentReport($incidentReport)

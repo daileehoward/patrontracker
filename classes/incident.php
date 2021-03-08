@@ -1,6 +1,6 @@
 <?php
 
-class Patron
+class Incident
 {
     private $_patronId;
     private $_employeeId;

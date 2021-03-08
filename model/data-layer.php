@@ -8,9 +8,14 @@
 class DataLayer
 {
     private $_dbh;
+    private $_locationsArray;
+    private $_questionsArray;
+
     function __construct($dbh)
     {
         $this->_dbh = $dbh;
+        $this->_locationsArray = array("admission issue", "adobe account", "borrow item", "borrowed laptop troubleshooting");
+        $this->_questionsArray = array("2", "l");
     }
 
     /** getQuestions() returns an array of questions
@@ -18,7 +23,12 @@ class DataLayer
      */
     function getQuestions()
     {
-        return array("q1", "q2", "q3");
+        return $this->_questionsArray;
+    }
+
+    function addQuestion($newQuestion)
+    {
+        array_push($this->_questionsArray, $newQuestion);
     }
 
     /** getLocations() returns an array of locations
@@ -26,7 +36,12 @@ class DataLayer
      */
     function getLocations()
     {
-        return array("l1", "l2", "l3");
+        return $this->_locationsArray;
+    }
+
+    function addLocation($newLocation)
+    {
+        array_push($this->_locationsArray);
     }
 
     /** getPositions() returns an array of positions
