@@ -39,7 +39,8 @@ class Validate
 
     function validName($name)
     {
-        return !empty($name) && preg_match("/^[a-zA-Z ]*$/", $name);
+        return !empty($name) && preg_match("/^[a-zA-Z ]+$/", $name)
+            || preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $name);
     }
 
     function validTime($time)
@@ -59,7 +60,7 @@ class Validate
 
     function validContactMethod($contactMethod)
     {
-        return !empty($contactMethod) and in_array();
+        return !empty($contactMethod) and in_array($contactMethod, $this->_dataLayer->getContactMethods());
     }
 
     function validLocation($location)

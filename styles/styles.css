@@ -6,7 +6,7 @@ nav.navbar ul {
     font-size: 20px;
 }
 
-h1, nav.navbar {
+h1, h3, h4, #status-submit, nav.navbar {
     font-family: BigNoodleTitling,Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
 }
 
@@ -70,7 +70,7 @@ header h1 {
 }
 
 input#status-submit {
-    padding: 7px;
+    padding: 10px;
     background-color: white;
     border: 1px solid grey;
 }
@@ -104,6 +104,11 @@ div.content-wrap {
 
 form#formpg h1 {
     font-size: 3em;
+}
+
+table#submissionTable {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /***** Login Pg Styles ******/
@@ -156,6 +161,11 @@ li#logout button {
 
 li#logout button:hover {
     background-color: #749974;
+}
+
+a.nav-link:hover {
+    color: #749974;
+    text-shadow: 2px 2px black;
 }
 
 .fa-sign-out {

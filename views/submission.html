@@ -12,11 +12,12 @@
     </div>
     <br>
 
+
     <div class="card bg-white shadow mx-auto">
         <div class="card-body">
             <h4 class="text-center">Submission Summary:</h4>
             <hr>
-            <table>
+            <table id="submissionTable">
                 <tbody>
                 <tr>
                     <th class="pb-1 pl-3">Employee Name:</th>
@@ -67,5 +68,10 @@
         </div>
     </div>
 </div>
+<form class="center-text" method="post" action="status">
+    <input type="submit" class="submit rounded shadow" id="status-submit" value="Back to Status Page">
+</form>
+<br><br>
 
 <include href="views/footer.html"></include>
+

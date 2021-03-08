@@ -2,7 +2,7 @@
 
 <div class="content-wrap pb-5">
     <form id="formpg" class="container border mt-4 shadow bg-white" method="post" action="#">
-        <h1 class="pt-3 text-center">Incident Form</h1>
+        <h1 class="pt-3 text-center">Patron Form</h1>
         <hr>
 
         <div class="pl-5 pr-5 pb-5 pt-2">
@@ -33,7 +33,8 @@
                 </div>
             </div>
             <br>
-            <label><strong>Position:</strong></label>
+
+            <label><strong>Position:&emsp;</strong></label>
             <repeat group="{{ @positions }}" value="{{ @position }}">
                 <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
                     <check if="{{ @position == @employeePosition }}">checked</check>
@@ -46,7 +47,7 @@
             </check>
             <br><br>
 
-            <label><strong>Contact Method: </strong></label>
+            <label><strong>Contact Method:&emsp;</strong></label>
             <repeat group="{{ @methods }}" value="{{ @method }}">
                 <label><input type="radio" name="method" id="{{ @method }}" value="{{ @method }}"
                     <check if="{{ @method == @clientMethod }}">checked</check>
@@ -85,7 +86,9 @@
             <select class="form-control" id="question" name="question">
                 <option selected>Choose...</option>
                 <repeat group="{{ @questions }}" value="{{ @question }}">
-                    <option value="question">{{ ucfirst(@question) }}</option>
+                    <option value="{{ @question }}"
+                    <check if="{{ @question == @clientQuestion }}">selected</check>
+                    >{{ ucfirst(@question) }}</option>
                 </repeat>
                 <option value="otherQuestion">Other...</option>
             </select><br>
@@ -100,7 +103,7 @@
                 <br>
             </div>
 
-            <label><strong>Incident Report:</strong></label>
+            <label><strong>Incident Report:&emsp;</strong></label>
             <repeat group="{{ @incidentReports }}" value="{{ @incidentReport }}">
                 <label><input type="radio" name="incidentReport" id="{{ @incidentReport }}"
                               value="{{ @incidentReport }}"

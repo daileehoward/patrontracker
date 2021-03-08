@@ -1,5 +1,5 @@
 {
-  "name": "dclemmer2/328/midterm1",
+  "name": "patrontracker",
 
   "authors": [
     {
@@ -17,6 +17,6 @@
   },
 
   "autoload": {
-    "classmap": ["model/", "controllers/"]
+    "classmap": ["model/", "controllers/", "classes/"]
   }
 }
