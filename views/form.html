@@ -42,8 +42,8 @@
                     </input></label>&emsp;
             </repeat>
 
-            <check if="{{ isset(@errors['position']) }}">
-                {{ @errors['position'] }}
+            <check if="{{ isset(@errors['employeePosition']) }}">
+                {{ @errors['employeePosition'] }}
             </check>
             <br><br>
 
@@ -55,27 +55,33 @@
                     </input></label>&emsp;
             </repeat>
 
-            <check if="{{ isset(@errors['method']) }}">
-                {{ @errors['method'] }}
+            <check if="{{ isset(@errors['clientMethod']) }}">
+                {{ @errors['clientMethod'] }}
             </check>
             <br><br>
 
             <label for="location"><strong>Location:</strong></label>
             <select class="form-control" id="location" name="location">
-                <option selected>Choose...</option>
+                <option selected></option>
                 <repeat group="{{ @locations }}" value="{{ @location }}">
                     <option value="{{ @location }}"
                     <check if="{{ @location == @clientLocation }}">selected</check>
                     >
                     {{ ucfirst(@location) }}</option>
                 </repeat>
-                <option value="otherLocation">Other...</option>
-            </select><br>
+                <option value="other">Other...</option>
+            </select>
+
+            <check if="{{ isset(@errors['clientLocation']) }}">
+                {{ @errors['clientLocation'] }}
+            </check>
+            <br>
 
             <div id="otherLocation" class="d-none">
                 <label for="locationOther"><strong>Other Location: </strong></label>
                 <input class="form-control" type="text" id="locationOther" name="locationOther"
                        value="{{ @clientLocationOther }}">
+
                 <check if="{{ isset(@errors['clientLocationOther']) }}">
                     {{ @errors['clientLocationOther'] }}
                 </check>
@@ -84,14 +90,19 @@
 
             <label for="question"><strong>Question:</strong></label>
             <select class="form-control" id="question" name="question">
-                <option selected>Choose...</option>
+                <option selected></option>
                 <repeat group="{{ @questions }}" value="{{ @question }}">
                     <option value="{{ @question }}"
                     <check if="{{ @question == @clientQuestion }}">selected</check>
                     >{{ ucfirst(@question) }}</option>
                 </repeat>
-                <option value="otherQuestion">Other...</option>
-            </select><br>
+                <option value="other">Other...</option>
+            </select>
+
+            <check if="{{ isset(@errors['clientQuestion']) }}">
+                {{ @errors['clientQuestion'] }}
+            </check>
+            <br>
 
             <div id="otherQuestion" class="d-none">
                 <label for="questionOther"><strong>Other Question: </strong></label>
@@ -101,6 +112,10 @@
                     {{ @errors['clientQuestionOther'] }}
                 </check>
                 <br>
+
+                <check if="{{ isset(@errors['otherQuestion']) }}">
+                    {{ @errors['otherQuestion'] }}
+                </check>
             </div>
 
             <label><strong>Incident Report:&emsp;</strong></label>
@@ -112,12 +127,12 @@
                     </input></label>&emsp;
             </repeat>
 
-            <check if="{{ isset(@errors['incidentReport']) }}">
-                {{ @errors['incidentReport'] }}
+            <check if="{{ isset(@errors['clientIncidentReport']) }}">
+                {{ @errors['clientIncidentReport'] }}
             </check>
             <br><br>
 
-            <div id="incNumDiv">
+            <div id="incNumDiv" class="d-none">
                 <label for="incidentNum"><strong>Incident Report Number:</strong></label>
                 <input class="form-control" type="text" id="incidentNum" name="incidentNum"
                        value="{{ @clientIncReportNum }}">
@@ -128,6 +143,7 @@
                 <br>
             </div>
             <br>
+
             <label for="comments"><strong>Comments:</strong></label>
             <textarea class="form-control" id="comments" name="comments" rows="2" value="{{ @clientComments }}">{{ @clientComments }}</textarea>
 

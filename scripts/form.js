@@ -34,8 +34,10 @@ function otherQuestion() {
 //This function will show incident number textbox if "yes" for incident reports is checked
 function incidentReport() {
     alert("fgh");
-    let incReport = document.getElementsByName("incidentReport");
+    //let incReport = document.getElementsByName("incidentReport").value;
     let incNumDiv = document.getElementById("incNumDiv");
+
+    /*
     for (let i=0; i < incReport.length; i++) {
         if (incReport[i].checked) {
             if (incReport[i].value === "yes") {
@@ -46,8 +48,16 @@ function incidentReport() {
             }
         }
     }
-}
+     */
 
+    let incReport = document.querySelector('input[name="incidentReport"]:checked'.value);
+
+    if (incReport === "yes") {
+        incNumDiv.classList.remove("d-none");
+    } else {
+        incNumDiv.classList.add("d-none");
+    }
+}
 
 //Repopulates form page with submission results
 function submissionResults() {

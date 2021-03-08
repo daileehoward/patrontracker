@@ -70,7 +70,7 @@ class Validate
 
     function validOtherLocationChosen($location)
     {
-        return $location == "Other...";
+        return $location == "other";
     }
 
     function validLocationOther($locationOther)
@@ -90,7 +90,7 @@ class Validate
 
     function validOtherQuestionChosen($question)
     {
-        return $question == "Other...";
+        return $question == "other";
     }
 
     function validQuestionOther($questionOther)
@@ -110,6 +110,6 @@ class Validate
 
     function validIncidentReportNumber($incidentReportNumber)
     {
-        return !empty($incidentReportNumber);
+        return !empty($incidentReportNumber) && is_integer($incidentReportNumber);
     }
 }
