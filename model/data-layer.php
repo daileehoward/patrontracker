@@ -14,8 +14,28 @@ class DataLayer
     function __construct($dbh)
     {
         $this->_dbh = $dbh;
-        $this->_locationsArray = array("admission issue", "adobe account", "borrow item", "borrowed laptop troubleshooting");
-        $this->_questionsArray = array("2", "l");
+
+        $this->_locationsArray = array("auburn", "arizona", "bonney lake", "canada", "china", "covington", "delaware",
+        "edgewood", "enumclaw", "federal way", "florida", "kent", "korea", "lake tapps", "maple valley", "tennessee",
+        "milton", "olympia", "philippines", "port angeles", "puyallup", "renton", "seattle", "stanwood", "south korea",
+        "tacoma", "tukwila", "walla walla", "issaquah", "louisiana", "des moines", "myanmar", "vietnam", "michigan",
+        "alaska", "coupeville", "bothell", "yelm", "united arab emirates", "white pass", "pacific", "bellevue",
+        "buckley", "port townsend", "black diamond", "nevada", "gig harbor", "texas");
+
+        $this->_questionsArray = array("admission issue", "adobe account", "borrowed item", "borrowed laptop 
+        troubleshooting", "adress change", "canvas troubleshooting", "canvas classes", "connect to advisor", "connect 
+        to instructor", "convert pdf to word doc", "employee account locked", "financial aid", "holman library issue",
+        "linkedin learning issue", "virtual desktop login", "microsoft office account", "microsoft office download",
+        "microsoft troubleshooting", "my greenriver", "noodletools citation", "office of the registrar (formerly 
+        enrollment services", "onedrive", "placement testing", "printing through campus", "registration", "respondus 
+        lockdown browser", "sexual assault training", "student email (lookup)", "student email (hacked)", "student 
+        email (password reset)", "student email (login issue)", "student email (unable to receive emails)", "student 
+        email (unable to send emails)", "student id", "student pin", "student transcript", "tlr", "tutoring and 
+        resources center", "uploading files to canvas", "video recording", "wifi issue", "zoom audio issue", "covid 
+        training", "bookstore", "continuing education", "grc account password reset", "workforce education", "campus 
+        housing", "discord", "international programs", "ged program", "counseling services", "wamap", "employee 
+        password", "personal printer issue", "nasar", "job application", "criminal justice department", "personal 
+        laptop issue");
     }
 
     /** getQuestions() returns an array of questions
@@ -41,7 +61,7 @@ class DataLayer
 
     function addLocation($newLocation)
     {
-        array_push($this->_locationsArray);
+        array_push($this->_locationsArray, $newLocation);
     }
 
     /** getPositions() returns an array of positions
