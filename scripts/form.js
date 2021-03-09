@@ -29,6 +29,7 @@ function otherQuestion() {
     }
 }
 
+//This function will load the "other" boxes if there is text in them and "other" is selected in the dropdown
 function loadOtherBoxes() {
     let location = document.getElementById("location");
     let selectedValueLocation = location.options[location.selectedIndex].value;

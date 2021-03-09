@@ -50,7 +50,7 @@ body {
 
 /***** Status Pg Styles ******/
 header#status-header {
-    height: 45vh;
+    height: 35vh;
     background: linear-gradient(
             rgba(0, 0, 0, 0),
             rgba(0, 0, 0, 0.2)
@@ -60,11 +60,11 @@ header#status-header {
 }
 
 header h1 {
-    font-size: 6em;
+    font-size: 5em;
     text-shadow: 3px 3px black;
     margin: auto;
     position: absolute;
-    top: 26%;
+    top: 21%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -86,6 +86,16 @@ input#status-submit:hover, input.submit-form:hover, #newFormButton:hover {
 
 
 /***** Form Pg Styles ******/
+header#form-header {
+    height: 35vh;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0.2)
+    ),
+    url(../images/grc_trail.jpg) no-repeat fixed;
+    background-size: cover;
+}
+
 input.submit-form {
     background-color: white;
     border: 1px solid grey;
@@ -101,10 +111,6 @@ input.submit-form {
     #formpg, #submitted-form div.card {
         width: 80%;
     }
-}
-
-div.content-wrap {
-    padding-top: 6em;
 }
 
 form#formpg h1 {
@@ -248,6 +254,13 @@ footer a.taber {
 
     div#firstCol {
         padding-bottom: 25px;
+    }
+
+    .taber.collapsed:after {
+        content: "+";
+    }
+    .taber:after {
+        content: "-";
     }
 
 }
