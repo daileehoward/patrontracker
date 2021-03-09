@@ -10,7 +10,7 @@
             <input class="form-control" type="text" id="name" name="name" value="{{ @employeeName }}">
 
             <check if="{{ isset(@errors['employeeName']) }}">
-                {{ @errors['employeeName'] }}
+                <span class="text-danger">{{ @errors['employeeName'] }}</span>
             </check>
             <br>
 
@@ -20,7 +20,7 @@
                     <input class="form-control" type="time" name="time" value="{{ @clientTime }}"><br>
 
                     <check if="{{ isset(@errors['time']) }}">
-                        {{ @errors['time'] }}
+                        <span class="text-danger">{{ @errors['time'] }}</span>
                     </check>
                 </div>
                 <div class="col">
@@ -28,7 +28,7 @@
                     <input class="form-control" type="date" name="date" value="{{ $clientDate }}"><br>
 
                     <check class="text-danger" if="{{ isset(@errors['date']) }}">
-                        {{ @errors['date'] }}
+                        <span class="text-danger">{{ @errors['date'] }}</span>
                     </check>
                 </div>
             </div>
@@ -38,12 +38,12 @@
             <repeat group="{{ @positions }}" value="{{ @position }}">
                 <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
                     <check if="{{ @position == @employeePosition }}">checked</check>
-                    > {{ucfirst(@position) }}
+                    >{{ucfirst(@position) }}
                     </input></label>&emsp;
             </repeat>
 
             <check if="{{ isset(@errors['employeePosition']) }}">
-                {{ @errors['employeePosition'] }}
+                <span class="text-danger">{{ @errors['employeePosition'] }}</span>
             </check>
             <br><br>
 
@@ -51,12 +51,12 @@
             <repeat group="{{ @methods }}" value="{{ @method }}">
                 <label><input type="radio" name="method" id="{{ @method }}" value="{{ @method }}"
                     <check if="{{ @method == @clientMethod }}">checked</check>
-                    > {{ucfirst(@method) }}
+                    >{{ucfirst(@method) }}
                     </input></label>&emsp;
             </repeat>
 
             <check if="{{ isset(@errors['clientMethod']) }}">
-                {{ @errors['clientMethod'] }}
+                <span class="text-danger">{{ @errors['clientMethod'] }}</span>
             </check>
             <br><br>
 
@@ -66,15 +66,16 @@
                 <repeat group="{{ @locations }}" value="{{ @location }}">
                     <option value="{{ @location }}"
                     <check if="{{ @location == @clientLocation }}">selected</check>
-                    >
-                    {{ ucfirst(@location) }}</option>
+                    > {{ ucfirst(@location) }}</option>
                 </repeat>
-                <option value="unknown">Unknown</option>
-                <option value="other">Other...</option>
+                <option value="unknown"
+                <check if="{{ @unknown == @clientLocation }}">selected</check>>Unknown</option>
+                <option value="other"
+                <check if="{{ @other == @clientLocation }}">selected</check>>Other...</option>
             </select>
 
             <check if="{{ isset(@errors['clientLocation']) }}">
-                {{ @errors['clientLocation'] }}
+                <span class="text-danger">{{ @errors['clientLocation'] }}</span>
             </check>
             <br>
 
@@ -83,8 +84,8 @@
                 <input class="form-control" type="text" id="locationOther" name="locationOther"
                        value="{{ @clientLocationOther }}">
 
-                <check if="{{ isset(@errors['clientLocationOther']) }}">
-                    {{ @errors['clientLocationOther'] }}
+                <check if="{{ isset(@errors['otherLocation']) }}">
+                    <span class="text-danger">{{ @errors['otherLocation'] }}</span>
                 </check>
                 <br>
             </div>
@@ -97,11 +98,12 @@
                     <check if="{{ @question == @clientQuestion }}">selected</check>
                     >{{ ucfirst(@question) }}</option>
                 </repeat>
-                <option value="other">Other...</option>
+                <option value="other"
+                <check if="{{ @other == @clientQuestion }}">selected</check>>Other...</option>
             </select>
 
             <check if="{{ isset(@errors['clientQuestion']) }}">
-                {{ @errors['clientQuestion'] }}
+                <span class="text-danger">{{ @errors['clientQuestion'] }}</span>
             </check>
             <br>
 
@@ -109,14 +111,11 @@
                 <label for="questionOther"><strong>Other Question: </strong></label>
                 <input class="form-control" type="text" id="questionOther" name="questionOther"
                        value="{{ @clientQuestionOther }}">
-                <check if="{{ isset(@errors['clientQuestionOther']) }}">
-                    {{ @errors['clientQuestionOther'] }}
-                </check>
-                <br>
 
                 <check if="{{ isset(@errors['otherQuestion']) }}">
-                    {{ @errors['otherQuestion'] }}
+                    <span class="text-danger">{{ @errors['otherQuestion'] }}</span>
                 </check>
+                <br>
             </div>
 
             <label><strong>Incident Report:&emsp;</strong></label>
@@ -124,12 +123,12 @@
                 <label><input type="radio" name="incidentReport" id="{{ @incidentReport }}"
                               value="{{ @incidentReport }}"
                     <check if="{{ @incidentReport == @clientIncidentReport }}">checked</check>
-                    > {{ucfirst(@incidentReport) }}
+                    >{{ucfirst(@incidentReport) }}
                     </input></label>&emsp;
             </repeat>
 
             <check if="{{ isset(@errors['clientIncidentReport']) }}">
-                {{ @errors['clientIncidentReport'] }}
+                <span class="text-danger">{{ @errors['clientIncidentReport'] }}</span>
             </check>
             <br><br>
 
@@ -139,7 +138,7 @@
                        value="{{ @clientIncReportNum }}">
 
                 <check if="{{ isset(@errors['clientIncReportNum']) }}">
-                    {{ @errors['clientIncReportNum'] }}
+                    <span class="text-danger">{{ @errors['clientIncReportNum'] }}</span>
                 </check>
                 <br>
             </div>
@@ -149,7 +148,7 @@
             <textarea class="form-control" id="comments" name="comments" rows="2" value="{{ @clientComments }}">{{ @clientComments }}</textarea>
 
             <check if="{{ isset(@errors['comments']) }}">
-                {{ @errors['comments'] }}
+                <span class="text-danger">{{ @errors['comments'] }}</span>
             </check>
             <br><br>
 

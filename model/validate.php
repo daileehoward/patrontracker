@@ -48,9 +48,9 @@ class Validate
         return !empty($time);
     }
 
-    function validDate($data)
+    function validDate($date)
     {
-        return !empty($data);
+        return !empty($date);
     }
 
     function validPosition($position)
@@ -65,22 +65,12 @@ class Validate
 
     function validLocation($location)
     {
-        return !empty($location) && in_array($location, $this->_dataLayer->getLocations());
-    }
-
-    function validOtherLocationChosen($location)
-    {
-        return $location == "other";
+        return !empty($location) && in_array($location, $this->_dataLayer->getLocations()) || $location == "unknown";
     }
 
     function validLocationOther($locationOther)
     {
-        return !empty($locationOther) && preg_match("/^[a-zA-Z ]*$/", $locationOther);
-    }
-
-    function validLocationOtherNoDuplicates($locationOther)
-    {
-        return !in_array($locationOther, $this->_dataLayer->getLocations());
+        return !empty($locationOther) && !in_array($locationOther, $this->_dataLayer->getLocations());
     }
 
     function validQuestion($question)
@@ -88,19 +78,9 @@ class Validate
         return !empty($question) && in_array($question, $this->_dataLayer->getQuestions());
     }
 
-    function validOtherQuestionChosen($question)
-    {
-        return $question == "other";
-    }
-
     function validQuestionOther($questionOther)
     {
-        return !empty($questionOther);
-    }
-
-    function validQuestionOtherNoDuplicates($questionOther)
-    {
-        return !in_array($questionOther, $this->_dataLayer->getQuestions());
+        return !empty($questionOther) && !in_array($questionOther, $this->_dataLayer->getQuestions());
     }
 
     function validIncidentReport($incidentReport)

@@ -72,21 +72,22 @@ class Controller
             $this->_f3->reroute('/');
         }
 
-        //Get the data from the POST array
-        $employeeName = trim($_POST['name']);
-        $time = $_POST['time'];
-        $date = $_POST['date'];
-        $employeePosition = trim($_POST['position']);
-        $clientMethod = trim($_POST['method']);
-        $clientLocation = trim($_POST['location']);
-        $locationOther = trim($_POST['locationOther']);
-        $clientQuestion = trim($_POST['question']);
-        $questionOther = trim($_POST['questionOther']);
-        $clientIncidentReport = trim($_POST['incidentReport']);
-        $clientIncReportNum = trim($_POST['incidentNum']);
-        $comments = trim($_POST['comments']);
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //Get the data from the POST array
+            $employeeName = trim($_POST['name']);
+            $time = $_POST['time'];
+            $date = $_POST['date'];
+            $employeePosition = trim($_POST['position']);
+            $clientMethod = trim($_POST['method']);
+            $clientLocation = trim($_POST['location']);
+            $locationOther = trim($_POST['locationOther']);
+            $clientQuestion = trim($_POST['question']);
+            $questionOther = trim($_POST['questionOther']);
+            $clientIncidentReport = trim($_POST['incidentReport']);
+            $clientIncReportNum = trim($_POST['incidentNum']);
+            $comments = trim($_POST['comments']);
+
+
             if ($validator->validName($employeeName)) {
                 $_SESSION['employeeName'] = $employeeName;
             } else {
@@ -118,42 +119,31 @@ class Controller
             }
 
             if ($validator->validLocation($clientLocation)) {
-                if ($validator->validOtherLocationChosen($clientLocation)) {
-                    if ($validator->validLocationOther($locationOther)) {
-                        if ($validator->validLocationOtherNoDuplicates($locationOther)) {
-                            $_SESSION['clientLocation'] = "";
-                            $_SESSION['otherLocation'] = $locationOther;
-                            $dataLayer->addLocation($locationOther);
-                        } else {
-                            $_SESSION['clientLocation'] = $locationOther;
-                        }
-                    } else {
-                        $this->_f3->set("errors[otherLocation]", "Other location is required and can only contain 
-                        characters");
-                    }
+                $_SESSION['clientLocation'] = $clientLocation;
+            } else if ($clientLocation == "other") {
+                if ($validator->validLocationOther($locationOther)) {
+                    $_SESSION['clientLocation'] = "";
+                    $_SESSION['otherLocation'] = $locationOther;
+                    $dataLayer->addLocation($locationOther);
                 } else {
-                    $_SESSION['clientLocation'] = $clientLocation;
+                    $this->_f3->set("errors[otherLocation]", "Other location is required and can only contain 
+                        characters");
                 }
             } else {
                 $this->_f3->set("errors[clientLocation]", "*Location is required");
             }
 
             if ($validator->validQuestion($clientQuestion)) {
-                if ($validator->validOtherQuestionChosen($clientQuestion)) {
-                    if ($validator->validQuestionOther($questionOther)) {
-                        if ($validator->validQuestionOtherNoDuplicates($questionOther)) {
-                            $_SESSION['clientQuestion'] = "";
-                            $_SESSION['questionOther'] = $questionOther;
-                            $dataLayer->addQuestion($questionOther);
-                        } else {
-                            $_SESSION['clientQuestion'] = $questionOther;
-                        }
-                    } else {
-                        $this->_f3->set("errors[otherQuestion]", "Other question is required");
-                    }
+                $_SESSION['clientQuestion'] = $clientQuestion;
+            } else if ($clientQuestion == "other") {
+                if ($validator->validQuestionOther($questionOther)) {
+                    $_SESSION['clientQuestion'] = "";
+                    $_SESSION['questionOther'] = $questionOther;
+                    $dataLayer->addQuestion($questionOther);
                 } else {
-                    $_SESSION['clientQuestion'] = $clientQuestion;
+                    $this->_f3->set("errors[otherQuestion]", "Other question is required");
                 }
+
             } else {
                 $this->_f3->set("errors[clientQuestion]", "*Question is required");
             }
@@ -198,6 +188,8 @@ class Controller
         $this->_f3->set('clientIncidentReport', isset($clientIncidentReport) ? $clientIncidentReport : "");
         $this->_f3->set('clientIncReportNum', isset($clientIncReportNum) ? $clientIncReportNum : "");
         $this->_f3->set('clientComments', isset($comments) ? $comments : "");
+        $this->_f3->set('unknown', "unknown");
+        $this->_f3->set('other', "other");
 
         //Display a view
         $view = new Template();

@@ -199,3 +199,57 @@ a.hyperlink-removed {
     text-decoration: none;
     color: white;
 }
+
+/***** Collapsible Footer Styles *****/
+
+@media(min-width: 1400px) {
+    footer {
+        padding-left: 12em;
+        padding-right: 12em;
+    }
+}
+
+footer ul {
+    padding:0 0 0;
+}
+
+footer ul li,.taber
+{
+    list-style:none;
+}
+
+ul>li>a:hover, a:hover {
+    color: #d3d9dd;
+}
+
+.copyright-text {
+    color: #d3d9dd;
+    font-size: 13px;
+}
+
+footer a.taber {
+    font-size: 20px;
+    color: white;
+    text-decoration: none !important;
+}
+
+@media (max-width:768px)
+{
+    .copyright-text {
+        padding-top: 20px;
+    }
+
+    .taber {
+        cursor:auto;
+    }
+    .taber.collapsed:after {
+        content: "+";
+        padding-left: 1em;
+    }
+    .taber:after {
+        content: "-";
+        padding-left: 1em;
+
+    }
+
+}
