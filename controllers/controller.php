@@ -151,19 +151,19 @@ class Controller
             if ($validator->validIncidentReport($clientIncidentReport)) {
                 $_SESSION['clientIncidentReport'] = $clientIncidentReport;
 
-                if ($validator->validIncidentReportNumber($clientIncReportNum)) {
+              /*  if ($validator->validIncidentReportNumber($clientIncReportNum)) {
                     $_SESSION['clientIncReportNum'] = $clientIncReportNum;
                 } else {
                     $this->_f3->set("errors['clientIncReportNum']", "*Incident report number must be provided and can 
                     only contain numbers");
-                }
+                }*/
             } else {
                 $this->_f3->set("errors['clientIncidentReport']", "*Specify if an incident report was created for this 
                 incident");
             }
 
             if (empty($this->_f3->get('errors'))) {
-                //Redirect to sumbmission page
+                //Redirect to submission page
                 $this->_f3->reroute('/submission');
             }
         }

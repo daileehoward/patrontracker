@@ -38,7 +38,7 @@
             <repeat group="{{ @positions }}" value="{{ @position }}">
                 <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
                     <check if="{{ @position == @employeePosition }}">checked</check>
-                    >{{ucfirst(@position) }}
+                    > {{ucfirst(@position) }}
                     </input></label>&emsp;
             </repeat>
 
@@ -51,7 +51,7 @@
             <repeat group="{{ @methods }}" value="{{ @method }}">
                 <label><input type="radio" name="method" id="{{ @method }}" value="{{ @method }}"
                     <check if="{{ @method == @clientMethod }}">checked</check>
-                    >{{ucfirst(@method) }}
+                    > {{ucfirst(@method) }}
                     </input></label>&emsp;
             </repeat>
 
@@ -123,7 +123,7 @@
                 <label><input type="radio" name="incidentReport" id="{{ @incidentReport }}"
                               value="{{ @incidentReport }}"
                     <check if="{{ @incidentReport == @clientIncidentReport }}">checked</check>
-                    >{{ucfirst(@incidentReport) }}
+                    > {{ucfirst(@incidentReport) }}
                     </input></label>&emsp;
             </repeat>
 
