@@ -1,13 +1,12 @@
 <include href="views/header.html"></include>
 
-<header id="form-header">
-    <h1 class="center-text text-white">PATRON FORM</h1>
+<header id="form-header" class="pt-5">
+    <h1 class="center-text align-self-center text-white text-uppercase">Patron Form</h1>
 </header>
 
 <div class="content-wrap pb-5">
     <form id="formpg" class="container border mt-4 shadow bg-white" method="post" action="#">
-        <br><br>
-        <div class="pl-5 pr-5 pb-5 pt-2">
+        <div id="inner-form" class="pb-5 pt-5">
             <label for="name"><strong>Employee Name:</strong></label>
             <input class="form-control" type="text" id="name" name="name" value="{{ @employeeName }}">
 
