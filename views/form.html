@@ -119,18 +119,21 @@
                 <br>
             </div>
 
-            <label><strong>Incident Report:&emsp;</strong></label>
+        <!--    <label><strong>Incident Report:&emsp;</strong></label>
             <repeat group="{{ @incidentReports }}" value="{{ @incidentReport }}">
                 <label><input type="radio" name="incidentReport" id="{{ @incidentReport }}"
                               value="{{ @incidentReport }}"
                     <check if="{{ @incidentReport == @clientIncidentReport }}">checked</check>
                     > {{ucfirst(@incidentReport) }}
-                    </input></label>&emsp;
-            </repeat>
+                </label>
+            </repeat>-->
 
-            <check if="{{ isset(@errors['clientIncidentReport']) }}">
+            <label class="font-weight-bold"><input type="checkbox" name="incidentReport" value="incidentReport">
+                 Incident Report</label>
+
+         <!--   <check if="{{ isset(@errors['clientIncidentReport']) }}">
                 <span class="text-danger">{{ @errors['clientIncidentReport'] }}</span>
-            </check>
+            </check>-->
             <br><br>
 
             <div id="incNumDiv" class="d-none">

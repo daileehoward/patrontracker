@@ -83,8 +83,8 @@ class DataLayer
     /** getIncidentReportOptions() returns an array of incident report options
      *  @return array
      */
-    function getIncidentReportOptions()
+   /* function getIncidentReportOptions()
     {
         return array("yes", "no");
-    }
+    }*/
 }

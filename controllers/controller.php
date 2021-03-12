@@ -65,6 +65,7 @@ class Controller
     {
         global $validator;
         global $dataLayer;
+        global $incident;
 
         //if not logged in, take user to login page
         if (!isset($_SESSION['loggedin'])) {
@@ -95,35 +96,35 @@ class Controller
             }
 
             if ($validator->validTime($time)) {
-                $_SESSION['time'] = $time;
+                $incident->setTimeHelped($time);
             } else {
                 $this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
             }
 
             if ($validator->validDate($date)) {
-                $_SESSION['date'] = $date;
+                $incident->setDateHelped($date);
             } else {
                 $this->_f3->set("errors[date]", "*Date is required and needs to follow the correct format");
             }
 
             if ($validator->validPosition($employeePosition)) {
-                $_SESSION['employeePosition'] = $employeePosition;
+                $incident->setPosition($employeePosition);
             } else {
                 $this->_f3->set("errors[employeePosition]", "*Position is required");
             }
 
             if ($validator->validContactMethod($clientMethod)) {
-                $_SESSION['clientMethod'] = $clientMethod;
+                $incident->setContactMethod($clientMethod);
             } else {
                 $this->_f3->set("errors[clientMethod]", "*Contact method is required");
             }
 
             if ($validator->validLocation($clientLocation)) {
-                $_SESSION['clientLocation'] = $clientLocation;
+                $incident->setLocation($clientLocation);
             } else if ($clientLocation == "other") {
                 if ($validator->validLocationOther($locationOther)) {
-                    $_SESSION['clientLocation'] = "";
-                    $_SESSION['otherLocation'] = $locationOther;
+                    $incident->setLocation("");
+                    $incident->setLocationOther($locationOther);
                     $dataLayer->addLocation($locationOther);
                 } else {
                     $this->_f3->set("errors[otherLocation]", "Other location is required and can only contain 
@@ -134,11 +135,11 @@ class Controller
             }
 
             if ($validator->validQuestion($clientQuestion)) {
-                $_SESSION['clientQuestion'] = $clientQuestion;
+                $incident->setQuestion($clientQuestion);
             } else if ($clientQuestion == "other") {
                 if ($validator->validQuestionOther($questionOther)) {
-                    $_SESSION['clientQuestion'] = "";
-                    $_SESSION['questionOther'] = $questionOther;
+                    $incident->setQuestion("");
+                    $incident->setQuestionOther($questionOther);
                     $dataLayer->addQuestion($questionOther);
                 } else {
                     $this->_f3->set("errors[otherQuestion]", "Other question is required");
@@ -148,21 +149,25 @@ class Controller
                 $this->_f3->set("errors[clientQuestion]", "*Question is required");
             }
 
-            if ($validator->validIncidentReport($clientIncidentReport)) {
-                $_SESSION['clientIncidentReport'] = $clientIncidentReport;
+            if (isset($clientIncidentReport)) {
+                $incident->setFiledIncidentReport('yes');
 
               /*  if ($validator->validIncidentReportNumber($clientIncReportNum)) {
-                    $_SESSION['clientIncReportNum'] = $clientIncReportNum;
+                    $incident->setIncidentReportNum($clientIncidentReport);
                 } else {
                     $this->_f3->set("errors['clientIncReportNum']", "*Incident report number must be provided and can 
                     only contain numbers");
                 }*/
             } else {
-                $this->_f3->set("errors['clientIncidentReport']", "*Specify if an incident report was created for this 
-                incident");
+                $incident->setFiledIncidentReport('no');
+            }
+
+            if(isset($comments)) {
+                $incident->setComments($comments);
             }
 
             if (empty($this->_f3->get('errors'))) {
+                $_SESSION['incident'] = $incident;
                 //Redirect to submission page
                 $this->_f3->reroute('/submission');
             }
@@ -173,7 +178,7 @@ class Controller
         $this->_f3->set('locations', $dataLayer->getLocations());
         $this->_f3->set('positions', $dataLayer->getPositions());
         $this->_f3->set('methods', $dataLayer->getContactMethods());
-        $this->_f3->set('incidentReports', $dataLayer->getIncidentReportOptions());
+       // $this->_f3->set('incidentReports', $dataLayer->getIncidentReportOptions());
 
         //make form sticky
         $this->_f3->set('employeeName', isset($employeeName) ? $employeeName : "");

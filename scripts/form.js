@@ -1,6 +1,6 @@
 document.getElementById("location").onclick = otherLocation;
 document.getElementById("question").onclick = otherQuestion;
-document.getElementsByName("incidentReport").onclick = incidentReport;
+document.getElementById("incidentReport").onclick = incidentReport;
 window.onload = loadOtherBoxes;
 //document.getElementById("formpg").onsubmit = submissionResults;
 
@@ -50,36 +50,20 @@ function loadOtherBoxes() {
     }
 }
 
-//This function will show incident number textbox if "yes" for incident reports is checked
-    function incidentReport() {
-        alert("fgh");
-        //let incReport = document.getElementsByName("incidentReport").value;
-        let incNumDiv = document.getElementById("incNumDiv");
+//This function will show incident number textbox if incident report is checked
+function incidentReport() {
 
-        /*
-        for (let i=0; i < incReport.length; i++) {
-            if (incReport[i].checked) {
-                if (incReport[i].value === "yes") {
-                    incNumDiv.classList.remove("d-none");
-                }
-                else {
-                    incNumDiv.classList.add("d-none");
-                }
-            }
-        }
-         */
+    let incReport = document.getElementById("incidentReport");
+    let incNumDiv = document.getElementById("incNumDiv");
 
-        let incReport = document.querySelector('input[name="incidentReport"]:checked'.value);
-
-        if (incReport === "yes") {
-            incNumDiv.classList.remove("d-none");
-        } else {
-            incNumDiv.classList.add("d-none");
-        }
+    incNumDiv.classList.remove("d-none");
+    if (!incReport.checked) {
+        incNumDiv.classList.add("d-none");
     }
+}
 
 //Repopulates form page with submission results
-    function submissionResults() {
-        document.getElementById("formpg").classList.add("d-none");
-        document.getElementById("submitted-form").classList.remove("d-none");
-    }
+function submissionResults() {
+    document.getElementById("formpg").classList.add("d-none");
+    document.getElementById("submitted-form").classList.remove("d-none");
+}

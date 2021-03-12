@@ -1,6 +1,7 @@
 <include href="views/header.html"></include>
 
-<div id="submitted-form" class="content-wrap pb-5">
+<br><br><br>
+<div id="submitted-form" class="content-wrap pt-5 pb-5">
     <div class="card bg-white shadow mx-auto">
         <div class="card-body">
             <h1 class="text-center">Thank You for Your Submission!</h1>
@@ -25,43 +26,43 @@
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Date:</th>
-                    <td>{{ @SESSION.clientDate }}</td>
+                    <td>{{ @SESSION.incident->getDateHelped() }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Position:</th>
-                    <td>{{ @SESSION.employeePosition }}</td>
+                    <td>{{ @SESSION.incident->getPosition() }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Contact Method:</th>
-                    <td>{{ @SESSION.clientMethod }}</td>
+                    <td>{{ ucfirst(@SESSION.incident->getContactMethod()) }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Location:</th>
-                    <td>{{ @SESSION.clientLocation }}</td>
+                    <td>{{ ucfirst(@SESSION.incident->getLocation()) }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Location Other:</th>
-                    <td>{{ @SESSION.clientLocationOther }}</td>
+                    <td>{{ ucfirst(@SESSION.incident->getLocationOther()) }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Question:</th>
-                    <td>{{ @SESSION.clientQuestion }}</td>
+                    <td>{{ ucfirst(@SESSION.incident->getQuestion()) }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Question Other:</th>
-                    <td>{{ @SESSION.clientQuestionOther }}</td>
+                    <td>{{ ucfirst(@SESSION.incident->getQuestionOther()) }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Incident Report:</th>
-                    <td>{{ @SESSION.clientIncidentReport }}</td>
+                    <td>{{ ucfirst(@SESSION.incident->getFiledIncidentReport()) }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Incident Report Number:</th>
-                    <td>{{ @SESSION.clientIncReportNum }}</td>
+                    <td>{{ @SESSION.incident->getIncidentReportNum() }}</td>
                 </tr>
                 <tr>
                     <th class="pb-1 pl-3">Comments:</th>
-                    <td>{{ @SESSION.clientComments }}</td>
+                    <td>{{ @SESSION.incident->getComments() }}</td>
                 </tr>
                 </tbody>
             </table>
