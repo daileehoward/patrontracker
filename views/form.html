@@ -128,12 +128,18 @@
                 </label>
             </repeat>-->
 
-            <label class="font-weight-bold"><input type="checkbox" name="incidentReport" value="incidentReport">
-                 Incident Report</label>
+            <div>
+                <label class="font-weight-bold">
+                <input type="checkbox" id="incidentReport" name="incidentReport" value="incidentReport"
+                    <check if="{{ @incidentReport == @clientIncidentReport }}">checked</check>
+                    > {{ucfirst(@incidentReport) }}
+                     Incident Report
+                </label>
+            </div>
 
-         <!--   <check if="{{ isset(@errors['clientIncidentReport']) }}">
+            <check if="{{ isset(@errors['clientIncidentReport']) }}">
                 <span class="text-danger">{{ @errors['clientIncidentReport'] }}</span>
-            </check>-->
+            </check>
             <br><br>
 
             <div id="incNumDiv" class="d-none">

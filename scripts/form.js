@@ -1,6 +1,14 @@
 document.getElementById("location").onclick = otherLocation;
 document.getElementById("question").onclick = otherQuestion;
-document.getElementById("incidentReport").onclick = incidentReport;
+document.getElementById("incidentReport").addEventListener("click", displayIncidentReport);
+/*$('#incidentReport').click(function() {
+    if (this.checked) {
+        $('#incNumDiv').classList.remove("d-none");
+    } else {
+        $('#incNumDiv').classList.add("d-none");
+    }
+});
+ */
 window.onload = loadOtherBoxes;
 //document.getElementById("formpg").onsubmit = submissionResults;
 
@@ -51,13 +59,13 @@ function loadOtherBoxes() {
 }
 
 //This function will show incident number textbox if incident report is checked
-function incidentReport() {
-
+function displayIncidentReport() {
     let incReport = document.getElementById("incidentReport");
     let incNumDiv = document.getElementById("incNumDiv");
 
-    incNumDiv.classList.remove("d-none");
-    if (!incReport.checked) {
+    if (incReport.checked) {
+        incNumDiv.classList.remove("d-none");
+    } else {
         incNumDiv.classList.add("d-none");
     }
 }
