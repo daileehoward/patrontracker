@@ -79,12 +79,4 @@ class DataLayer
     {
         return array("zoom", "phone");
     }
-
-    /** getIncidentReportOptions() returns an array of incident report options
-     *  @return array
-     */
-   /* function getIncidentReportOptions()
-    {
-        return array("yes", "no");
-    }*/
 }

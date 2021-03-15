@@ -151,13 +151,6 @@ class Controller
 
             if (isset($clientIncidentReport)) {
                 $incident->setFiledIncidentReport('yes');
-
-              /*  if ($validator->validIncidentReportNumber($clientIncReportNum)) {
-                    $incident->setIncidentReportNum($clientIncidentReport);
-                } else {
-                    $this->_f3->set("errors['clientIncReportNum']", "*Incident report number must be provided and can 
-                    only contain numbers");
-                }*/
             } else {
                 $incident->setFiledIncidentReport('no');
             }

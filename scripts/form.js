@@ -1,17 +1,14 @@
+<!--
+Dana Clemmer, Dailee Howard
+scripts/form.html
+Script for form page for app
+-->
+
 document.getElementById("location").onclick = otherLocation;
 document.getElementById("question").onclick = otherQuestion;
 document.getElementById("incidentReport").addEventListener("click", displayIncidentReport);
-/*$('#incidentReport').click(function() {
-    if (this.checked) {
-        $('#incNumDiv').classList.remove("d-none");
-    } else {
-        $('#incNumDiv').classList.add("d-none");
-    }
-});
- */
-window.onload = loadOtherBoxes;
-//document.getElementById("formpg").onsubmit = submissionResults;
 
+window.onload = loadOtherBoxes;
 
 //This function will show other location textbox if "other" selected from dropdown
 function otherLocation() {
@@ -47,7 +44,6 @@ function loadOtherBoxes() {
             otherLocationDiv.classList.remove("d-none");
         }
     }
-
     let question = document.getElementById("question");
     let selectedValueQuestion = question.options[question.selectedIndex].value;
     let otherQuestionDiv = document.getElementById("otherQuestion");
@@ -68,10 +64,4 @@ function displayIncidentReport() {
     } else {
         incNumDiv.classList.add("d-none");
     }
-}
-
-//Repopulates form page with submission results
-function submissionResults() {
-    document.getElementById("formpg").classList.add("d-none");
-    document.getElementById("submitted-form").classList.remove("d-none");
 }

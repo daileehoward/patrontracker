@@ -87,9 +87,4 @@ class Validate
     {
         return !empty($incidentReport);
     }
-
-    function validIncidentReportNumber($incidentReportNumber)
-    {
-        return !empty($incidentReportNumber) && is_integer($incidentReportNumber);
-    }
 }
