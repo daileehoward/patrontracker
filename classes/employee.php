@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Class Employee creates an object for an employee using the site
+ * @author Dana Clemmer, Dailee Howard
+ * classes/employee.php
+ */
 class Employee
 {
     private $_employeeID;
@@ -9,6 +13,7 @@ class Employee
     private $_password;
 
     /**
+     * Gets employee ID
      * @return int
      */
     public function getEmployeeID()
@@ -17,6 +22,7 @@ class Employee
     }
 
     /**
+     * Set employee ID
      * @param int $employeeID
      */
     public function setEmployeeID($employeeID): void
@@ -25,6 +31,7 @@ class Employee
     }
 
     /**
+     * Gets name
      * @return String
      */
     public function getName()
@@ -33,6 +40,7 @@ class Employee
     }
 
     /**
+     * Sets name
      * @param String $name
      */
     public function setName($name): void
@@ -41,6 +49,7 @@ class Employee
     }
 
     /**
+     * Gets email
      * @return String
      */
     public function getEmail()
@@ -49,6 +58,16 @@ class Employee
     }
 
     /**
+     * Sets email
+     * @return String
+     */
+    public function setEmail($email) : void
+    {
+        $this->_email = $email;
+    }
+
+    /**
+     * Gets username
      * @return String
      */
     public function getUsername()
@@ -57,6 +76,7 @@ class Employee
     }
 
     /**
+     * Sets username
      * @param String $username
      */
     public function setUsername($username): void
@@ -65,6 +85,7 @@ class Employee
     }
 
     /**
+     * Gets password
      * @return String
      */
     public function getPassword()
@@ -73,6 +94,7 @@ class Employee
     }
 
     /**
+     * Sets password
      * @param String $password
      */
     public function setPassword($password): void

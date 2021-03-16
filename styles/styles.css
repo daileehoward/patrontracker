@@ -1,3 +1,9 @@
+/*
+Dana Clemmer, Dailee Howard
+styles/styles.css
+Styles for site/app
+*/
+
 /***** Navbar Styles ******/
 nav.navbar a.navbar-brand {
     font-size: 25px;
@@ -21,36 +27,6 @@ li.nav-item {
     img#grLogo {
         width: 3em;
     }
-}
-
-
-/***** Logout Styles ******/
-
-li#logout a {
-    color: black!important;
-    line-height: 46px;
-}
-
-li#logout a:hover {
-    text-decoration: none;
-    text-shadow: 1px 1px lightgrey;
-}
-
-/*li#logout button {
-    background-color: white;
-    border: 2px solid black;
-}*/
-
-/*li#logout button:hover {
-    background-color: #749974;
-}*/
-
-a.nav-link:hover {
-    text-shadow: 2px 2px black;
-}
-
-.fa-sign-out {
-    color: black;
 }
 
 
@@ -181,7 +157,7 @@ form#login {
 }
 
 div.login {
-    padding-top: 10em;
+    padding-top: 15em;
     height: 100vh;
     background-image: url(../images/grc.jpg);
     background-repeat: no-repeat;
@@ -218,6 +194,27 @@ input.submit-login, input.submit-form {
     #formpg {
         width: 50%;
     }
+}
+
+
+/***** Logout Styles ******/
+
+li#logout a {
+    color: black!important;
+    line-height: 46px;
+}
+
+li#logout a:hover {
+    text-decoration: none;
+    text-shadow: 1px 1px lightgrey;
+}
+
+a.nav-link:hover {
+    text-shadow: 2px 2px black;
+}
+
+.fa-sign-out {
+    color: black;
 }
 
 /***** Footer Styles ******/

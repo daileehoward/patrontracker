@@ -1,8 +1,8 @@
-<!--
+/*
 Dana Clemmer, Dailee Howard
 scripts/form.html
-Script for form page for app
--->
+Script for form page for site/app
+*/
 
 document.getElementById("location").onclick = otherLocation;
 document.getElementById("question").onclick = otherQuestion;

@@ -1,8 +1,8 @@
-<!--
+/*
 Dana Clemmer, Dailee Howard
 scripts/navbar_and_footer.html
-Script for navbar and footer for app
--->
+Script for navbar and footer for site/app
+*/
 
 /*Navbar Collapse*/
 $('.navbar-collapse a').click(function(){

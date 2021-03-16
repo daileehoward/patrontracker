@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Class Incident creates an object for an incident of a patron
+ * @author Dana Clemmer, Dailee Howard
+ * classes/incident.php
+ */
 class Incident
 {
     private $_patronId;
@@ -18,6 +22,7 @@ class Incident
     private $_submissionTime;
 
     /**
+     * Gets patron ID
      * @return int
      */
     public function getPatronId()
@@ -26,6 +31,7 @@ class Incident
     }
 
     /**
+     * Sets patron ID
      * @param int $patronId
      */
     public function setPatronId($patronId): void
@@ -34,6 +40,7 @@ class Incident
     }
 
     /**
+     * Gets employee ID
      * @return int
      */
     public function getEmployeeId()
@@ -42,6 +49,7 @@ class Incident
     }
 
     /**
+     * Gets position
      * @return String
      */
     public function getPosition()
@@ -50,6 +58,7 @@ class Incident
     }
 
     /**
+     * Sets position
      * @param String $position
      */
     public function setPosition($position): void
@@ -58,6 +67,7 @@ class Incident
     }
 
     /**
+     * Gets date helped
      * @return String
      */
     public function getDateHelped()
@@ -66,6 +76,7 @@ class Incident
     }
 
     /**
+     * Sets date helped
      * @param String $dateHelped
      */
     public function setDateHelped($dateHelped): void
@@ -74,6 +85,7 @@ class Incident
     }
 
     /**
+     * Gets time helped
      * @return String
      */
     public function getTimeHelped()
@@ -82,6 +94,7 @@ class Incident
     }
 
     /**
+     * Sets time helped
      * @param String $timeHelped
      */
     public function setTimeHelped($timeHelped): void
@@ -90,6 +103,7 @@ class Incident
     }
 
     /**
+     * Gets location
      * @return String
      */
     public function getLocation()
@@ -98,6 +112,7 @@ class Incident
     }
 
     /**
+     * Sets location
      * @param String $location
      */
     public function setLocation($location): void
@@ -106,6 +121,7 @@ class Incident
     }
 
     /**
+     * Gets other location
      * @return String
      */
     public function getLocationOther()
@@ -114,6 +130,7 @@ class Incident
     }
 
     /**
+     * Sets other location
      * @param String $locationOther
      */
     public function setLocationOther($locationOther): void
@@ -122,6 +139,7 @@ class Incident
     }
 
     /**
+     * Gets question
      * @return String
      */
     public function getQuestion()
@@ -130,6 +148,7 @@ class Incident
     }
 
     /**
+     * Sets question
      * @param String $question
      */
     public function setQuestion($question): void
@@ -138,6 +157,7 @@ class Incident
     }
 
     /**
+     * Gets other question
      * @return String
      */
     public function getQuestionOther()
@@ -146,6 +166,7 @@ class Incident
     }
 
     /**
+     * Sets other question
      * @param String $questionOther
      */
     public function setQuestionOther($questionOther): void
@@ -154,6 +175,7 @@ class Incident
     }
 
     /**
+     * Gets contact method
      * @return String
      */
     public function getContactMethod()
@@ -162,6 +184,7 @@ class Incident
     }
 
     /**
+     * Sets contact method
      * @param String $contactMethod
      */
     public function setContactMethod($contactMethod): void
@@ -170,6 +193,7 @@ class Incident
     }
 
     /**
+     * Gets filed incident report
      * @return String
      */
     public function getFiledIncidentReport()
@@ -178,6 +202,7 @@ class Incident
     }
 
     /**
+     * sets filed incident report
      * @param String $filedIncidentReport
      */
     public function setFiledIncidentReport($filedIncidentReport): void
@@ -186,6 +211,7 @@ class Incident
     }
 
     /**
+     * Gets incident report report number
      * @return int
      */
     public function getIncidentReportNum()
@@ -194,6 +220,7 @@ class Incident
     }
 
     /**
+     * Sets incident report number
      * @param int $incidentReportNum
      */
     public function setIncidentReportNum($incidentReportNum): void
@@ -202,6 +229,7 @@ class Incident
     }
 
     /**
+     * Gets comments
      * @return String
      */
     public function getComments()
@@ -210,6 +238,7 @@ class Incident
     }
 
     /**
+     * Sets comments
      * @param String $comments
      */
     public function setComments($comments): void
@@ -218,6 +247,7 @@ class Incident
     }
 
     /**
+     * Gets submission time
      * @return String
      */
     public function getSubmissionTime()
@@ -226,6 +256,7 @@ class Incident
     }
 
     /**
+     * Sets submission time
      * @param String $submissionTime
      */
     public function setSubmissionTime($submissionTime): void

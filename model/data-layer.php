@@ -1,8 +1,9 @@
 <?php
 
-/* model/data-layer.php
- * returns data for app
- *
+/**
+ * Class DataLayer returns data for site/app
+ * @author Dana Clemmer, Dailee Howard
+ * model/data-layer.php
  */
 
 class DataLayer

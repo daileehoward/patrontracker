@@ -1,7 +1,9 @@
 <?php
-
-//  controllers/controller.php
-
+/**
+ * Class Controller for site
+ * @author Dana Clemmer, Dailee Howard
+ * controllers/controller.php
+ */
 class Controller
 {
     private $_f3;
