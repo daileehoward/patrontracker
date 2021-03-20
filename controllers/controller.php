@@ -16,10 +16,10 @@ class Controller
     /** Display login page */
     function login()
     {
-        global $validator;
         global $dataLayer;
         global $employee;
         global $manager;
+        global $database;
 
         //If the form has been submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -27,19 +27,10 @@ class Controller
             $employeeUsername = trim($_POST['username']);
             $employeePassword = trim($_POST['password']);
 
-            $sql = "SELECT * FROM employees WHERE username = :employeeUsername AND userPassword = :employeePassword 
-            LIMIT 1";
-
-            $statement = $dataLayer->_dbh->prepare($sql);
-
-            $statement->bindParam(':employeeUsername', $employeeUsername, PDO::PARAM_STR);
-            $statement->bindParam(':employeePassword', $employeePassword, PDO::PARAM_STR);
-
-            $statement->execute();
-
-            if ($statement->fetch(PDO::FETCH_ASSOC)) {
+            //get employee associated with input username and password using query from Database class
+            if ($database->getEmployee($employeeUsername, $employeePassword)) {
                 //Login is valid -> Store the employee data to a class and proceed to the Status page
-                $employeeAccountRow = $statement->fetch(PDO::FETCH_ASSOC);
+                $employeeAccountRow = $database->getEmployee($employeeUsername, $employeePassword);
 
                 if (is_null($employeeAccountRow['workPhoneExtension'])) {
                     $employee->setEmployeeID($employeeAccountRow['employeeID']);
@@ -121,6 +112,7 @@ class Controller
         global $validator;
         global $dataLayer;
         global $incident;
+        global $database;
 
         //if not logged in, take user to login page
         if (!isset($_SESSION['loggedin'])) {
@@ -214,22 +206,9 @@ class Controller
             }
 
             if (empty($this->_f3->get('errors'))) {
+
+                $database->insertIncident($incident);
                 $_SESSION['incident'] = $incident;
-
-                /*
-                require $_SERVER['DOCUMENT_ROOT'] . "/../config.php";
-                $sql = "INSERT INTO incidents (employeeID, position, dateHelped, timeHelped, location, locationOther,
-                       question, questionOther, contactMethod, filedIncidentReport, incidentReportNumber, comments, 
-                       submissionTime) VALUES (:employeeID, :position, :dateHelped, :timeHelped, :location, 
-                       :locationOther, :question, :questionOther, :contactMethod, :filedIncidentReport, 
-                       :incidentReportNumber, :comments, :submissionTime)";
-
-                $statement = $dataLayer->_dbh->prepare($sql);
-
-                $statement->
-
-                $statement->execute();
-                */
 
                 //Redirect to submission page
                 $this->_f3->reroute('/submission');

@@ -27,6 +27,8 @@ $validator = new Validate($dataLayer);
 $employee = new Employee();
 $manager = new Manager();
 $incident = new Incident();
+$dayHistory = new DayHistory();
+$database = new Database($dbh);
 
 //Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);

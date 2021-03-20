@@ -3,9 +3,9 @@
 /**
  * Class DaySchedule creates an object for a specified day on the site
  * @author Dana Clemmer, Dailee Howard
- * classes/daySchedule.php
+ * classes/dayHistory.php
  */
-class daySchedule
+class DayHistory
 {
     private $_date;
     private $_totalIncidents;
