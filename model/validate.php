@@ -1,7 +1,7 @@
 <?php
 
 //get login credentials
-require($_SERVER['HOME'] . '/logincredspatrontracker.php');
+//require($_SERVER['HOME'] . '/logincredspatrontracker.php');
 //require('../views/includes/logincredspatrontracker.php');
 
 /**

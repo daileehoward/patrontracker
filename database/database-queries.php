@@ -6,8 +6,8 @@ CREATE TABLE employees
     lastName VARCHAR(30) NOT NULL,
     username VARCHAR(30) NOT NULL,
     userPassword VARCHAR(30) NOT NULL,
-    employeeEmail VARCHAR(50) NULL,
-    manager BOOLEAN NOT NULL,
+    employeeEmail VARCHAR(50),
+    workPhoneExtension INT(4),
     PRIMARY KEY(employeeID)
 );
 
@@ -46,9 +46,9 @@ CREATE TABLE dayHistory
 );
 
 <!-- Creates manager account -->
-INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, manager)
-VALUES ('Kim', 'Olsen', 'admin', '@dm!n', 'kOlsen@greenriver.edu', 1);
+INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, workPhoneExtension)
+VALUES ('Kim', 'Olsen', 'admin', '@dm!n', 'kOlsen@greenriver.edu', 6066);
 
 <!-- Creates employee account -->
-INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, manager)
-VALUES ('Dailee', 'Howard', 'daileehoward', 'greenriver!', 'Dhoward@greenriver.edu', 0);
+INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail)
+VALUES ('Dailee', 'Howard', 'daileehoward', 'greenriver!', 'Dhoward@greenriver.edu');

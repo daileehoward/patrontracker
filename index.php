@@ -24,7 +24,8 @@ session_start();
 $controller = new Controller($f3);
 $dataLayer = new DataLayer($dbh);
 $validator = new Validate($dataLayer);
-//$employee = new Employee();
+$employee = new Employee();
+$manager = new Manager();
 $incident = new Incident();
 
 //Turn on Fat-Free error reporting

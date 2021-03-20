@@ -3,27 +3,28 @@
 /**
  * Class Manager creates an object for a manager using the site
  * @author Dana Clemmer, Dailee Howard
+ * @author Dana Clemmer, Dailee Howard
  * classes/manager.php
  */
-class manager extends employee
+class Manager extends Employee
 {
-    private $_workPhone;
+    private $_workPhoneExtension;
 
     /**
-     * Gets work phone
+     * Gets work phone extension
      * @return int
      */
-    public function getWorkPhone()
+    public function getWorkPhoneExtension()
     {
-        return $this->_workPhone;
+        return $this->_workPhoneExtension;
     }
 
     /**
-     * Sets work phone
-     * @param int $workPhone
+     * Sets work phone extension
+     * @param int $workPhoneExtension
      */
-    public function setWorkPhone($workPhone)
+    public function setWorkPhoneExtension($workPhoneExtension)
     {
-        $this->_workPhone = $workPhone;
+        $this->_workPhoneExtension = $workPhoneExtension;
     }
 }

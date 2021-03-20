@@ -17,16 +17,60 @@ class Controller
     function login()
     {
         global $validator;
+        global $dataLayer;
+        global $employee;
+        global $manager;
 
         //If the form has been submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
             //Get the data from the POST array
-            $employeeUsername = strtolower(trim($_POST['username']));
-            $employeePassword = strtolower(trim($_POST['password']));
+            $employeeUsername = trim($_POST['username']);
+            $employeePassword = trim($_POST['password']);
 
+            $sql = "SELECT * FROM employees WHERE username = :employeeUsername AND userPassword = :employeePassword 
+            LIMIT 1";
+
+            $statement = $dataLayer->_dbh->prepare($sql);
+
+            $statement->bindParam(':employeeUsername', $employeeUsername, PDO::PARAM_STR);
+            $statement->bindParam(':employeePassword', $employeePassword, PDO::PARAM_STR);
+
+            $statement->execute();
+
+            if ($statement->fetch(PDO::FETCH_ASSOC)) {
+                //Login is valid -> Store the employee data to a class and proceed to the Status page
+                $employeeAccountRow = $statement->fetch(PDO::FETCH_ASSOC);
+
+                if (is_null($employeeAccountRow['workPhoneExtension'])) {
+                    $employee->setEmployeeID($employeeAccountRow['employeeID']);
+                    $employee->setFirstName($employeeAccountRow['firstName']);
+                    $employee->setLastName($employeeAccountRow['lastName']);
+                    $employee->setEmail($employeeAccountRow['username']);
+                    $employee->setUsername($employeeAccountRow['userPassword']);
+                    $employee->setPassword($employeeAccountRow['employeeEmail']);
+
+                    $_SESSION['employee'] = $employee;
+                } else {
+                    $manager->setEmployeeID($employeeAccountRow['employeeID']);
+                    $manager->setFirstName($employeeAccountRow['firstName']);
+                    $manager->setLastName($employeeAccountRow['lastName']);
+                    $manager->setEmail($employeeAccountRow['username']);
+                    $manager->setUsername($employeeAccountRow['userPassword']);
+                    $manager->setPassword($employeeAccountRow['employeeEmail']);
+                    $manager->setWorkPhoneExtension($employeeAccountRow['workPhoneExtension']);
+
+                    $_SESSION['manager'] = $manager;
+                }
+
+                $this->_f3->reroute('/status');
+            } else {
+                //Login is not valid -> Set an error in F3 hive
+                $this->_f3->set('errors["login"]', "*Incorrect username and/or password");
+            }
+
+            /*
             //get login credentials
-            require($_SERVER['HOME'] . '/logincredspatrontracker.php');
+            //require($_SERVER['HOME'] . '/logincredspatrontracker.php');
 
             //check if username and password are valid
             if ($validator->validUsername($employeeUsername, $adminUser)
@@ -38,6 +82,7 @@ class Controller
             {
                 $this->_f3->set('errors["login"]', "*Incorrect login");
             }
+            */
         }
 
         //Make form sticky
@@ -51,11 +96,19 @@ class Controller
     /** Display status page */
     function status()
     {
+        if (is_null($_SESSION['employee']) && is_null($_SESSION['manager'])) {
+            //Redirect to login
+            $this->_f3->reroute('/');
+        }
+
+        /*
         //if not logged in, take user to login page
         if (!isset($_SESSION['loggedin'])) {
             //Redirect to login
             $this->_f3->reroute('/');
         }
+        */
+
         //Display a view
         $view = new Template();
         echo $view->render('views/status.html');
@@ -89,7 +142,6 @@ class Controller
             $clientIncidentReport = trim($_POST['incidentReport']);
             $clientIncReportNum = trim($_POST['incidentNum']);
             $comments = trim($_POST['comments']);
-
 
             if ($validator->validName($employeeName)) {
                 $_SESSION['employeeName'] = $employeeName;
