@@ -8,7 +8,7 @@
 
 class DataLayer
 {
-    private $_dbh;
+    public $_dbh;
     private $_locationsArray;
     private $_questionsArray;
 

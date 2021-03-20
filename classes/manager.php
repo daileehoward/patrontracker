@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Class Manager creates an object for a manager using the site
+ * @author Dana Clemmer, Dailee Howard
+ * classes/manager.php
+ */
+class manager extends employee
+{
+    private $_workPhone;
+
+    /**
+     * Gets work phone
+     * @return int $workPhone
+     */
+    public function getWorkPhone()
+    {
+        return $this->_workPhone;
+    }
+
+    /**
+     * Sets work phone
+     * @param int $manager
+     */
+    public function setWorkPhone($workPhone)
+    {
+        $this->_workPhone = $workPhone;
+    }
+}

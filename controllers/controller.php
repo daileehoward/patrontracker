@@ -22,15 +22,15 @@ class Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //Get the data from the POST array
-            $patronUsername = strtolower(trim($_POST['username']));
-            $patronPassword = strtolower(trim($_POST['password']));
+            $employeeUsername = strtolower(trim($_POST['username']));
+            $employeePassword = strtolower(trim($_POST['password']));
 
             //get login credentials
             require($_SERVER['HOME'] . '/logincredspatrontracker.php');
 
             //check if username and password are valid
-            if ($validator->validUsername($patronUsername, $adminUser)
-                && $validator->validPassword($patronPassword, $adminPassword)) {
+            if ($validator->validUsername($employeeUsername, $adminUser)
+                && $validator->validPassword($employeePassword, $adminPassword)) {
                 //If they are correct
                 $_SESSION['loggedin'] = true;
                 $this->_f3->reroute('/status');
@@ -41,7 +41,7 @@ class Controller
         }
 
         //Make form sticky
-        $this->_f3->set('patronUsername', isset($patronUsername) ? $patronUsername : "");
+        $this->_f3->set('employeeUsername', isset($employeeUsername) ? $employeeUsername : "");
 
         //Display a view
         $view = new Template();
@@ -163,6 +163,22 @@ class Controller
 
             if (empty($this->_f3->get('errors'))) {
                 $_SESSION['incident'] = $incident;
+
+                /*
+                require $_SERVER['DOCUMENT_ROOT'] . "/../config.php";
+                $sql = "INSERT INTO incidents (employeeID, position, dateHelped, timeHelped, location, locationOther,
+                       question, questionOther, contactMethod, filedIncidentReport, incidentReportNumber, comments, 
+                       submissionTime) VALUES (:employeeID, :position, :dateHelped, :timeHelped, :location, 
+                       :locationOther, :question, :questionOther, :contactMethod, :filedIncidentReport, 
+                       :incidentReportNumber, :comments, :submissionTime)";
+
+                $statement = $dataLayer->_dbh->prepare($sql);
+
+                $statement->
+
+                $statement->execute();
+                */
+
                 //Redirect to submission page
                 $this->_f3->reroute('/submission');
             }

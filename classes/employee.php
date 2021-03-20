@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class Employee creates an object for an employee using the site
  * @author Dana Clemmer, Dailee Howard
@@ -7,7 +8,8 @@
 class Employee
 {
     private $_employeeID;
-    private $_name;
+    private $_firstName;
+    private $_lastName;
     private $_email;
     private $_username;
     private $_password;
@@ -31,21 +33,39 @@ class Employee
     }
 
     /**
-     * Gets name
+     * Gets first name
      * @return String
      */
-    public function getName()
+    public function getFirstName()
     {
-        return $this->_name;
+        return $this->_firstName;
     }
 
     /**
-     * Sets name
-     * @param String $name
+     * Sets first name
+     * @param String $firstName
      */
-    public function setName($name): void
+    public function setFirstName($firstName): void
     {
-        $this->_name = $name;
+        $this->_firstName = $firstName;
+    }
+
+    /**
+     * Gets last name
+     * @return String
+     */
+    public function getLastName()
+    {
+        return $this->_lastName;
+    }
+
+    /**
+     * Sets last name
+     * @param String $lastName
+     */
+    public function setLastName($lastName): void
+    {
+        $this->_lastName = $lastName;
     }
 
     /**

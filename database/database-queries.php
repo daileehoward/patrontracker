@@ -45,3 +45,11 @@ CREATE TABLE dayHistory
     totalIncidentsReportsFiled INT(3) NOT NULL,
     PRIMARY KEY(dayDate)
 );
+
+<!-- Creates manager account -->
+INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, manager)
+VALUES ('Kim', 'Olsen', 'admin', '@dm!n', 'kOlsen@greenriver.edu', 1);
+
+<!-- Creates employee account -->
+INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, manager)
+VALUES ('Dailee', 'Howard', 'daileehoward', 'greenriver!', 'Dhoward@greenriver.edu', 0);

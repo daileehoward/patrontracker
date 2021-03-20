@@ -12,16 +12,19 @@ require_once('vendor/autoload.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 
 //Start a session
-session_start();
+//session_start();
 
 //Create an instance of the Base class
 $f3 = Base::instance();
+
+//Start a session
+session_start();
 
 //add classes
 $controller = new Controller($f3);
 $dataLayer = new DataLayer($dbh);
 $validator = new Validate($dataLayer);
-$employee = new Employee();
+//$employee = new Employee();
 $incident = new Incident();
 
 //Turn on Fat-Free error reporting
