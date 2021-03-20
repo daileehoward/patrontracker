@@ -11,7 +11,7 @@ class manager extends employee
 
     /**
      * Gets work phone
-     * @return int $workPhone
+     * @return int
      */
     public function getWorkPhone()
     {
@@ -20,7 +20,7 @@ class manager extends employee
 
     /**
      * Sets work phone
-     * @param int $manager
+     * @param int $workPhone
      */
     public function setWorkPhone($workPhone)
     {

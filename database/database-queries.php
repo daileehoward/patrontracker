@@ -36,7 +36,6 @@ CREATE TABLE incidents
 CREATE TABLE dayHistory
 (
     dayDate DATE NOT NULL,
-    day VARCHAR(10) NOT NULL,
     totalIncidents INT(3) NOT NULL,
     totalZoomIncidents INT(3) NOT NULL,
     totalPhoneIncidents INT(3) NOT NULL,
