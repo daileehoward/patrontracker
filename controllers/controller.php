@@ -76,9 +76,10 @@ class Controller
         if (is_null($_SESSION['employee']) && is_null($_SESSION['manager'])) {
             //Redirect to login
             $this->_f3->reroute('/');
-        } else {
-            $_SESSION['currentDate'] = date('F j, Y');
         }
+
+        $_SESSION['currentDate'] = date('F j, Y');
+        $_SESSION['dayHistory'] = $database->getDayHistory(date('YYYY-mm-dd'));
 
         //Display a view
         $view = new Template();

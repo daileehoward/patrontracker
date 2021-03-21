@@ -202,23 +202,31 @@ class Database
         $statement->bindParam(':totalSHD2Incidents', $dayHistory->getShd2Incidents(), PDO::PARAM_INT);
         $statement->bindParam(':totalIncidentsReportsFiled', $dayHistory->getIncidentReportsFiled(), PDO::PARAM_INT);
 
-        //Execute
+        //Execute the statement
         $statement->execute();
+
+    }
+
+    function incrementDayHistory()
+    {
 
     }
 
     /**
      * query that returns rows from dayHistory table
      */
-    function getDayHistory()
+    function getDayHistory($dayDate)
     {
         /* SELECT QUERY WITH FETCHALL (gets multiple rows) */
 
         //Define the query
-        $sql = "SELECT * FROM dayHistory";
+        $sql = "SELECT * FROM dayHistory WHERE dayDate = :dayDate";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':dayDate', $dayDate, PDO::PARAM_STR);
 
         //Execute the statement
         $statement->execute();
@@ -229,4 +237,9 @@ class Database
         return $result;
     }
 
+    function getIncidentTimeHistory()
+    {
+        //Define the query
+        $sql = "SELECT * FROM dayHistory WHERE dayDate = :dayDate";
+    }
 }
