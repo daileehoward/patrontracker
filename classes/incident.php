@@ -49,6 +49,15 @@ class Incident
     }
 
     /**
+     * Sets employee ID
+     * @return int $employeeId
+     */
+    public function setEmployeeId($employeeId)
+    {
+        $this->_employeeId = $employeeId;
+    }
+
+    /**
      * Gets position
      * @return String
      */
