@@ -31,7 +31,7 @@ class Incident
     }
 
     /**
-     * Sets patron ID
+     * Sets incident ID
      * @param int $incidentId
      */
     public function setIncidentId($incidentId): void

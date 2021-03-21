@@ -116,7 +116,7 @@ class Validate
      */
     function validLocationOther($locationOther)
     {
-        return !empty($locationOther) && !in_array($locationOther, $this->_dataLayer->getLocations());
+        return !empty($locationOther) && !in_array(strtolower($locationOther), $this->_dataLayer->getLocations());
     }
 
     /**
@@ -136,7 +136,7 @@ class Validate
      */
     function validQuestionOther($questionOther)
     {
-        return !empty($questionOther) && !in_array($questionOther, $this->_dataLayer->getQuestions());
+        return !empty($questionOther) && !in_array(strtolower($questionOther), $this->_dataLayer->getQuestions());
     }
 
     /**

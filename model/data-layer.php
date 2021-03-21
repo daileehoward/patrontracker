@@ -24,7 +24,7 @@ class DataLayer
         "buckley", "port townsend", "black diamond", "nevada", "gig harbor", "texas");
 
         $this->_questionsArray = array("admission issue", "adobe account", "borrowed item", "borrowed laptop 
-        troubleshooting", "adress change", "canvas troubleshooting", "canvas classes", "connect to advisor", "connect 
+        troubleshooting", "address change", "canvas troubleshooting", "canvas classes", "connect to advisor", "connect 
         to instructor", "convert pdf to word doc", "employee account locked", "financial aid", "holman library issue",
         "linkedin learning issue", "virtual desktop login", "microsoft office account", "microsoft office download",
         "microsoft troubleshooting", "my greenriver", "noodletools citation", "office of the registrar (formerly 

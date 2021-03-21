@@ -31,7 +31,7 @@ locationOther VARCHAR(20),
 question VARCHAR(30) NOT NULL,
 questionOther VARCHAR(30),
 contactMethod VARCHAR(20) NOT NULL,
-filedIncidentReport BOOLEAN NOT NULL,
+filedIncidentReport VARCHAR(5) NOT NULL,
 incidentReportNumber INT(5),
 comments VARCHAR(300),
 submissionTime DATETIME NOT NULL,
@@ -167,7 +167,7 @@ class Database
         $statement->bindParam(':question', $incident->getQuestion(), PDO::PARAM_STR);
         $statement->bindParam(':questionOther', $incident->getQuestionOther(), PDO::PARAM_STR);
         $statement->bindParam(':contactMethod', $incident->getContactMethod(), PDO::PARAM_STR);
-        $statement->bindParam(':filedIncidentReport', $incident->getFiledIncidentReport(), PDO::PARAM_BOOL);
+        $statement->bindParam(':filedIncidentReport', $incident->getFiledIncidentReport(), PDO::PARAM_STR);
         $statement->bindParam(':incidentReportNumber', $incident->getIncidentReportNum(), PDO::PARAM_INT);
         $statement->bindParam(':comments', $incident->getComments(), PDO::PARAM_STR);
         $statement->bindParam(':submissionTime', $incident->getSubmissionTime(), PDO::PARAM_STR);
@@ -194,7 +194,7 @@ class Database
         $statement = $this->_dbh->prepare($sql);
 
         //Bind the parameters
-        $statement->bindParam(':dayDate', $dayHistory->getDate(), PDO::PARAM_DATE);
+        $statement->bindParam(':dayDate', $dayHistory->getDate(), PDO::PARAM_STR);
         $statement->bindParam(':totalIncidents', $dayHistory->getTotalIncidents(), PDO::PARAM_INT);
         $statement->bindParam(':totalZoomIncidents', $dayHistory->getZoomIncidents(), PDO::PARAM_INT);
         $statement->bindParam(':totalPhoneIncidents', $dayHistory->getPhoneIncidents(), PDO::PARAM_INT);
@@ -207,17 +207,44 @@ class Database
 
     }
 
-    function incrementDayHistory()
+    /**
+     * update query to increment dayHistory columns
+     * @param $dayHistory dayHistory object passed in
+     * @param $dayDate passed in date
+     */
+    function updateDayHistory($dayHistory, $dayDate)
     {
+        /* UPDATE QUERY */
+
+        //Define the query
+        $sql = "UPDATE dayHistory SET totalIncidents = :newTotalIncidents,
+                      totalZoomIncidents = :newTotalZoomIncidents, totalPhoneIncidents = :newTotalPhoneIncidents, 
+                      totalSHD1Incidents = :newTotalSHD1Incidents, totalSHD2Incidents = :newTotalSHD2Incidents,
+                      totalIncidentsReportsFiled = :newTotalIncidentsReportsFiled WHERE dayDate = :dayDate";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':newTotalIncidents', $dayHistory->getTotalIncidents(), PDO::PARAM_INT);
+        $statement->bindParam(':newTotalZoomIncidents', $dayHistory->getZoomIncidents(), PDO::PARAM_INT);
+        $statement->bindParam(':newTotalPhoneIncidents', $dayHistory->getPhoneIncidents(), PDO::PARAM_INT);
+        $statement->bindParam(':newTotalSHD1Incidents', $dayHistory->getShd1Incidents(), PDO::PARAM_INT);
+        $statement->bindParam(':newTotalSHD2Incidents', $dayHistory->getShd2Incidents(), PDO::PARAM_INT);
+        $statement->bindParam(':newTotalIncidentsReportsFiled', $dayHistory->getIncidentReportsFiled(), PDO::PARAM_INT);
+        $statement->bindParam(':dayDate', $dayDate, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
 
     }
 
     /**
-     * query that returns rows from dayHistory table
+     * query that returns a row from dayHistory table
      */
     function getDayHistory($dayDate)
     {
-        /* SELECT QUERY WITH FETCHALL (gets multiple rows) */
+        /* SELECT QUERY WITH FETCH (gets one row) */
 
         //Define the query
         $sql = "SELECT * FROM dayHistory WHERE dayDate = :dayDate";
@@ -232,7 +259,7 @@ class Database
         $statement->execute();
 
         //Process the result
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $result;
     }

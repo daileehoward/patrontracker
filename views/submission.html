@@ -21,47 +21,49 @@
             <table id="submissionTable">
                 <tbody>
                 <tr>
-                    <th class="pb-1 pl-3">Employee Name:</th>
-                    <td>{{ @SESSION.employeeName }}</td>
+                    <th class="pb-1 pl-3 pr-5">Employee Name:</th>
+                    <td>{{ @SESSION.employee->getFirstName() }} {{
+                        @SESSION.employee->getLastName() }}
+                    </td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Date:</th>
+                    <th class="pb-1 pl-3 pr-5">Date:</th>
                     <td>{{ @SESSION.incident->getDateHelped() }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Position:</th>
+                    <th class="pb-1 pl-3 pr-5">Position:</th>
                     <td>{{ @SESSION.incident->getPosition() }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Contact Method:</th>
+                    <th class="pb-1 pl-3 pr-5">Contact Method:</th>
                     <td>{{ ucfirst(@SESSION.incident->getContactMethod()) }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Location:</th>
+                    <th class="pb-1 pl-3 pr-5">Location:</th>
                     <td>{{ ucfirst(@SESSION.incident->getLocation()) }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Location Other:</th>
+                    <th class="pb-1 pl-3 pr-5">Location Other:</th>
                     <td>{{ ucfirst(@SESSION.incident->getLocationOther()) }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Question:</th>
+                    <th class="pb-1 pl-3 pr-5">Question:</th>
                     <td>{{ ucfirst(@SESSION.incident->getQuestion()) }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Question Other:</th>
+                    <th class="pb-1 pl-3 pr-5">Question Other:</th>
                     <td>{{ ucfirst(@SESSION.incident->getQuestionOther()) }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Incident Report:</th>
+                    <th class="pb-1 pl-3 pr-5">Incident Report:</th>
                     <td>{{ ucfirst(@SESSION.incident->getFiledIncidentReport()) }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Incident Report Number:</th>
+                    <th class="pb-1 pl-3 pr-5">Incident Report Number:</th>
                     <td>{{ @SESSION.incident->getIncidentReportNum() }}</td>
                 </tr>
                 <tr>
-                    <th class="pb-1 pl-3">Comments:</th>
+                    <th class="pb-1 pl-3 pr-5">Comments:</th>
                     <td>{{ @SESSION.incident->getComments() }}</td>
                 </tr>
                 </tbody>
@@ -69,9 +71,11 @@
         </div>
     </div>
 </div>
-<form class="center-text" method="post" action="status">
-    <input type="submit" class="submit rounded shadow" id="status-submit" value="Back to Status Page">
-</form>
+
+<div class="ml-auto mr-auto text-center">
+    <button type="button" class="rounded shadow text-decoration-none" id="backToStatus"><a href="status">Back to Status Page</a>
+    </button>
+</div>
 <br><br>
 
 <include href="views/footer.html"></include>

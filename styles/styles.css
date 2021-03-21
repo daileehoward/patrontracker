@@ -93,17 +93,17 @@ header h1 {
     right: 0;
 }
 
-#newFormButton {
+#newFormButton, #backToStatus {
     padding: 10px;
     background-color: white;
     border: 1px solid grey;
 }
 
-input.submit-form:hover, #newFormButton:hover {
+input.submit-form:hover, #newFormButton:hover, #backToStatus:hover {
     background-color: #2c882b;
 }
 
-#newFormButton a {
+#newFormButton a, #backToStatus a {
     color: black!important;
     text-decoration: none;
 }
@@ -150,6 +150,9 @@ table#submissionTable {
 }
 
 /***** Login Pg Styles ******/
+body, html {
+    height: 100%;
+}
 form#login {
     width: 20em;
     border: 13px solid #000000d9;

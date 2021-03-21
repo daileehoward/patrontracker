@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class Controller for site
  * @author Dana Clemmer, Dailee Howard
@@ -49,7 +50,7 @@ class Controller
                     $manager->setPassword($employeeAccountRow['employeeEmail']);
                     $manager->setWorkPhoneExtension($employeeAccountRow['workPhoneExtension']);
 
-                    $_SESSION['manager'] = $manager;
+                    $_SESSION['employee'] = $manager;
                 }
 
                 $this->_f3->reroute('/status');
@@ -73,13 +74,16 @@ class Controller
         global $database;
 
         //if not logged in, take user to login page
-        if (is_null($_SESSION['employee']) && is_null($_SESSION['manager'])) {
+        if (is_null($_SESSION['employee'])) {
             //Redirect to login
             $this->_f3->reroute('/');
         }
 
         $_SESSION['currentDate'] = date('F j, Y');
-        $_SESSION['dayHistory'] = $database->getDayHistory(date('YYYY-mm-dd'));
+        //$_SESSION['dayHistory'] = $database->getDayHistory(date('YYYY-mm-dd'));
+
+        $this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
+
 
         //Display a view
         $view = new Template();
@@ -94,8 +98,9 @@ class Controller
         global $dataLayer;
         global $incident;
         global $database;
+        global $dayHistory;
 
-        if (is_null($_SESSION['employee']) && is_null($_SESSION['manager'])) {
+        if (is_null($_SESSION['employee'])) {
             //Redirect to login
             $this->_f3->reroute('/');
         }
@@ -115,22 +120,13 @@ class Controller
             $clientIncReportNum = trim($_POST['incidentNum']);
             $comments = trim($_POST['comments']);
 
-            if (is_null($_SESSION['manager'])) {
-                if ($validator->verifiedAccountName($employeeName, ($_SESSION['employee']->getFirstName() . " " .
+
+            if ($validator->verifiedAccountName($employeeName, ($_SESSION['employee']->getFirstName() . " " .
                 $_SESSION['employee']->getLastName()))) {
-                    $incident->setEmployeeId($_SESSION['employee']->getEmployeeID());
-                } else {
-                    $this->_f3->set("errors[employeeName]", "*Employee name is required and must match the name on your 
-                    account");
-                }
+                $incident->setEmployeeId($_SESSION['employee']->getEmployeeID());
             } else {
-                if ($validator->verifiedAccountName($employeeName, ($_SESSION['manager']->getFirstName() . " " .
-                    $_SESSION['manager']->getLastName()))) {
-                    $incident->setEmployeeId($_SESSION['manager']->getEmployeeID());
-                } else {
-                    $this->_f3->set("errors[employeeName]", "*Employee name is required and must match the name on your 
+                $this->_f3->set("errors[employeeName]", "*Employee name is required and must match the name on your 
                     account");
-                }
             }
 
             if ($validator->validTime($time)) {
@@ -149,18 +145,70 @@ class Controller
                 $date = $date->format('Y-m-d');
 
                 $incident->setDateHelped($date);
+                $dayHistory->setDate($date);
             } else {
                 $this->_f3->set("errors[date]", "*Date is required and needs to follow the correct format");
             }
 
             if ($validator->validPosition($employeePosition)) {
                 $incident->setPosition($employeePosition);
+                //shd1
+                if ($employeePosition == 1) {
+                    if (is_null($dayHistory->getShd1Incidents())) {
+                        $dayHistory->setShd1Incidents(1);
+                    } else {
+                        $dayHistory->setShd1Incidents($dayHistory->getShd1Incidents() + 1);
+                    }
+                    if (is_null($dayHistory->getShd2Incidents())) {
+                        $dayHistory->setShd2Incidents(0);
+                    }
+                    if (is_null($dayHistory->getTotalIncidents())) {
+                        $dayHistory->setTotalIncidents(1);
+                    } else {
+                        $dayHistory->setTotalIncidents($dayHistory->getTotalIncidents() + 1);
+                    }
+                } //shd2
+                else if ($employeePosition == 2) {
+                    if (is_null($dayHistory->getShd2Incidents())) {
+                        $dayHistory->setShd2Incidents(1);
+                    } else {
+                        $dayHistory->setShd2Incidents($dayHistory->getShd2Incidents() + 1);
+                    }
+                    if (is_null($dayHistory->getShd1Incidents())) {
+                        $dayHistory->setShd1Incidents(0);
+                    }
+                    if (is_null($dayHistory->getTotalIncidents())) {
+                        $dayHistory->setTotalIncidents(1);
+                    } else {
+                        $dayHistory->setTotalIncidents($dayHistory->getTotalIncidents() + 1);
+                    }
+                }
             } else {
                 $this->_f3->set("errors[employeePosition]", "*Position is required");
             }
 
             if ($validator->validContactMethod($clientMethod)) {
                 $incident->setContactMethod($clientMethod);
+
+                if ($clientMethod == "zoom") {
+                    if (is_null($dayHistory->getZoomIncidents())) {
+                        $dayHistory->setZoomIncidents(1);
+                    } else {
+                        $dayHistory->setZoomIncidents($dayHistory->getZoomIncidents() + 1);
+                    }
+                    if (is_null($dayHistory->getPhoneIncidents())) {
+                        $dayHistory->setPhoneIncidents(0);
+                    }
+                } else if ($clientMethod == "phone") {
+                    if (is_null($dayHistory->getPhoneIncidents())) {
+                        $dayHistory->setPhoneIncidents(1);
+                    } else {
+                        $dayHistory->setPhoneIncidents($dayHistory->getPhoneIncidents() + 1);
+                    }
+                    if (is_null($dayHistory->getZoomIncidents())) {
+                        $dayHistory->setZoomIncidents(0);
+                    }
+                }
             } else {
                 $this->_f3->set("errors[clientMethod]", "*Contact method is required");
             }
@@ -172,6 +220,9 @@ class Controller
                     $incident->setLocation("");
                     $incident->setLocationOther($locationOther);
                     $dataLayer->addLocation($locationOther);
+                } else if (!($validator->validLocationOther($locationOther))) {
+                    $incident->setLocation($locationOther);
+                    $incident->setLocationOther("");
                 } else {
                     $this->_f3->set("errors[otherLocation]", "Other location is required and can only contain 
                         characters");
@@ -187,6 +238,9 @@ class Controller
                     $incident->setQuestion("");
                     $incident->setQuestionOther($questionOther);
                     $dataLayer->addQuestion($questionOther);
+                } else if (!($validator->validQuestionOther($questionOther))) {
+                    $incident->setQuestion($questionOther);
+                    $incident->setQuestionOther("");
                 } else {
                     $this->_f3->set("errors[otherQuestion]", "Other question is required");
                 }
@@ -195,7 +249,13 @@ class Controller
             }
 
             if (!empty($clientIncidentReport)) {
-                $incident->setFiledIncidentReport(1);
+                $incident->setFiledIncidentReport("Yes");
+
+                if (is_null($dayHistory->getIncidentReportsFiled())) {
+                    $dayHistory->setIncidentReportsFiled(1);
+                } else {
+                    $dayHistory->setIncidentReportsFiled($dayHistory->getIncidentReportsFiled() + 1);
+                }
 
                 if ($validator->validIncidentReport($clientIncReportNum)) {
                     $clientIncReportNum = (int)($clientIncReportNum);
@@ -204,7 +264,13 @@ class Controller
                     $this->_f3->set("errors[clientIncReportNum]", "*Incident report number can only contain numbers");
                 }
             } else {
-                $incident->setFiledIncidentReport(0);
+                $incident->setFiledIncidentReport("No");
+
+                if (is_null($dayHistory->getIncidentReportsFiled())) {
+                    $dayHistory->setIncidentReportsFiled(0);
+                } else {
+                    $dayHistory->setIncidentReportsFiled($dayHistory->getIncidentReportsFiled());
+                }
             }
 
             if (isset($comments)) {
@@ -217,6 +283,11 @@ class Controller
 
                 $database->insertIncident($incident);
                 $_SESSION['incident'] = $incident;
+
+                $database->insertDayHistory($dayHistory);
+                $database->updateDayHistory($dayHistory, $_SESSION['currentDate']);
+
+                $_SESSION['dayHistory'] = $dayHistory;
 
                 //Redirect to submission page
                 $this->_f3->reroute('/submission');
@@ -254,6 +325,8 @@ class Controller
     /** Submission page */
     function submission()
     {
+        //var_dump($_SESSION);
+
         //Display a view
         $view = new Template();
         echo $view->render('views/submission.html');
