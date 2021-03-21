@@ -50,6 +50,16 @@ class Validate
     }
 
     /**
+     * @param $employeeName
+     * @param $verifiedEmployeeName
+     * @return bool
+     */
+    function verifiedAccountName($employeeName, $verifiedEmployeeName)
+    {
+        return $employeeName == $verifiedEmployeeName;
+    }
+
+    /**
      * Returns true of time is not empty
      * @param $time
      * @return bool

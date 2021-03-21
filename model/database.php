@@ -154,10 +154,10 @@ class Database
                :question, :questionOther, :contactMethod, :filedIncidentReport, :incidentReportNumber, :comments, 
                :submissionTime)";
 
+
+
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
-
-
 
         //Bind the parameters
         $statement->bindParam(':employeeID', $incident->getEmployeeId(), PDO::PARAM_INT);

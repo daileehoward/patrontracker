@@ -143,10 +143,22 @@ class Controller
             $clientIncReportNum = trim($_POST['incidentNum']);
             $comments = trim($_POST['comments']);
 
-            if ($validator->validName($employeeName) && $validator->verifiedAccountName($employeeName, $employee['firstName'])) {
-                $_SESSION['employeeName'] = $employeeName;
+            if (is_null($_SESSION['manager'])) {
+                if ($validator->verifiedAccountName($employeeName, ($_SESSION['employee']->getFirstName() . " " .
+                $_SESSION['employee']->getLastName()))) {
+                    $incident->setEmployeeId($_SESSION['employee']->getEmployeeID());
+                } else {
+                    $this->_f3->set("errors[employeeName]", "*Employee name is required and must match the name on your 
+                    account");
+                }
             } else {
-                $this->_f3->set("errors[employeeName]", "*Employee name is required and can only contain characters");
+                if ($validator->verifiedAccountName($employeeName, ($_SESSION['manager']->getFirstName() . " " .
+                    $_SESSION['manager']->getLastName()))) {
+                    $incident->setEmployeeId($_SESSION['manager']->getEmployeeID());
+                } else {
+                    $this->_f3->set("errors[employeeName]", "*Employee name is required and must match the name on your 
+                    account");
+                }
             }
 
             if ($validator->validTime($time)) {
