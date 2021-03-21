@@ -235,13 +235,14 @@ class Controller
                 $incident->setFiledIncidentReport(0);
             }
 
-            if(isset($comments)) {
+            if (isset($comments)) {
                 $incident->setComments($comments);
             }
 
             if (empty($this->_f3->get('errors'))) {
-                date_default_timezone_set("America/Los_Angeles");
-                $incident->setSubmissionTime(date('H:i:s'));
+                $submissionTime = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
+
+                $incident->setSubmissionTime((string)($submissionTime->format('Y-m-d H:i:s')));
 
                 $database->insertIncident($incident);
                 $_SESSION['incident'] = $incident;
