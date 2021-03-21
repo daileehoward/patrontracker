@@ -57,22 +57,6 @@ class Controller
                 //Login is not valid -> Set an error in F3 hive
                 $this->_f3->set('errors["login"]', "*Incorrect username and/or password");
             }
-
-            /*
-            //get login credentials
-            //require($_SERVER['HOME'] . '/logincredspatrontracker.php');
-
-            //check if username and password are valid
-            if ($validator->validUsername($employeeUsername, $adminUser)
-                && $validator->validPassword($employeePassword, $adminPassword)) {
-                //If they are correct
-                $_SESSION['loggedin'] = true;
-                $this->_f3->reroute('/status');
-            } else //Login is not valid -> Set an error in F3 hive
-            {
-                $this->_f3->set('errors["login"]', "*Incorrect login");
-            }
-            */
         }
 
         //Make form sticky
@@ -92,14 +76,9 @@ class Controller
         if (is_null($_SESSION['employee']) && is_null($_SESSION['manager'])) {
             //Redirect to login
             $this->_f3->reroute('/');
+        } else {
+            $_SESSION['currentDate'] = date('F j, Y');
         }
-        /*
-        //if not logged in, take user to login page
-        if (!isset($_SESSION['loggedin'])) {
-            //Redirect to login
-            $this->_f3->reroute('/');
-        }
-        */
 
         //Display a view
         $view = new Template();
@@ -119,14 +98,6 @@ class Controller
             //Redirect to login
             $this->_f3->reroute('/');
         }
-
-        /*
-        //if not logged in, take user to login page
-        if (!isset($_SESSION['loggedin'])) {
-            //Redirect to login
-            $this->_f3->reroute('/');
-        }
-        */
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Get the data from the POST array
@@ -241,7 +212,6 @@ class Controller
 
             if (empty($this->_f3->get('errors'))) {
                 $submissionTime = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
-
                 $incident->setSubmissionTime((string)($submissionTime->format('Y-m-d H:i:s')));
 
                 $database->insertIncident($incident);
