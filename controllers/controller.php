@@ -225,6 +225,13 @@ class Controller
 
             if (isset($clientIncidentReport)) {
                 $incident->setFiledIncidentReport(1);
+
+                if ($validator->validIncidentReport($clientIncReportNum)) {
+                    $clientIncReportNum = (int)($clientIncReportNum);
+                    $incident->setIncidentReportNum($clientIncReportNum);
+                } else {
+                    $this->_f3->set("errors[clientIncReportNum]", "*Incident report number can only contain numbers");
+                }
             } else {
                 $incident->setFiledIncidentReport(0);
             }

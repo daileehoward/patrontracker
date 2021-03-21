@@ -146,6 +146,6 @@ class Validate
      */
     function validIncidentReport($incidentReport)
     {
-        return !empty($incidentReport);
+        return !empty($incidentReport) && (int)($incidentReport);
     }
 }
