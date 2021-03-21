@@ -260,6 +260,7 @@ class Controller
     /** Logout */
     function logout()
     {
+        session_start();
         session_destroy();
 
         //Redirect to login

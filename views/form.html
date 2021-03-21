@@ -8,8 +8,10 @@
     <form id="formpg" class="container border mt-4 shadow bg-white" method="post" action="#">
         <div id="inner-form" class="pb-5 pt-5">
             <label for="name"><strong>Employee Name:</strong></label>
-            <input class="form-control" type="text" id="name" name="name" value="{{ @SESSION.employee->getFirstName() . ' ' . @SESSION.employee->getLastName() }}">
-
+            <input class="form-control" type="text" id="name" name="name"
+                <check if="{{ is_null(@SESSION.manager) }}"> value="{{ @SESSION.employee->getFirstName() . ' ' . @SESSION.employee->getLastName() }}"</check>
+                <check if="{{ is_null(@SESSION.employee) }}"> value="{{ @SESSION.manager->getFirstName() . ' ' . @SESSION.manager->getLastName() }}"</check>
+            >
             <check if="{{ isset(@errors['employeeName']) }}">
                 <span class="text-danger">{{ @errors['employeeName'] }}</span>
             </check>
