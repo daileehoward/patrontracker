@@ -174,7 +174,6 @@ class Database
 
         //Execute
         $statement->execute();
-
     }
 
     /**

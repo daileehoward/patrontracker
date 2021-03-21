@@ -143,7 +143,7 @@ class Controller
             $clientIncReportNum = trim($_POST['incidentNum']);
             $comments = trim($_POST['comments']);
 
-            if ($validator->validName($employeeName)) {
+            if ($validator->validName($employeeName) && $validator->verifiedAccountName($employeeName, $employee['firstName'])) {
                 $_SESSION['employeeName'] = $employeeName;
             } else {
                 $this->_f3->set("errors[employeeName]", "*Employee name is required and can only contain characters");
@@ -198,7 +198,6 @@ class Controller
                 } else {
                     $this->_f3->set("errors[otherQuestion]", "Other question is required");
                 }
-
             } else {
                 $this->_f3->set("errors[clientQuestion]", "*Question is required");
             }
@@ -214,7 +213,6 @@ class Controller
             }
 
             if (empty($this->_f3->get('errors'))) {
-
                 $database->insertIncident($incident);
                 $_SESSION['incident'] = $incident;
 
@@ -228,7 +226,7 @@ class Controller
         $this->_f3->set('locations', $dataLayer->getLocations());
         $this->_f3->set('positions', $dataLayer->getPositions());
         $this->_f3->set('methods', $dataLayer->getContactMethods());
-       // $this->_f3->set('incidentReports', $dataLayer->getIncidentReportOptions());
+        // $this->_f3->set('incidentReports', $dataLayer->getIncidentReportOptions());
 
         //make form sticky
         $this->_f3->set('employeeName', isset($employeeName) ? $employeeName : "");

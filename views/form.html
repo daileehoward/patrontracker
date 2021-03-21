@@ -8,7 +8,7 @@
     <form id="formpg" class="container border mt-4 shadow bg-white" method="post" action="#">
         <div id="inner-form" class="pb-5 pt-5">
             <label for="name"><strong>Employee Name:</strong></label>
-            <input class="form-control" type="text" id="name" name="name" value="{{ @employeeName }}">
+            <input class="form-control" type="text" id="name" name="name" value="{{ @SESSION.employee->getFirstName() . ' ' . @SESSION.employee->getLastName() }}">
 
             <check if="{{ isset(@errors['employeeName']) }}">
                 <span class="text-danger">{{ @errors['employeeName'] }}</span>
