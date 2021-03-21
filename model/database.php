@@ -4,29 +4,7 @@
  * Contains SQL Statements and database queries for site
  */
 /**
- * SQL Statements:
- *
- * MEMBER TABLE:
- *
- * CREATE TABLE member(
- * member_id INT(3) not null AUTO_INCREMENT primary key,
- * fname varchar(50) not null,
- * lname varchar(50) not null,
- * age int(3) not null,
- * gender varchar(10),
- * phone varchar(20),
- * email varchar(100),
- * state varchar(100),
- * seeking varchar(10),
- * bio varchar(1000),
- * premium tinyint,
- * interests varchar(100),
- * image varchar(100)
- * );
- *
- */
-
-/**
+SQL Statements:
 CREATE TABLE employees
 (
 employeeID INT NOT NULL AUTO_INCREMENT,
@@ -101,6 +79,7 @@ class Database
      * query that returns employee associated with passed in username and password
      * @param $username
      * @param $password
+     * @return employee row
      */
     function getEmployee($username, $password)
     {
@@ -159,36 +138,6 @@ class Database
         $statement->execute();
     }
 
-    /**
-     * insert query to insert dayHistory into database
-     * @param $dayHistory dayHistory object passed in
-     */
-    function insertDayHistory($dayHistory)
-    {
-        /* INSERT QUERY */
-
-        //Define the query
-        $sql = "INSERT INTO dayHistory (dayDate, totalIncidents, totalZoomIncidents, totalPhoneIncidents, 
-                totalSHD1Incidents, totalSHD2Incidents, totalIncidentsReportsFiled) VALUES (:dayDate, :totalIncidents, 
-                :totalZoomIncidents, :totalPhoneIncidents, :totalSHD1Incidents, :totalSHD2Incidents, 
-                :totalIncidentsReportsFiled)";
-
-        //Prepare the statement
-        $statement = $this->_dbh->prepare($sql);
-
-        //Bind the parameters
-        $statement->bindParam(':dayDate', $dayHistory->getDate(), PDO::PARAM_DATE);
-        $statement->bindParam(':totalIncidents', $dayHistory->getTotalIncidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalZoomIncidents', $dayHistory->getZoomIncidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalPhoneIncidents', $dayHistory->getPhoneIncidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalSHD1Incidents', $dayHistory->getShd1Incidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalSHD2Incidents', $dayHistory->getShd2Incidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalIncidentsReportsFiled', $dayHistory->getIncidentReportsFiled(), PDO::PARAM_INT);
-
-        //Execute
-        $statement->execute();
-
-    }
 
     /**
      * insert query to insert incident into database
@@ -222,6 +171,37 @@ class Database
         $statement->bindParam(':incidentReportNumber', $incident->getIncidentReportNum(), PDO::PARAM_INT);
         $statement->bindParam(':comments', $incident->getComments(), PDO::PARAM_STR);
         $statement->bindParam(':submissionTime', $incident->getSubmissionTime(), PDO::PARAM_DATETIME);
+
+        //Execute
+        $statement->execute();
+
+    }
+
+    /**
+     * insert query to insert dayHistory into database
+     * @param $dayHistory dayHistory object passed in
+     */
+    function insertDayHistory($dayHistory)
+    {
+        /* INSERT QUERY */
+
+        //Define the query
+        $sql = "INSERT INTO dayHistory (dayDate, totalIncidents, totalZoomIncidents, totalPhoneIncidents, 
+                totalSHD1Incidents, totalSHD2Incidents, totalIncidentsReportsFiled) VALUES (:dayDate, :totalIncidents, 
+                :totalZoomIncidents, :totalPhoneIncidents, :totalSHD1Incidents, :totalSHD2Incidents, 
+                :totalIncidentsReportsFiled)";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':dayDate', $dayHistory->getDate(), PDO::PARAM_DATE);
+        $statement->bindParam(':totalIncidents', $dayHistory->getTotalIncidents(), PDO::PARAM_INT);
+        $statement->bindParam(':totalZoomIncidents', $dayHistory->getZoomIncidents(), PDO::PARAM_INT);
+        $statement->bindParam(':totalPhoneIncidents', $dayHistory->getPhoneIncidents(), PDO::PARAM_INT);
+        $statement->bindParam(':totalSHD1Incidents', $dayHistory->getShd1Incidents(), PDO::PARAM_INT);
+        $statement->bindParam(':totalSHD2Incidents', $dayHistory->getShd2Incidents(), PDO::PARAM_INT);
+        $statement->bindParam(':totalIncidentsReportsFiled', $dayHistory->getIncidentReportsFiled(), PDO::PARAM_INT);
 
         //Execute
         $statement->execute();

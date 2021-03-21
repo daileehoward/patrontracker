@@ -16,7 +16,6 @@ class Controller
     /** Display login page */
     function login()
     {
-        global $dataLayer;
         global $employee;
         global $manager;
         global $database;
@@ -87,11 +86,13 @@ class Controller
     /** Display status page */
     function status()
     {
+        global $database;
+
+        //if not logged in, take user to login page
         if (is_null($_SESSION['employee']) && is_null($_SESSION['manager'])) {
             //Redirect to login
             $this->_f3->reroute('/');
         }
-
         /*
         //if not logged in, take user to login page
         if (!isset($_SESSION['loggedin'])) {

@@ -88,7 +88,7 @@ header h1 {
     font-size: 5em;
     text-shadow: 5px 5px black;
     position: absolute;
-    bottom: 1em;
+    bottom: 0.9em;
     left: 0;
     right: 0;
 }
@@ -157,8 +157,8 @@ form#login {
 }
 
 div.login {
-    padding-top: 15em;
-    height: 100vh;
+    padding: 13em 0 13em 0;
+    height: 100%;
     background-image: url(../images/grc.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
