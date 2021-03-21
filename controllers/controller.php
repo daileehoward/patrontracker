@@ -225,6 +225,8 @@ class Controller
             }
 
             if (empty($this->_f3->get('errors'))) {
+                date_default_timezone_set("America/Los_Angeles");
+                $incident->setSubmissionTime(date('H:i:s'));
                 $database->insertIncident($incident);
                 $_SESSION['incident'] = $incident;
 
