@@ -163,7 +163,6 @@ class Controller
 
             if ($validator->validTime($time)) {
                 $time = (string)$time;
-                $time = $time . ":00";
 
                 $incident->setTimeHelped($time);
             } else {
@@ -223,7 +222,7 @@ class Controller
                 $this->_f3->set("errors[clientQuestion]", "*Question is required");
             }
 
-            if (isset($clientIncidentReport)) {
+            if (!empty($clientIncidentReport)) {
                 $incident->setFiledIncidentReport(1);
 
                 if ($validator->validIncidentReport($clientIncReportNum)) {
