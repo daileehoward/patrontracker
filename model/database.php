@@ -134,8 +134,9 @@ class Database
         /* INSERT QUERY */
 
         //Define the query
-        $sql = "INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, manager, workPhoneExtension)
-    VALUES (:firstName, :lastName, :username, :userPassword, :employeeEmail, :manager, :workPhoneExtension)";
+        $sql = "INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, manager, 
+                workPhoneExtension) VALUES (:firstName, :lastName, :username, :userPassword, :employeeEmail, :manager, 
+                :workPhoneExtension)";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -156,7 +157,6 @@ class Database
 
         //Execute
         $statement->execute();
-
     }
 
     /**
@@ -168,8 +168,10 @@ class Database
         /* INSERT QUERY */
 
         //Define the query
-        $sql = "INSERT INTO dayHistory (dayDate, totalIncidents, totalZoomIncidents, totalPhoneIncidents, totalSHD1Incidents, totalSHD2Incidents, totalIncidentsReportsFiled)
-    VALUES (:dayDate, :totalIncidents, :totalZoomIncidents, :totalPhoneIncidents, :totalSHD1Incidents, :totalSHD2Incidents, :totalIncidentsReportsFiled)";
+        $sql = "INSERT INTO dayHistory (dayDate, totalIncidents, totalZoomIncidents, totalPhoneIncidents, 
+                totalSHD1Incidents, totalSHD2Incidents, totalIncidentsReportsFiled) VALUES (:dayDate, :totalIncidents, 
+                :totalZoomIncidents, :totalPhoneIncidents, :totalSHD1Incidents, :totalSHD2Incidents, 
+                :totalIncidentsReportsFiled)";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);

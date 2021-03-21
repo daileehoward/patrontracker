@@ -114,11 +114,18 @@ class Controller
         global $incident;
         global $database;
 
+        if (is_null($_SESSION['employee']) && is_null($_SESSION['manager'])) {
+            //Redirect to login
+            $this->_f3->reroute('/');
+        }
+
+        /*
         //if not logged in, take user to login page
         if (!isset($_SESSION['loggedin'])) {
             //Redirect to login
             $this->_f3->reroute('/');
         }
+        */
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Get the data from the POST array
