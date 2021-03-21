@@ -6,7 +6,7 @@
  */
 class Incident
 {
-    private $_patronId;
+    private $_incidentId;
     private $_employeeId;
     private $_position;
     private $_dateHelped;
@@ -22,21 +22,21 @@ class Incident
     private $_submissionTime;
 
     /**
-     * Gets patron ID
+     * Gets incident ID
      * @return int
      */
-    public function getPatronId()
+    public function getIncidentId()
     {
-        return $this->_patronId;
+        return $this->_incidentId;
     }
 
     /**
      * Sets patron ID
-     * @param int $patronId
+     * @param int $incidentId
      */
-    public function setPatronId($patronId): void
+    public function setIncidentId($incidentId): void
     {
-        $this->_patronId = $patronId;
+        $this->_incidentId = $incidentId;
     }
 
     /**

@@ -87,7 +87,7 @@ class Database
 
         //Define the query
         $sql = "SELECT * FROM employees WHERE username = :employeeUsername AND userPassword = :employeePassword 
-            LIMIT 1";
+                LIMIT 1";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -149,13 +149,15 @@ class Database
 
         //Define the query
         $sql = "INSERT INTO incidents (employeeID, position, dateHelped, timeHelped, location, locationOther,
-                       question, questionOther, contactMethod, filedIncidentReport, incidentReportNumber, comments, 
-                       submissionTime) VALUES (:employeeID, :position, :dateHelped, :timeHelped, :location, 
-                       :locationOther, :question, :questionOther, :contactMethod, :filedIncidentReport, 
-                       :incidentReportNumber, :comments, :submissionTime)";
+               question, questionOther, contactMethod, filedIncidentReport, incidentReportNumber, comments, 
+               submissionTime) VALUES (:employeeID, :position, :dateHelped, :timeHelped, :location, :locationOther, 
+               :question, :questionOther, :contactMethod, :filedIncidentReport, :incidentReportNumber, :comments, 
+               :submissionTime)";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
+
+
 
         //Bind the parameters
         $statement->bindParam(':employeeID', $incident->getEmployeeId(), PDO::PARAM_INT);
