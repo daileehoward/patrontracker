@@ -154,25 +154,46 @@ class Database
                :question, :questionOther, :contactMethod, :filedIncidentReport, :incidentReportNumber, :comments, 
                :submissionTime)";
 
-
-
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
         //Bind the parameters
         $statement->bindParam(':employeeID', $incident->getEmployeeId(), PDO::PARAM_INT);
         $statement->bindParam(':position', $incident->getPosition(), PDO::PARAM_INT);
-        $statement->bindParam(':dateHelped', $incident->getDateHelped(), PDO::PARAM_DATE);
-        $statement->bindParam(':timeHelped', $incident->getTimeHelped(), PDO::PARAM_TIME);
+        $statement->bindParam(':dateHelped', $incident->getDateHelped(), PDO::PARAM_STR);
+        $statement->bindParam(':timeHelped', $incident->getTimeHelped(), PDO::PARAM_STR);
         $statement->bindParam(':location', $incident->getLocation(), PDO::PARAM_STR);
-        $statement->bindParam(':locationOther', $incident->getLocationOther(), PDO::PARAM_STR);
+
+        if (!empty($incident->getLocationOther())) {
+            $statement->bindParam(':locationOther', $incident->getLocationOther(), PDO::PARAM_STR);
+        } else {
+            $statement->bindParam(':locationOther', NULL, PDO::PARAM_STR);
+        }
+
         $statement->bindParam(':question', $incident->getQuestion(), PDO::PARAM_STR);
-        $statement->bindParam(':questionOther', $incident->getQuestionOther(), PDO::PARAM_STR);
+
+        if (!empty($incident->getQuestionOther())) {
+            $statement->bindParam(':questionOther', $incident->getQuestionOther(), PDO::PARAM_STR);
+        } else {
+            $statement->bindParam(':questionOther', NULL, PDO::PARAM_STR);
+        }
+
         $statement->bindParam(':contactMethod', $incident->getContactMethod(), PDO::PARAM_STR);
         $statement->bindParam(':filedIncidentReport', $incident->getFiledIncidentReport(), PDO::PARAM_BOOL);
-        $statement->bindParam(':incidentReportNumber', $incident->getIncidentReportNum(), PDO::PARAM_INT);
-        $statement->bindParam(':comments', $incident->getComments(), PDO::PARAM_STR);
-        $statement->bindParam(':submissionTime', $incident->getSubmissionTime(), PDO::PARAM_DATETIME);
+
+        if (!empty($incident->getIncidentReportNum())) {
+            $statement->bindParam(':incidentReportNumber', $incident->getIncidentReportNum(), PDO::PARAM_INT);
+        } else {
+            $statement->bindParam(':incidentReportNumber', NULL, PDO::PARAM_INT);
+        }
+
+        if (!empty($incident->getComments())) {
+            $statement->bindParam(':comments', $incident->getComments(), PDO::PARAM_STR);
+        } else {
+            $statement->bindParam(':comments', NULL, PDO::PARAM_STR);
+        }
+
+        $statement->bindParam(':submissionTime', $incident->getSubmissionTime(), PDO::PARAM_STR);
 
         //Execute
         $statement->execute();
