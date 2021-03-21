@@ -224,9 +224,9 @@ class Controller
             }
 
             if (isset($clientIncidentReport)) {
-                $incident->setFiledIncidentReport('yes');
+                $incident->setFiledIncidentReport(1);
             } else {
-                $incident->setFiledIncidentReport('no');
+                $incident->setFiledIncidentReport(0);
             }
 
             if(isset($comments)) {
