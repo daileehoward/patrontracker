@@ -162,12 +162,21 @@ class Controller
             }
 
             if ($validator->validTime($time)) {
+                $time = (string)$time;
+                $time = $time . ":00";
+
                 $incident->setTimeHelped($time);
             } else {
                 $this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
             }
 
             if ($validator->validDate($date)) {
+                $date = (string)$date;
+                $date = str_replace("/", "-", $date);
+
+                $date = new DateTime($date);
+                $date = $date->format('Y-m-d');
+
                 $incident->setDateHelped($date);
             } else {
                 $this->_f3->set("errors[date]", "*Date is required and needs to follow the correct format");
@@ -227,6 +236,7 @@ class Controller
             if (empty($this->_f3->get('errors'))) {
                 date_default_timezone_set("America/Los_Angeles");
                 $incident->setSubmissionTime(date('H:i:s'));
+
                 $database->insertIncident($incident);
                 $_SESSION['incident'] = $incident;
 
