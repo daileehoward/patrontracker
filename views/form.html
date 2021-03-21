@@ -41,7 +41,7 @@
             <repeat group="{{ @positions }}" value="{{ @position }}">
                 <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
                     <check if="{{ @position == @employeePosition }}">checked</check>
-                    > {{ucfirst(@position) }}
+                    > SHD-{{ucfirst(@position) }}
                     </input></label>&emsp;
             </repeat>
 

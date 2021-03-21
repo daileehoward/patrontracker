@@ -70,7 +70,7 @@ class DataLayer
      */
     function getPositions()
     {
-        return array("SHD-1", "SHD-2");
+        return array(1, 2);
     }
 
     /** getContactMethods() returns an array of contact methods
