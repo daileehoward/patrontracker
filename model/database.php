@@ -176,6 +176,26 @@ class Database
         $statement->execute();
     }
 
+    function getHourHistory($selectedDate, $position, $startTime, $endTime)
+    {
+        $sql = "SELECT COUNT(*) FROM incidents WHERE dateHelped = :selectedDate AND position = :position AND 
+                 timeHelped >= :startTime AND timeHelped < :endTime";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':selectedDate', $selectedDate, PDO::PARAM_STR);
+        $statement->bindParam(':position', $position, PDO::PARAM_INT);
+        $statement->bindParam(':startTime', $startTime, PDO::PARAM_INT);
+        $statement->bindParam(':endTime', $endTime, PDO::PARAM_INT);
+
+        //Execute
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * insert query to insert dayHistory into database
      * @param $dayHistory dayHistory object passed in
@@ -262,12 +282,6 @@ class Database
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $result;
-    }
-
-    function getIncidentTimeHistory()
-    {
-        //Define the query
-        $sql = "SELECT * FROM dayHistory WHERE dayDate = :dayDate";
     }
 
     /**

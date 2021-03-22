@@ -72,6 +72,7 @@ class Controller
     function status()
     {
         global $database;
+        global $dataLayer;
 
         //if not logged in, take user to login page
         if (is_null($_SESSION['employee'])) {
@@ -82,15 +83,29 @@ class Controller
         $_SESSION['currentDate'] = date('F j, Y');
         //$_SESSION['dayHistory'] = $database->getDayHistory(date('YYYY-mm-dd'));
 
+        $currentDateSQL = date('YYYY-MM-DD');
+        $startOfDay = 8;
+        $endOfDay = 19;
+        $sessionHourNames = $dataLayer->getSessionHourNames();
+        $sessionHourNamesIndex = 0;
+
+        for ($startHour = $startOfDay; $startHour <= $endOfDay; $startHour++) {
+            $sessionName = $sessionHourNames[$sessionHourNamesIndex] . 'SHD1';
+            $_SESSION[$sessionName] =
+                $database->getHourHistory($currentDateSQL, 1, $startHour, $startHour + 1);
+            $_SESSION[$sessionName . 'SHD2'] =
+                $database->getHourHistory($currentDateSQL, 2, $startHour, $startHour + 1);
+
+            $sessionHourNamesIndex++;
+        }
+
         $this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
         $this->_f3->set('notifications', $_SESSION['notifications']);
-
 
         //Display a view
         $view = new Template();
         echo $view->render('views/status.html');
     }
-
 
     /** Display form page */
     function form()

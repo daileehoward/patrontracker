@@ -80,4 +80,11 @@ class DataLayer
     {
         return array("zoom", "phone");
     }
+
+    function getSessionHourNames()
+    {
+        return array('hour8-9History', 'hour9-10History', 'hour10-11History', 'hour11-12History', 'hour12-13History',
+            'hour13-14History', 'hour14-15History', 'hour15-16History', 'hour16-17History', 'hour17-18History',
+            'hour18-19History');
+    }
 }
