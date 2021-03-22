@@ -269,4 +269,26 @@ class Database
         //Define the query
         $sql = "SELECT * FROM dayHistory WHERE dayDate = :dayDate";
     }
+
+    /**
+     * query that returns rows from incidents table
+     */
+    function getIncidents()
+    {
+        /* SELECT QUERY WITH FETCHALL (gets multiple rows) */
+
+        //Define the query
+        $sql = "SELECT * FROM incidents ORDER BY submissionTime";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Execute the statement
+        $statement->execute();
+
+        //Process the result
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
 }

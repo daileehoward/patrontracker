@@ -83,6 +83,7 @@ class Controller
         //$_SESSION['dayHistory'] = $database->getDayHistory(date('YYYY-mm-dd'));
 
         $this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
+        $this->_f3->set('notifications', $_SESSION['notifications']);
 
 
         //Display a view
@@ -286,6 +287,11 @@ class Controller
 
                 $database->insertDayHistory($dayHistory);
                 $database->updateDayHistory($dayHistory, $_SESSION['currentDate']);
+
+                $_SESSION['notifications'] = $_SESSION['employee']->getFirstName() . " " . $_SESSION['employee']->getLastName()
+                    . " submitted a form at " . date("g:i a", strtotime($incident->getSubmissionTime() . "-3 hours"))
+                . " on " . date("M d, Y", strtotime($incident->getSubmissionTime()));
+
 
                 $_SESSION['dayHistory'] = $dayHistory;
 
