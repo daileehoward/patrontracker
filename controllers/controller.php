@@ -120,6 +120,8 @@ class Controller
         $totalPatronsToday = $database->getTotalPatronsToday($currentDateSQL);
         $this->_f3->set('totalPatronsToday', $totalPatronsToday);
         $this->_f3->set('avgPatronsHour', number_format((float)$totalPatronsToday / 11, 1, '.', ''));
+        $averagePatrons = $database->getAveragePatronsPerDay();
+        $this->_f3->set('avgPatrons', $averagePatrons);
 
         //Display a view
         $view = new Template();

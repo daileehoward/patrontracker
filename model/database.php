@@ -274,7 +274,6 @@ class Database
 
         //Execute the statement
         $statement->execute();
-
     }
 
     /**
@@ -306,7 +305,6 @@ class Database
 
         //Execute
         $statement->execute();
-
     }
 
     /**
@@ -334,6 +332,29 @@ class Database
         return $result;
     }
 
+    function getAveragePatronsPerDay()
+    {
+        //Define the query
+        $sql = "SELECT totalIncidents FROM dayHistory";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Execute the statement
+        $statement->execute();
+
+        $results = $statement->fetch(PDO::FETCH_ASSOC);
+        $totalPatrons = 0;
+        $numberOfDays = 0;
+
+        foreach ($results as $result) {
+            $totalPatrons += $result;
+            $numberOfDays++;
+        }
+
+        return $totalPatrons/$numberOfDays;
+    }
+
     /**
      * query that returns rows from incidents table
      */
@@ -352,7 +373,6 @@ class Database
 
         //Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
-
     }
 
 }
