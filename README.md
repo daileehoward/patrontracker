@@ -1,4 +1,4 @@
 # patrontracker
-Final Project: This web application will help the Student Help Desk Employees of Green River College track their patrons from Zoom and over the phone. 
+Final Project: Built a web application for Student Help Desk Employees of Green River College to keep track of the statistics of the the patrons that they help.
 - Incorporated the Fat-Free framework, the MVC pattern, OOP, and PDO.
 
