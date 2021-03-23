@@ -25,7 +25,7 @@ incidentID INT NOT NULL AUTO_INCREMENT,
 employeeID INT NOT NULL,
 position INT(1) NOT NULL,
 dateHelped DATE NOT NULL,
-timeHelped INT(2) NOT NULL,
+timeHelped TIME(0) NOT NULL,
 location VARCHAR(20) NOT NULL,
 locationOther VARCHAR(20),
 question VARCHAR(30) NOT NULL,
@@ -181,7 +181,6 @@ class Database
      * @param $selectedDate
      * @param $position
      * @param $startTime
-     * @param $endTime
      * @return int
      */
     function getHourHistory($selectedDate, $position, $startTime)
@@ -192,10 +191,12 @@ class Database
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
+        $timeSelected = $startTime . ":%";
+
         //Bind the parameters
         $statement->bindParam(':selectedDate', $selectedDate, PDO::PARAM_STR);
         $statement->bindParam(':position', $position, PDO::PARAM_INT);
-        $statement->bindParam(':startTime', $startTime . ":*", PDO::PARAM_STR);
+        $statement->bindParam(':startTime', $timeSelected, PDO::PARAM_STR);
 
         //Execute
         $statement->execute();
