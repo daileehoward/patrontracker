@@ -122,7 +122,8 @@ class Controller
         $this->_f3->set('avgPatronsHour', number_format((float)
             $totalPatronsToday / 11, 1, '.', ''));
         $averagePatrons = $database->getAveragePatronsPerDay();
-        $this->_f3->set('avgPatrons', $averagePatrons);
+        $this->_f3->set('avgPatrons', number_format((float)
+        $averagePatrons, 1, '.', ''));
         $totalPatronsWeek = $database->getTotalPatronsWeek($currentDateSQL);
         $this->_f3->set('totalPatronsWeek', $totalPatronsWeek);
 
@@ -372,8 +373,6 @@ class Controller
     /** Submission page */
     function submission()
     {
-        //var_dump($_SESSION);
-
         //Display a view
         $view = new Template();
         echo $view->render('views/submission.html');

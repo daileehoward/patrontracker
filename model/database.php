@@ -335,7 +335,7 @@ class Database
     function getAveragePatronsPerDay()
     {
         //Define the query
-        $sql = "SELECT totalIncidents FROM dayHistory";
+        $sql = "SELECT AVG(totalIncidents) FROM dayHistory";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -343,16 +343,7 @@ class Database
         //Execute the statement
         $statement->execute();
 
-        $results = $statement->fetch(PDO::FETCH_ASSOC);
-        $totalPatrons = 0;
-        $numberOfDays = 0;
-
-        foreach ($results as $result) {
-            $totalPatrons += $result;
-            $numberOfDays++;
-        }
-
-        return $totalPatrons/$numberOfDays;
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     function getTotalPatronsWeek($dayDate)
@@ -371,8 +362,6 @@ class Database
 
         $results = $statement->fetch(PDO::FETCH_ASSOC);
         $totalPatrons = 0;
-
-        var_dump($results);
 
         foreach ($results as $result) {
             $totalPatrons += $result;
