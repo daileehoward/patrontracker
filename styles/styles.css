@@ -4,6 +4,20 @@ styles/styles.css
 Styles for site/app
 */
 
+/***** Styles across all pages ******/
+h1, h3, h4, #newFormButton, #backToStatus, nav.navbar {
+    font-family: BigNoodleTitling, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.green-color {
+    background-color: #2c882b;
+    border: 2px solid black;
+}
+
+body {
+    background-color: #80808029;
+}
+
 /***** Navbar Styles ******/
 nav.navbar a.navbar-brand {
     font-size: 25px;
@@ -29,49 +43,6 @@ li.nav-item {
     }
 }
 
-
-
-h1, h3, h4, #newFormButton, nav.navbar {
-    font-family: BigNoodleTitling, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-.center-text {
-    text-align: center;
-}
-
-.right-text {
-    text-align: right;
-}
-
-.thick-border {
-    border: 3px solid black;
-}
-
-.skinny-border {
-    border: 2px solid black;
-}
-
-.width-80 {
-    width: 80%;
-}
-
-.center-table {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.large-font {
-    font-size: 30px;
-}
-
-.green-color {
-    background-color: #2c882b;
-    border: 2px solid black;
-}
-
-body {
-    background-color: #80808029;
-}
 
 /***** Status Pg Styles ******/
 header#status-header {
@@ -108,6 +79,21 @@ input.submit-form:hover, #newFormButton:hover, #backToStatus:hover {
     text-decoration: none;
 }
 
+.thick-border {
+    border: 3px solid black;
+}
+
+.tableWidth {
+    width: 80%;
+}
+
+.large-font {
+    font-size: 30px;
+}
+
+#timeColumn {
+    width: 45%;
+}
 
 /***** Form Pg Styles ******/
 header#form-header {

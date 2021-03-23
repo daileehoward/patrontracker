@@ -2,110 +2,121 @@
 
 
 <header id="status-header" class="pt-5">
-    <h1 class="center-text text-white text-uppercase">status</h1>
+    <h1 class="text-center text-white text-uppercase">status</h1>
 </header>
 <br>
 
 <div class="container-fluid form-row">
-    <div class="form-group col-md-3">
+    <div class="form-group col-lg-2 col-md-5 col-sm-7 mx-auto">
         <div class="card bg-white shadow">
             <div class="card-body">
-                <h3 class="center-text">Notifications</h3>
+                <h3 class="text-center">Notifications</h3>
                 <hr>
+                <repeat group="{{ @recentRows }}" value="{{ @row }}">
+                    <ul>
+                        <li>SHD{{ @row.position }} submitted a form at {{ @row.timeHelped }} on {{ @row.dateHelped }}
+                        </li>
+                    </ul>
+                </repeat>
                 <p>{{ @notifications }}</p>
             </div>
         </div>
     </div>
 
-    <div class="form-group col-md-6">
+    <div class="form-group col-lg-6 col-md-10 col-sm-11 mx-auto">
         <div class="card bg-white shadow">
             <div class="card-body">
-                <h3 class="center-text">{{ @SESSION['currentDate'] }}</h3>
+                <h3 class="text-center">{{ @SESSION['currentDate'] }}</h3>
                 <hr>
 
-                <table class="thick-border width-80 center-table">
+                <table class="thick-border tableWidth mx-auto table-striped">
+                    <thead class="table-dark">
                     <tr class="thick-border">
-                        <th style="width: 40%;" class="thick-border center-text">Time</th>
-                        <th class="thick-border center-text">SHD-1</th>
-                        <th class="thick-border center-text">SHD-2</th>
+                        <th id="timeColumn" class="thick-border text-center">Time</th>
+                        <th class="thick-border text-center">SHD-1</th>
+                        <th class="thick-border text-center">SHD-2</th>
                     </tr>
-
+                    </thead>
+                    <tbody>
                     <tr>
-                        <td class="thick-border right-text">8:00 - 9:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour89HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour89HistorySHD2 }}</td>
-                    </tr>
-                    <tr>
-                        <td class="thick-border right-text">9:00 - 10:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour910HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour910HistorySHD2 }}</td>
+                        <td class="thick-border text-center">8:00am - 9:00am</td>
+                        <td class="thick-border text-center">{{ @hour89HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour89HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">10:00 - 11:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour1011HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1011HistorySHD2 }}</td>
+                        <td class="thick-border text-center">9:00am - 10:00am</td>
+                        <td class="thick-border text-center">{{ @hour910HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour910HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">11:00 - 12:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour1112HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1112HistorySHD2 }}</td>
+                        <td class="thick-border text-center">10:00am - 11:00am</td>
+                        <td class="thick-border text-center">{{ @hour1011HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1011HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">12:00 - 1:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour1213HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1213HistorySHD2 }}</td>
+                        <td class="thick-border text-center">11:00am - 12:00pm</td>
+                        <td class="thick-border text-center">{{ @hour1112HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1112HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">1:00 - 2:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour1314HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1314HistorySHD2 }}</td>
+                        <td class="thick-border text-center">12:00pm - 1:00pm</td>
+                        <td class="thick-border text-center">{{ @hour1213HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1213HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">2:00 - 3:00&nbsp;&nbsp;</td>
-                         <td class="skinny-border">{{ @hour1415HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1415HistorySHD2 }}</td>
+                        <td class="thick-border text-center">1:00pm - 2:00pm</td>
+                        <td class="thick-border text-center">{{ @hour1314HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1314HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">3:00 - 4:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour1516HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1516HistorySHD2 }}</td>
+                        <td class="thick-border text-center">2:00pm - 3:00pm</td>
+                        <td class="thick-border text-center">{{ @hour1415HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1415HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">4:00 - 5:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour1617HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1617HistorySHD2 }}</td>
+                        <td class="thick-border text-center">3:00pm - 4:00pm</td>
+                        <td class="thick-border text-center">{{ @hour1516HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1516HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">5:00 - 6:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour1718HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1718HistorySHD2 }}</td>
+                        <td class="thick-border text-center">4:00pm - 5:00pm</td>
+                        <td class="thick-border text-center">{{ @hour1617HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1617HistorySHD2 }}</td>
                     </tr>
                     <tr>
-                        <td class="thick-border right-text">6:00 - 7:00&nbsp;&nbsp;</td>
-                        <td class="skinny-border">{{ @hour1819HistorySHD1 }}</td>
-                        <td class="skinny-border">{{ @hour1819HistorySHD2 }}</td>
+                        <td class="thick-border text-center">5:00pm - 6:00pm</td>
+                        <td class="thick-border text-center">{{ @hour1718HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1718HistorySHD2 }}</td>
                     </tr>
+                    <tr>
+                        <td class="thick-border text-center">6:00pm - 7:00pm</td>
+                        <td class="thick-border text-center">{{ @hour1819HistorySHD1 }}</td>
+                        <td class="thick-border text-center">{{ @hour1819HistorySHD2 }}</td>
+                    </tr>
+                    </tbody>
                 </table>
                 <br><br>
                 <div class="ml-auto mr-auto text-center">
-                    <button type="button" class="rounded shadow text-decoration-none" id="newFormButton"><a href="form">New Patron Form</a>
-                    </button>
+                    <form action="form">
+                        <input class="rounded shadow text-decoration-none" id="newFormButton" type="submit"
+                               value="New Patron Form"/>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="form-group col-md-3">
+    <div class="form-group col-lg-2 col-md-5 col-sm-7 mx-auto">
         <div class="card bg-white shadow">
             <div class="card-body">
-                <h3 class="center-text">Daily Stats</h3>
+                <h3 class="text-center">Daily Stats</h3>
                 <hr>
-                <ul class="list-unstyled center-text">
+                <ul class="list-unstyled text-center">
                     <li>Total Patrons Today</li>
-                    <li class="large-font"><strong>{{ @dayHistory.totalIncidents }}</strong></li>
+                    <li class="large-font"><strong>{{ @totalPatronsToday }}</strong></li>
                     <br>
                     <li>Average Patrons Per Hour</li>
-                    <li class="large-font"><strong>2</strong></li>
+                    <li class="large-font"><strong>{{ @avgPatronsHour }}</strong></li>
                     <br>
                     <li>Average Patrons Per Day</li>
                     <li class="large-font"><strong>15</strong></li>

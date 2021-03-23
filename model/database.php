@@ -138,6 +138,27 @@ class Database
         $statement->execute();
     }
 
+    /**
+     * query that returns 5 most recent rows from incident
+     */
+    function getRecentRowsIncident()
+    {
+        /* SELECT QUERY WITH FETCHALL (gets multiple rows) */
+
+        //Define the query
+        $sql = "SELECT * FROM incidents ORDER BY incidentID DESC LIMIT 5";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Execute the statement
+        $statement->execute();
+
+        //Process the result
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
 
     /**
      * insert query to insert incident into database
@@ -197,6 +218,27 @@ class Database
         $statement->bindParam(':selectedDate', $selectedDate, PDO::PARAM_STR);
         $statement->bindParam(':position', $position, PDO::PARAM_INT);
         $statement->bindParam(':startTime', $timeSelected, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+
+        return $statement->rowCount(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Returns row count where row matches passed in specifications
+     * @param $selectedDate
+     * @return int
+     */
+    function getTotalPatronsToday($selectedDate)
+    {
+        $sql = "SELECT * FROM incidents WHERE dateHelped = :selectedDate";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':selectedDate', $selectedDate, PDO::PARAM_STR);
 
         //Execute
         $statement->execute();

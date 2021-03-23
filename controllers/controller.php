@@ -87,7 +87,6 @@ class Controller
 
         $currentDateSQL = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
         $currentDateSQL = $currentDateSQL->format('Y-m-d');
-        var_dump($currentDateSQL);
 
         $startOfDay = 8;
         $endOfDay = 19;
@@ -116,7 +115,11 @@ class Controller
 
         $this->_f3->set('incidents', $database->getIncidents());
         //$this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
-        $this->_f3->set('notifications', $_SESSION['notifications']);
+        //$this->_f3->set('notifications', $_SESSION['notifications']);
+        $this->_f3->set('recentRows', $database->getRecentRowsIncident());
+        $totalPatronsToday = $database->getTotalPatronsToday($currentDateSQL);
+        $this->_f3->set('totalPatronsToday', $totalPatronsToday);
+        $this->_f3->set('avgPatronsHour', number_format((float)$totalPatronsToday / 11, 1, '.', ''));
 
         //Display a view
         $view = new Template();
@@ -163,7 +166,7 @@ class Controller
 
             if ($validator->validTime($time)) {
                 $time = (string)$time;
-                $time = $time . ":00";
+                //$time = $time . ":00";
                 //$time = (int)date("H",strtotime($time));
                 $incident->setTimeHelped($time);
             } else {
@@ -320,9 +323,10 @@ class Controller
                 $database->insertDayHistory($dayHistory);
                 $database->updateDayHistory($dayHistory, $_SESSION['currentDate']);
 
-                $_SESSION['notifications'] = $_SESSION['employee']->getFirstName() . " " . $_SESSION['employee']->getLastName()
-                    . " submitted a form at " . date("g:i a", strtotime($incident->getSubmissionTime()))
-                . " on " . date("M d, Y", strtotime($incident->getSubmissionTime()));
+
+                /* $_SESSION['notifications'] = $_SESSION['employee']->getFirstName() . " " . $_SESSION['employee']->getLastName()
+                     . " submitted a form at " . date("g:i a", strtotime($incident->getSubmissionTime()))
+                 . " on " . date("M d, Y", strtotime($incident->getSubmissionTime()));*/
 
 
                 $_SESSION['dayHistory'] = $dayHistory;
