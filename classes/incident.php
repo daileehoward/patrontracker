@@ -95,7 +95,7 @@ class Incident
 
     /**
      * Gets time helped
-     * @return String
+     * @return int
      */
     public function getTimeHelped()
     {
@@ -104,7 +104,7 @@ class Incident
 
     /**
      * Sets time helped
-     * @param String $timeHelped
+     * @param int $timeHelped
      */
     public function setTimeHelped($timeHelped): void
     {

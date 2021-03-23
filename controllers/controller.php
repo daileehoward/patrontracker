@@ -80,25 +80,32 @@ class Controller
             $this->_f3->reroute('/');
         }
 
-        $_SESSION['currentDate'] = date('F j, Y');
+        $currentDate = date('F j, Y');
+        $_SESSION['currentDate'] = $currentDate;
         //$_SESSION['dayHistory'] = $database->getDayHistory(date('YYYY-mm-dd'));
 
-        $currentDateSQL = date('YYYY-MM-DD');
+        $currentDateSQL = $currentDate;
+        $currentDateSQL = new DateTime($currentDateSQL);
+        $currentDateSQL = $currentDateSQL->format('Y-m-d');
+
         $startOfDay = 8;
         $endOfDay = 19;
         $sessionHourNames = $dataLayer->getSessionHourNames();
         $sessionHourNamesIndex = 0;
 
-        for ($startHour = $startOfDay; $startHour <= $endOfDay; $startHour++) {
-            $sessionName = $sessionHourNames[$sessionHourNamesIndex] . 'SHD1';
-            $_SESSION[$sessionName] =
+        for ($startHour = $startOfDay; $startHour < $endOfDay; $startHour++) {
+            $sessionName = $sessionHourNames[$sessionHourNamesIndex];
+            $hourHistorySHD1 =
                 $database->getHourHistory($currentDateSQL, 1, $startHour, $startHour + 1);
-            $_SESSION[$sessionName . 'SHD2'] =
+            $this->_f3->set($sessionName . 'SHD1', $hourHistorySHD1);
+            $hourHistorySHD2 =
                 $database->getHourHistory($currentDateSQL, 2, $startHour, $startHour + 1);
+            $this->_f3->set($sessionName . 'SHD2', $hourHistorySHD2);
 
             $sessionHourNamesIndex++;
         }
 
+        $this->_f3->set('incidents', $database->getIncidents());
         $this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
         $this->_f3->set('notifications', $_SESSION['notifications']);
 
@@ -147,7 +154,7 @@ class Controller
 
             if ($validator->validTime($time)) {
                 $time = (string)$time;
-
+                $time = (int)date("H",strtotime($time));
                 $incident->setTimeHelped($time);
             } else {
                 $this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
@@ -304,7 +311,7 @@ class Controller
                 $database->updateDayHistory($dayHistory, $_SESSION['currentDate']);
 
                 $_SESSION['notifications'] = $_SESSION['employee']->getFirstName() . " " . $_SESSION['employee']->getLastName()
-                    . " submitted a form at " . date("g:i a", strtotime($incident->getSubmissionTime() . "-3 hours"))
+                    . " submitted a form at " . date("g:i a", strtotime($incident->getSubmissionTime()))
                 . " on " . date("M d, Y", strtotime($incident->getSubmissionTime()));
 
 

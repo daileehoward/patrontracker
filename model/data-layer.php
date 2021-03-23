@@ -83,8 +83,8 @@ class DataLayer
 
     function getSessionHourNames()
     {
-        return array('hour8-9History', 'hour9-10History', 'hour10-11History', 'hour11-12History', 'hour12-13History',
-            'hour13-14History', 'hour14-15History', 'hour15-16History', 'hour16-17History', 'hour17-18History',
-            'hour18-19History');
+        return array('hour89History', 'hour910History', 'hour1011History', 'hour1112History', 'hour1213History',
+            'hour1314History', 'hour1415History', 'hour1516History', 'hour1617History', 'hour1718History',
+            'hour1819History');
     }
 }

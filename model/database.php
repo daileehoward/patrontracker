@@ -24,8 +24,8 @@ CREATE TABLE incidents
 incidentID INT NOT NULL AUTO_INCREMENT,
 employeeID INT NOT NULL,
 position INT(1) NOT NULL,
-dateHelped DATE NOT NULL,
-timeHelped TIME(0) NOT NULL,
+dateHelped VARCHAR(30) NOT NULL,
+timeHelped INT(2) NOT NULL,
 location VARCHAR(20) NOT NULL,
 locationOther VARCHAR(20),
 question VARCHAR(30) NOT NULL,
@@ -161,7 +161,7 @@ class Database
         $statement->bindParam(':employeeID', $incident->getEmployeeId(), PDO::PARAM_INT);
         $statement->bindParam(':position', $incident->getPosition(), PDO::PARAM_INT);
         $statement->bindParam(':dateHelped', $incident->getDateHelped(), PDO::PARAM_STR);
-        $statement->bindParam(':timeHelped', $incident->getTimeHelped(), PDO::PARAM_STR);
+        $statement->bindParam(':timeHelped', $incident->getTimeHelped(), PDO::PARAM_INT);
         $statement->bindParam(':location', $incident->getLocation(), PDO::PARAM_STR);
         $statement->bindParam(':locationOther', $incident->getLocationOther(), PDO::PARAM_STR);
         $statement->bindParam(':question', $incident->getQuestion(), PDO::PARAM_STR);
@@ -176,9 +176,17 @@ class Database
         $statement->execute();
     }
 
+    /**
+     * Returns row count where row matches passed in specifications
+     * @param $selectedDate
+     * @param $position
+     * @param $startTime
+     * @param $endTime
+     * @return int
+     */
     function getHourHistory($selectedDate, $position, $startTime, $endTime)
     {
-        $sql = "SELECT COUNT(*) FROM incidents WHERE dateHelped = :selectedDate AND position = :position AND 
+        $sql = "SELECT * FROM incidents WHERE dateHelped = :selectedDate AND position = :position AND 
                  timeHelped >= :startTime AND timeHelped < :endTime";
 
         //Prepare the statement
@@ -193,7 +201,7 @@ class Database
         //Execute
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->rowCount(PDO::FETCH_ASSOC);
     }
 
     /**
