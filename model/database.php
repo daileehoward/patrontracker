@@ -146,7 +146,8 @@ class Database
         /* SELECT QUERY WITH FETCHALL (gets multiple rows) */
 
         //Define the query
-        $sql = "SELECT * FROM incidents ORDER BY incidentID DESC LIMIT 5";
+        $sql = "SELECT * FROM incidents, employees WHERE incidents.employeeID = employees.employeeID ORDER BY incidentID
+        DESC LIMIT 5";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -156,7 +157,6 @@ class Database
 
         //Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
-
     }
 
 

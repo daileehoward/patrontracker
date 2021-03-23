@@ -119,7 +119,8 @@ class Controller
         $this->_f3->set('recentRows', $database->getRecentRowsIncident());
         $totalPatronsToday = $database->getTotalPatronsToday($currentDateSQL);
         $this->_f3->set('totalPatronsToday', $totalPatronsToday);
-        $this->_f3->set('avgPatronsHour', number_format((float)$totalPatronsToday / 11, 1, '.', ''));
+        $this->_f3->set('avgPatronsHour', number_format((float)
+            $totalPatronsToday / 11, 1, '.', ''));
         $averagePatrons = $database->getAveragePatronsPerDay();
         $this->_f3->set('avgPatrons', $averagePatrons);
         $totalPatronsWeek = $database->getTotalPatronsWeek($currentDateSQL);
