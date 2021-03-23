@@ -24,7 +24,7 @@ CREATE TABLE incidents
 incidentID INT NOT NULL AUTO_INCREMENT,
 employeeID INT NOT NULL,
 position INT(1) NOT NULL,
-dateHelped VARCHAR(30) NOT NULL,
+dateHelped DATE NOT NULL,
 timeHelped INT(2) NOT NULL,
 location VARCHAR(20) NOT NULL,
 locationOther VARCHAR(20),
@@ -161,7 +161,7 @@ class Database
         $statement->bindParam(':employeeID', $incident->getEmployeeId(), PDO::PARAM_INT);
         $statement->bindParam(':position', $incident->getPosition(), PDO::PARAM_INT);
         $statement->bindParam(':dateHelped', $incident->getDateHelped(), PDO::PARAM_STR);
-        $statement->bindParam(':timeHelped', $incident->getTimeHelped(), PDO::PARAM_INT);
+        $statement->bindParam(':timeHelped', $incident->getTimeHelped(), PDO::PARAM_STR);
         $statement->bindParam(':location', $incident->getLocation(), PDO::PARAM_STR);
         $statement->bindParam(':locationOther', $incident->getLocationOther(), PDO::PARAM_STR);
         $statement->bindParam(':question', $incident->getQuestion(), PDO::PARAM_STR);
@@ -184,10 +184,10 @@ class Database
      * @param $endTime
      * @return int
      */
-    function getHourHistory($selectedDate, $position, $startTime, $endTime)
+    function getHourHistory($selectedDate, $position, $startTime)
     {
         $sql = "SELECT * FROM incidents WHERE dateHelped = :selectedDate AND position = :position AND 
-                 timeHelped >= :startTime AND timeHelped < :endTime";
+                 timeHelped LIKE :startTime";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -195,8 +195,7 @@ class Database
         //Bind the parameters
         $statement->bindParam(':selectedDate', $selectedDate, PDO::PARAM_STR);
         $statement->bindParam(':position', $position, PDO::PARAM_INT);
-        $statement->bindParam(':startTime', $startTime, PDO::PARAM_INT);
-        $statement->bindParam(':endTime', $endTime, PDO::PARAM_INT);
+        $statement->bindParam(':startTime', $startTime . ":*", PDO::PARAM_STR);
 
         //Execute
         $statement->execute();

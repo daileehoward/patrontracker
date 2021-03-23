@@ -80,13 +80,14 @@ class Controller
             $this->_f3->reroute('/');
         }
 
-        $currentDate = date('F j, Y');
+        $currentDate = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
+        $currentDate = $currentDate->format('F j, Y');
         $_SESSION['currentDate'] = $currentDate;
         //$_SESSION['dayHistory'] = $database->getDayHistory(date('YYYY-mm-dd'));
 
-        $currentDateSQL = $currentDate;
-        $currentDateSQL = new DateTime($currentDateSQL);
+        $currentDateSQL = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
         $currentDateSQL = $currentDateSQL->format('Y-m-d');
+        var_dump($currentDateSQL);
 
         $startOfDay = 8;
         $endOfDay = 19;
@@ -95,18 +96,26 @@ class Controller
 
         for ($startHour = $startOfDay; $startHour < $endOfDay; $startHour++) {
             $sessionName = $sessionHourNames[$sessionHourNamesIndex];
+            if ($startHour <= 9) {
+                $hourHistorySHD1 =
+                    $database->getHourHistory($currentDateSQL, 1, ("0" . (string)($startHour)));
+                $this->_f3->set($sessionName . 'SHD1', $hourHistorySHD1);
+                $hourHistorySHD2 =
+                    $database->getHourHistory($currentDateSQL, 2, ("0" . (string)($startHour)));
+                $this->_f3->set($sessionName . 'SHD2', $hourHistorySHD2);
+            }
             $hourHistorySHD1 =
-                $database->getHourHistory($currentDateSQL, 1, $startHour, $startHour + 1);
+                $database->getHourHistory($currentDateSQL, 1, ((string)($startHour)));
             $this->_f3->set($sessionName . 'SHD1', $hourHistorySHD1);
             $hourHistorySHD2 =
-                $database->getHourHistory($currentDateSQL, 2, $startHour, $startHour + 1);
+                $database->getHourHistory($currentDateSQL, 2, ((string)($startHour)));
             $this->_f3->set($sessionName . 'SHD2', $hourHistorySHD2);
 
             $sessionHourNamesIndex++;
         }
 
         $this->_f3->set('incidents', $database->getIncidents());
-        $this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
+        //$this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
         $this->_f3->set('notifications', $_SESSION['notifications']);
 
         //Display a view
@@ -154,7 +163,8 @@ class Controller
 
             if ($validator->validTime($time)) {
                 $time = (string)$time;
-                $time = (int)date("H",strtotime($time));
+                $time = $time . ":00";
+                //$time = (int)date("H",strtotime($time));
                 $incident->setTimeHelped($time);
             } else {
                 $this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
