@@ -355,6 +355,32 @@ class Database
         return $totalPatrons/$numberOfDays;
     }
 
+    function getTotalPatronsWeek($dayDate)
+    {
+        //Define the query
+        $sql = "SELECT totalIncidents FROM dayHistory WHERE YEARWEEK(:dayDate)";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':dayDate', $dayDate, PDO::PARAM_STR);
+
+        //Execute the statement
+        $statement->execute();
+
+        $results = $statement->fetch(PDO::FETCH_ASSOC);
+        $totalPatrons = 0;
+
+        var_dump($results);
+
+        foreach ($results as $result) {
+            $totalPatrons += $result;
+        }
+
+        return $totalPatrons;
+    }
+
     /**
      * query that returns rows from incidents table
      */
