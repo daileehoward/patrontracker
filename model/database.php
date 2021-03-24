@@ -159,7 +159,6 @@ class Database
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     /**
      * insert query to insert incident into database
      * @param $incident incident object passed in

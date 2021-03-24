@@ -7,8 +7,6 @@
 <div class="content-wrap pb-5">
     <form id="formpg" class="container border mt-4 shadow bg-white" method="post" action="#">
         <div id="inner-form" class="pb-5 pt-5">
-            <p><i><span class="text-danger">*</span> indicates a required field</i></p>
-            <br>
             <label for="name"><strong><span class="text-danger">*</span> Employee Name:</strong></label>
             <input class="form-control" type="text" id="name" name="name"
                 value="{{ @SESSION.employee->getFirstName() . ' ' . @SESSION.employee->getLastName() }}">
@@ -132,6 +130,7 @@
             </check>
 
             <div id="incNumDiv" class="d-none">
+                <br>
                 <label for="incidentNum"><strong><span class="text-danger">*</span> Incident Report Number:</strong></label>
                 <input class="form-control" type="text" id="incidentNum" name="incidentNum"
                        value="{{ @clientIncReportNum }}">
@@ -139,7 +138,6 @@
                 <check if="{{ isset(@errors['clientIncReportNum']) }}">
                     <span class="text-danger">{{ @errors['clientIncReportNum'] }}</span>
                 </check>
-                <br>
             </div>
             <br>
 
@@ -150,7 +148,9 @@
             <check if="{{ isset(@errors['comments']) }}">
                 <span class="text-danger">{{ @errors['comments'] }}</span>
             </check>
-            <br><br>
+            <br>
+
+            <p><i><span class="text-danger">*</span> indicates a required field</i></p>
 
             <input type="submit" class="submit-form rounded" value="Submit">
         </div>

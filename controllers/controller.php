@@ -82,7 +82,6 @@ class Controller
         $currentDate = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
         $currentDate = $currentDate->format('F j, Y');
         $_SESSION['currentDate'] = $currentDate;
-        //$_SESSION['dayHistory'] = $database->getDayHistory(date('YYYY-mm-dd'));
 
         $currentDateSQL = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
         $currentDateSQL = $currentDateSQL->format('Y-m-d');
@@ -112,9 +111,31 @@ class Controller
             $sessionHourNamesIndex++;
         }
 
-        $this->_f3->set('incidents', $database->getIncidents());
-        //$this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
-        $this->_f3->set('recentRows', $database->getRecentRowsIncident());
+        //Stores five most recent incidents in Session array
+        //$this->_f3->set('recentRows', $database->getRecentRowsIncident());
+        $recentRows = $database->getRecentRowsIncident();
+
+        for ($i = 0; $i < sizeof($recentRows); $i++) {
+            $originalSubmissionTime = $recentRows[$i]['submissionTime'];
+            $submission = explode(" ", $originalSubmissionTime);
+            $recentRows[$i]['submissionTime'] = array($submission[0], $submission[1]);
+
+            $submissionDate = $submission[0];
+            $submissionDate = new DateTime($submissionDate);
+            $submissionDate = $submissionDate->format('n/d');
+
+            $recentRows[$i]['submissionTime'][0] = $submissionDate;
+
+            $submissionTime = $submission[1];
+            $submissionTime = explode(":", $submissionTime);
+            $newSubmissionTime = new DateTime($submissionTime[0] . ":" . $submissionTime[1]);
+            $newSubmissionTime = $newSubmissionTime->format('g:ia');
+
+            $recentRows[$i]['submissionTime'][1] = $newSubmissionTime;
+        }
+
+        $this->_f3->set('recentRows', $recentRows);
+
         $totalPatronsToday = $database->getTotalPatronsToday($currentDateSQL);
         $this->_f3->set('totalPatronsToday', $totalPatronsToday);
         $this->_f3->set('avgPatronsHour', number_format((float)
