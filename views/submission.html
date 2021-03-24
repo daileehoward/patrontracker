@@ -66,6 +66,10 @@
                     <th class="pb-1 pl-3 pr-5">Comments:</th>
                     <td>{{ @SESSION.incident->getComments() }}</td>
                 </tr>
+                <tr>
+                    <th class="pb-1 pl-3 pr-5">Submission Time:</th>
+                    <td>{{ @SESSION.incident->getSubmissionTime() }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>

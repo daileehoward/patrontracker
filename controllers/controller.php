@@ -112,7 +112,6 @@ class Controller
         }
 
         //Stores five most recent incidents in Session array
-        //$this->_f3->set('recentRows', $database->getRecentRowsIncident());
         $recentRows = $database->getRecentRowsIncident();
 
         for ($i = 0; $i < sizeof($recentRows); $i++) {
@@ -350,6 +349,65 @@ class Controller
 
                 $_SESSION['dayHistory'] = $dayHistory;
 
+                //Email submission
+                $incidentID = $database->getIncidentID($_SESSION['incident']);
+                $name = $_SESSION['employee']->getFirstName() . " " . $_SESSION['employee']->getLastName();
+                $timeHelped = $_SESSION['incident']->getTimeHelped();
+                $dateHelped = $_SESSION['incident']->getDateHelped();
+                $position = $_SESSION['incident']->getPosition();
+                $contactMethod = $_SESSION['incident']->getContactMethod();
+                $location = $_SESSION['incident']->getLocation();
+
+                if (!empty($_SESSION['incident']->getLocationOther())) {
+                    $location = $_SESSION['incident']->getLocationOther();
+                }
+
+                $question = $_SESSION['incident']->getQuestion();
+
+                if (!empty($_SESSION['incident']->getQuestionOther())) {
+                    $question = $_SESSION['incident']->getQuestionOther();
+                }
+
+                if (!empty($_SESSION['incident']->getIncidentReportNum())) {
+                    $incidentReportNum = $_SESSION['incident']->getIncidentReportNum();
+                }
+
+                if (!empty($_SESSION['incident']->getComments())) {
+                    $comments = $_SESSION['incident']->getComments();
+                }
+
+                $submissionTime = $_SESSION['incident']->getSubmissionTime();
+
+                $fromName = "Green River College Patron Tracker";
+                $fromEmail = "Dhoward18@mail.greenriver.edu";
+
+                $toEmail = "Dhoward@greenriver.edu";
+                $subject = "Patron Form #$incidentID";
+                $headers = "Name: $fromName <$fromEmail>";
+
+                $message = "\nPatron Form Submission #$incidentID Overview\n\n";
+                $message .= "Employee Name: $name\n";
+                $message .= "Date Helped: $dateHelped\n";
+                $message .= "Time Helped: $timeHelped\n";
+                $message .= "Position: $position\n";
+                $message .= "Contact Method: $contactMethod\n";
+                $message .= "Location: $location\n";
+                $message .= "Question: $question\n";
+
+                if (!empty($incidentReportNum)) {
+                    $message .= "Incident Report: $incidentReportNum\n";
+                } else {
+                    $message .= "Incident Report: N/A\n";
+                }
+
+                if (!empty($comments)) {
+                    $message .= "Comments: $comments\n";
+                }
+
+                $message .= "Form Submitted: $submissionTime\n";
+
+                $sendEmail = mail($toEmail, $subject, $message, $headers);
+
                 //Redirect to submission page
                 $this->_f3->reroute('/submission');
             }
@@ -360,7 +418,6 @@ class Controller
         $this->_f3->set('locations', $dataLayer->getLocations());
         $this->_f3->set('positions', $dataLayer->getPositions());
         $this->_f3->set('methods', $dataLayer->getContactMethods());
-        // $this->_f3->set('incidentReports', $dataLayer->getIncidentReportOptions());
 
         //make form sticky
         $this->_f3->set('employeeName', isset($employeeName) ? $employeeName : "");

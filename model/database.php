@@ -99,9 +99,25 @@ class Database
         $statement->execute();
 
         //Process the result
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 
-        return $result;
+    function getManagerEmail($firstNameManager, $lastNameManager)
+    {
+        //Define the query
+        $sql = "SELECT employeeEmail FROM employees WHERE firstName = :firstNameManager AND 
+              lastName = :lastNameManager";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':firstName', $firstNameManager, PDO::PARAM_STR);
+        $statement->bindParam(':lastName', $lastNameManager, PDO::PARAM_STR);
+
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -157,6 +173,37 @@ class Database
 
         //Process the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getIncidentID($incident)
+    {
+        $sql = "SELECT incidentID FROM incidents WHERE position = :position, 
+                dateHelped = :dateHelped, timeHelped = :timeHelped, location = :location, 
+                locationOther = :locationOther, question = :question, questionOther = :questionOther, 
+                contactMethod = :contactMethod, filedIncidentReport = :filedIncidentReport, 
+                incidentReportNumber = :incidentReportNumber, comments = :comments, submissionTime = :submissionTime";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':position', $incident->getPosition(), PDO::PARAM_INT);
+        $statement->bindParam(':dateHelped', $incident->getDateHelped(), PDO::PARAM_STR);
+        $statement->bindParam(':timeHelped', $incident->getTimeHelped(), PDO::PARAM_STR);
+        $statement->bindParam(':location', $incident->getLocation(), PDO::PARAM_STR);
+        $statement->bindParam(':locationOther', $incident->getLocationOther(), PDO::PARAM_STR);
+        $statement->bindParam(':question', $incident->getQuestion(), PDO::PARAM_STR);
+        $statement->bindParam(':questionOther', $incident->getQuestionOther(), PDO::PARAM_STR);
+        $statement->bindParam(':contactMethod', $incident->getContactMethod(), PDO::PARAM_STR);
+        $statement->bindParam(':filedIncidentReport', $incident->getFiledIncidentReport(), PDO::PARAM_STR);
+        $statement->bindParam(':incidentReportNumber', $incident->getIncidentReportNum(), PDO::PARAM_INT);
+        $statement->bindParam(':comments', $incident->getComments(), PDO::PARAM_STR);
+        $statement->bindParam(':submissionTime', $incident->getSubmissionTime(), PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -326,9 +373,7 @@ class Database
         $statement->execute();
 
         //Process the result
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return $result;
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     function getAveragePatronsPerDay()
