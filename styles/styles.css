@@ -37,6 +37,12 @@ li.nav-item {
     padding-left: 1em;
 }
 
+@media (max-width: 793px) {
+    li.nav-item {
+        padding-left: 0.4em!important;
+    }
+}
+
 @media (max-width: 480px) {
     img#grLogo {
         width: 3em;
@@ -44,7 +50,7 @@ li.nav-item {
 }
 
 #nav-form {
-    padding-left: 0.8em!important;
+    padding-left: 0.8em;
 }
 
 
