@@ -55,6 +55,12 @@ header#dashboard-header {
     background-size: cover;
 }
 
+@media(max-width: 450px) {
+    #dashboard-header, #form-header {
+        font-size: 12px;
+    }
+}
+
 header {
     position: relative;
 }
