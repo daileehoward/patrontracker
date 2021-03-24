@@ -1,11 +1,9 @@
 <?php
-
 /**
  * Class DataLayer returns data for site/app
  * @author Dana Clemmer, Dailee Howard
  * model/data-layer.php
  */
-
 class DataLayer
 {
     public $_dbh;

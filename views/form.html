@@ -7,7 +7,9 @@
 <div class="content-wrap pb-5">
     <form id="formpg" class="container border mt-4 shadow bg-white" method="post" action="#">
         <div id="inner-form" class="pb-5 pt-5">
-            <label for="name"><strong>Employee Name:</strong></label>
+            <p><i><span class="text-danger">*</span> indicates a required field</i></p>
+            <br>
+            <label for="name"><strong><span class="text-danger">*</span> Employee Name:</strong></label>
             <input class="form-control" type="text" id="name" name="name"
                 value="{{ @SESSION.employee->getFirstName() . ' ' . @SESSION.employee->getLastName() }}">
             <check if="{{ isset(@errors['employeeName']) }}">
@@ -17,7 +19,7 @@
 
             <div class="row">
                 <div class="col">
-                    <label><strong>Time:</strong></label>
+                    <label><strong><span class="text-danger">*</span> Time:</strong></label>
                     <input class="form-control" type="time" name="time" value="{{ @clientTime }}"><br>
 
                     <check if="{{ isset(@errors['time']) }}">
@@ -25,7 +27,7 @@
                     </check>
                 </div>
                 <div class="col">
-                    <label><strong>Date:</strong></label>
+                    <label><strong><span class="text-danger">*</span> Date:</strong></label>
                     <input class="form-control" type="date" name="date" value="{{ $clientDate }}"><br>
 
                     <check class="text-danger" if="{{ isset(@errors['date']) }}">
@@ -35,7 +37,7 @@
             </div>
             <br>
 
-            <label><strong>Position:&emsp;</strong></label>
+            <label><strong><span class="text-danger">*</span> Position:&emsp;</strong></label>
             <repeat group="{{ @positions }}" value="{{ @position }}">
                 <label><input type="radio" name="position" id="{{ @position }}" value="{{ @position }}"
                     <check if="{{ @position == @employeePosition }}">checked</check>
@@ -48,7 +50,7 @@
             </check>
             <br><br>
 
-            <label><strong>Contact Method:&emsp;</strong></label>
+            <label><strong><span class="text-danger">*</span> Contact Method:&emsp;</strong></label>
             <repeat group="{{ @methods }}" value="{{ @method }}">
                 <label><input type="radio" name="method" id="{{ @method }}" value="{{ @method }}"
                     <check if="{{ @method == @clientMethod }}">checked</check>
@@ -61,7 +63,7 @@
             </check>
             <br><br>
 
-            <label for="location"><strong>Location:</strong></label>
+            <label for="location"><strong><span class="text-danger">*</span> Location:</strong></label>
             <select class="form-control" id="location" name="location">
                 <option selected></option>
                 <repeat group="{{ @locations }}" value="{{ @location }}">
@@ -81,7 +83,7 @@
             <br>
 
             <div id="otherLocation" class="d-none">
-                <label for="locationOther"><strong>Other Location: </strong></label>
+                <label for="locationOther"><strong><span class="text-danger">*</span> Other Location: </strong></label>
                 <input class="form-control" type="text" id="locationOther" name="locationOther"
                        value="{{ @clientLocationOther }}">
 
@@ -91,7 +93,7 @@
                 <br>
             </div>
 
-            <label for="question"><strong>Question:</strong></label>
+            <label for="question"><strong><span class="text-danger">*</span> Question:</strong></label>
             <select class="form-control" id="question" name="question">
                 <option selected></option>
                 <repeat group="{{ @questions }}" value="{{ @question }}">
@@ -109,7 +111,7 @@
             <br>
 
             <div id="otherQuestion" class="d-none">
-                <label for="questionOther"><strong>Other Question: </strong></label>
+                <label for="questionOther"><strong><span class="text-danger">*</span> Other Question: </strong></label>
                 <input class="form-control" type="text" id="questionOther" name="questionOther"
                        value="{{ @clientQuestionOther }}">
 
@@ -130,7 +132,7 @@
             </check>
 
             <div id="incNumDiv" class="d-none">
-                <label for="incidentNum"><strong>Incident Report Number:</strong></label>
+                <label for="incidentNum"><strong><span class="text-danger">*</span> Incident Report Number:</strong></label>
                 <input class="form-control" type="text" id="incidentNum" name="incidentNum"
                        value="{{ @clientIncReportNum }}">
 

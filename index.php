@@ -1,5 +1,9 @@
 <?php
-//This is my CONTROLLER
+/**
+ * Controller for site that utilizes the functions in the Controller class
+ * @author Dana Clemmer, Dailee Howard
+ * index.php
+ */
 
 //Turn on error reporting
 ini_set('display_errors', 1);
@@ -10,9 +14,6 @@ require_once('vendor/autoload.php');
 
 //Connect to database using PDO
 require($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
-
-//Start a session
-//session_start();
 
 //Create an instance of the Base class
 $f3 = Base::instance();
@@ -39,10 +40,10 @@ $f3->route('GET|POST /', function () {
     $controller->login();
 });
 
-//Define a "status" route
-$f3->route('GET|POST /status', function () {
+//Define a "dashboard" route
+$f3->route('GET|POST /dashboard', function () {
     global $controller;
-    $controller->status();
+    $controller->dashboard();
 });
 
 //Define a "form" route

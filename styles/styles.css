@@ -5,7 +5,7 @@ Styles for site/app
 */
 
 /***** Styles across all pages ******/
-h1, h3, h4, #newFormButton, #backToStatus, nav.navbar {
+h1, h3, h4, #newFormButton, #backToDashboard, nav.navbar {
     font-family: BigNoodleTitling, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
@@ -43,9 +43,13 @@ li.nav-item {
     }
 }
 
+#nav-form {
+    padding-left: 0.8em!important;
+}
 
-/***** Status Pg Styles ******/
-header#status-header {
+
+/***** Dashboard Pg Styles ******/
+header#dashboard-header {
     height: 20em;
     background: url(../images/Misty-Forest.jpg) no-repeat scroll;
     background-size: cover;
@@ -64,17 +68,17 @@ header h1 {
     right: 0;
 }
 
-#newFormButton, #backToStatus {
+#newFormButton, #backToDashboard {
     padding: 10px;
     background-color: white;
     border: 1px solid grey;
 }
 
-input.submit-form:hover, #newFormButton:hover, #backToStatus:hover {
+input.submit-form:hover, #newFormButton:hover, #backToDashboard:hover {
     background-color: #2c882b;
 }
 
-#newFormButton a, #backToStatus a {
+#newFormButton a, #backToDashboard a {
     color: black!important;
     text-decoration: none;
 }

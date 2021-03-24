@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class Controller for site
  * @author Dana Clemmer, Dailee Howard
@@ -29,7 +28,7 @@ class Controller
 
             //get employee associated with input username and password using query from Database class
             if ($database->getEmployee($employeeUsername, $employeePassword)) {
-                //Login is valid -> Store the employee data to a class and proceed to the Status page
+                //Login is valid -> Store the employee data to a class and proceed to the dashboard page
                 $employeeAccountRow = $database->getEmployee($employeeUsername, $employeePassword);
 
                 if (is_null($employeeAccountRow['workPhoneExtension'])) {
@@ -53,7 +52,7 @@ class Controller
                     $_SESSION['employee'] = $manager;
                 }
 
-                $this->_f3->reroute('/status');
+                $this->_f3->reroute('/dashboard');
             } else {
                 //Login is not valid -> Set an error in F3 hive
                 $this->_f3->set('errors["login"]', "*Incorrect username and/or password");
@@ -68,8 +67,8 @@ class Controller
         echo $view->render('views/login.html');
     }
 
-    /** Display status page */
-    function status()
+    /** Display dashboard page */
+    function dashboard()
     {
         global $database;
         global $dataLayer;
@@ -115,7 +114,6 @@ class Controller
 
         $this->_f3->set('incidents', $database->getIncidents());
         //$this->_f3->set('dayHistory', $database->getDayHistory(date('YYYY-mm-dd')));
-        //$this->_f3->set('notifications', $_SESSION['notifications']);
         $this->_f3->set('recentRows', $database->getRecentRowsIncident());
         $totalPatronsToday = $database->getTotalPatronsToday($currentDateSQL);
         $this->_f3->set('totalPatronsToday', $totalPatronsToday);
@@ -129,7 +127,7 @@ class Controller
 
         //Display a view
         $view = new Template();
-        echo $view->render('views/status.html');
+        echo $view->render('views/dashboard.html');
     }
 
     /** Display form page */
@@ -328,12 +326,6 @@ class Controller
 
                 $database->insertDayHistory($dayHistory);
                 $database->updateDayHistory($dayHistory, $_SESSION['currentDate']);
-
-
-                /* $_SESSION['notifications'] = $_SESSION['employee']->getFirstName() . " " . $_SESSION['employee']->getLastName()
-                     . " submitted a form at " . date("g:i a", strtotime($incident->getSubmissionTime()))
-                 . " on " . date("M d, Y", strtotime($incident->getSubmissionTime()));*/
-
 
                 $_SESSION['dayHistory'] = $dayHistory;
 

@@ -1,9 +1,4 @@
 <?php
-
-//get login credentials
-//require($_SERVER['HOME'] . '/logincredspatrontracker.php');
-//require('../views/includes/logincredspatrontracker.php');
-
 /**
  * Class Validate contains validation functions for site/app
  * @author Dana Clemmer, Dailee Howard

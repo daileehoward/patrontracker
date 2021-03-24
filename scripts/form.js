@@ -7,7 +7,6 @@ Script for form page for site/app
 document.getElementById("location").onclick = otherLocation;
 document.getElementById("question").onclick = otherQuestion;
 document.getElementById("incidentReport").addEventListener("click", displayIncidentReport);
-
 window.onload = loadOtherBoxes;
 
 //This function will show other location textbox if "other" selected from dropdown
