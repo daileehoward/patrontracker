@@ -93,6 +93,7 @@ class Controller
 
         for ($startHour = $startOfDay; $startHour < $endOfDay; $startHour++) {
             $sessionName = $sessionHourNames[$sessionHourNamesIndex];
+
             if ($startHour <= 9) {
                 $hourHistorySHD1 =
                     $database->getHourHistory($currentDateSQL, 1, ("0" . (string)($startHour)));
@@ -101,6 +102,7 @@ class Controller
                     $database->getHourHistory($currentDateSQL, 2, ("0" . (string)($startHour)));
                 $this->_f3->set($sessionName . 'SHD2', $hourHistorySHD2);
             }
+
             $hourHistorySHD1 =
                 $database->getHourHistory($currentDateSQL, 1, ((string)($startHour)));
             $this->_f3->set($sessionName . 'SHD1', $hourHistorySHD1);
