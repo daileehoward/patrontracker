@@ -296,7 +296,7 @@ class Database
      * insert query to insert dayHistory into database
      * @param $dayHistory dayHistory object passed in
      */
-    function insertDayHistory($dayHistory)
+    function insertNewDayHistory($dayDate)
     {
         /* INSERT QUERY */
 
@@ -309,14 +309,17 @@ class Database
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
+        // Empty int parameter
+        $intZero = 0;
+
         //Bind the parameters
-        $statement->bindParam(':dayDate', $dayHistory->getDate(), PDO::PARAM_STR);
-        $statement->bindParam(':totalIncidents', $dayHistory->getTotalIncidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalZoomIncidents', $dayHistory->getZoomIncidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalPhoneIncidents', $dayHistory->getPhoneIncidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalSHD1Incidents', $dayHistory->getShd1Incidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalSHD2Incidents', $dayHistory->getShd2Incidents(), PDO::PARAM_INT);
-        $statement->bindParam(':totalIncidentsReportsFiled', $dayHistory->getIncidentReportsFiled(), PDO::PARAM_INT);
+        $statement->bindParam(':dayDate', $dayDate, PDO::PARAM_STR);
+        $statement->bindParam(':totalIncidents', $intZero, PDO::PARAM_INT);
+        $statement->bindParam(':totalZoomIncidents', $intZero, PDO::PARAM_INT);
+        $statement->bindParam(':totalPhoneIncidents', $intZero, PDO::PARAM_INT);
+        $statement->bindParam(':totalSHD1Incidents', $intZero, PDO::PARAM_INT);
+        $statement->bindParam(':totalSHD2Incidents', $intZero, PDO::PARAM_INT);
+        $statement->bindParam(':totalIncidentsReportsFiled', $intZero, PDO::PARAM_INT);
 
         //Execute the statement
         $statement->execute();
@@ -325,9 +328,8 @@ class Database
     /**
      * update query to increment dayHistory columns
      * @param $dayHistory dayHistory object passed in
-     * @param $dayDate passed in date
      */
-    function updateDayHistory($dayHistory, $dayDate)
+    function updateDayHistory($dayHistory)
     {
         /* UPDATE QUERY */
 
@@ -347,7 +349,7 @@ class Database
         $statement->bindParam(':newTotalSHD1Incidents', $dayHistory->getShd1Incidents(), PDO::PARAM_INT);
         $statement->bindParam(':newTotalSHD2Incidents', $dayHistory->getShd2Incidents(), PDO::PARAM_INT);
         $statement->bindParam(':newTotalIncidentsReportsFiled', $dayHistory->getIncidentReportsFiled(), PDO::PARAM_INT);
-        $statement->bindParam(':dayDate', $dayDate, PDO::PARAM_STR);
+        $statement->bindParam(':dayDate', $dayHistory->getDate(), PDO::PARAM_STR);
 
         //Execute
         $statement->execute();
@@ -361,7 +363,7 @@ class Database
         /* SELECT QUERY WITH FETCH (gets one row) */
 
         //Define the query
-        $sql = "SELECT * FROM dayHistory WHERE dayDate = :dayDate";
+        $sql = "SELECT * FROM dayHistory WHERE dayDate = :dayDate LIMIT 1";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);

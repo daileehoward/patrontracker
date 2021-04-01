@@ -179,7 +179,6 @@ class Controller
             $clientIncReportNum = trim($_POST['incidentNum']);
             $comments = trim($_POST['comments']);
 
-
             if ($validator->verifiedAccountName($employeeName, ($_SESSION['employee']->getFirstName() . " " .
                 $_SESSION['employee']->getLastName()))) {
                 $incident->setEmployeeId($_SESSION['employee']->getEmployeeID());
@@ -205,6 +204,14 @@ class Controller
                 $date = $date->format('Y-m-d');
 
                 $incident->setDateHelped($date);
+
+                $originalDayHistory = $database->getDayHistory($date);
+
+                if (empty($originalDayHistory)) {
+                    $database->insertNewDayHistory($date);
+                    $originalDayHistory = $database->getDayHistory($date);
+                }
+
                 $dayHistory->setDate($date);
             } else {
                 $this->_f3->set("errors[date]", "*Date is required and needs to follow the correct format");
@@ -212,35 +219,38 @@ class Controller
 
             if ($validator->validPosition($employeePosition)) {
                 $incident->setPosition($employeePosition);
+
+                if (empty($originalDayHistory['totalIncidents'])) {
+                    $dayHistory->setTotalIncidents(1);
+                } else {
+                    $dayHistory->setTotalIncidents($originalDayHistory['totalIncidents'] + 1);
+                }
+
                 //shd1
                 if ($employeePosition == 1) {
-                    if (is_null($dayHistory->getShd1Incidents())) {
+                    if (empty($originalDayHistory['totalSHD1Incidents'])) {
                         $dayHistory->setShd1Incidents(1);
                     } else {
-                        $dayHistory->setShd1Incidents($dayHistory->getShd1Incidents() + 1);
+                        $dayHistory->setShd1Incidents($originalDayHistory['totalSHD1Incidents'] + 1);
                     }
-                    if (is_null($dayHistory->getShd2Incidents())) {
+
+                    if (empty($originalDayHistory['totalSHD2Incidents'])) {
                         $dayHistory->setShd2Incidents(0);
-                    }
-                    if (is_null($dayHistory->getTotalIncidents())) {
-                        $dayHistory->setTotalIncidents(1);
                     } else {
-                        $dayHistory->setTotalIncidents($dayHistory->getTotalIncidents() + 1);
+                        $dayHistory->setShd2Incidents($originalDayHistory['totalSHD2Incidents']);
                     }
                 } //shd2
                 else if ($employeePosition == 2) {
-                    if (is_null($dayHistory->getShd2Incidents())) {
+                    if (empty($originalDayHistory['totalSHD2Incidents'])) {
                         $dayHistory->setShd2Incidents(1);
                     } else {
-                        $dayHistory->setShd2Incidents($dayHistory->getShd2Incidents() + 1);
+                        $dayHistory->setShd2Incidents($originalDayHistory['totalSHD2Incidents'] + 1);
                     }
-                    if (is_null($dayHistory->getShd1Incidents())) {
+
+                    if (empty($originalDayHistory['totalSHD1Incidents'])) {
                         $dayHistory->setShd1Incidents(0);
-                    }
-                    if (is_null($dayHistory->getTotalIncidents())) {
-                        $dayHistory->setTotalIncidents(1);
                     } else {
-                        $dayHistory->setTotalIncidents($dayHistory->getTotalIncidents() + 1);
+                        $dayHistory->setShd1Incidents($originalDayHistory['totalSHD1Incidents']);
                     }
                 }
             } else {
@@ -251,22 +261,28 @@ class Controller
                 $incident->setContactMethod($clientMethod);
 
                 if ($clientMethod == "zoom") {
-                    if (is_null($dayHistory->getZoomIncidents())) {
+                    if (empty($originalDayHistory['totalZoomIncidents'])) {
                         $dayHistory->setZoomIncidents(1);
                     } else {
-                        $dayHistory->setZoomIncidents($dayHistory->getZoomIncidents() + 1);
+                        $dayHistory->setZoomIncidents($originalDayHistory['totalZoomIncidents'] + 1);
                     }
-                    if (is_null($dayHistory->getPhoneIncidents())) {
+
+                    if (empty($originalDayHistory['totalPhoneIncidents'])) {
                         $dayHistory->setPhoneIncidents(0);
+                    } else {
+                        $dayHistory->setPhoneIncidents($originalDayHistory['totalZoomIncidents']);
                     }
                 } else if ($clientMethod == "phone") {
-                    if (is_null($dayHistory->getPhoneIncidents())) {
+                    if (empty($originalDayHistory['totalPhoneIncidents'])) {
                         $dayHistory->setPhoneIncidents(1);
                     } else {
-                        $dayHistory->setPhoneIncidents($dayHistory->getPhoneIncidents() + 1);
+                        $dayHistory->setPhoneIncidents($originalDayHistory['totalPhoneIncidents'] + 1);
                     }
-                    if (is_null($dayHistory->getZoomIncidents())) {
+
+                    if (empty($originalDayHistory['totalZoomIncidents'])) {
                         $dayHistory->setZoomIncidents(0);
+                    } else {
+                        $dayHistory->setZoomIncidents($originalDayHistory['totalZoomIncidents']);
                     }
                 }
             } else {
@@ -311,10 +327,11 @@ class Controller
             if (!empty($clientIncidentReport)) {
                 $incident->setFiledIncidentReport("Yes");
 
-                if (is_null($dayHistory->getIncidentReportsFiled())) {
+                if (empty($originalDayHistory['totalIncidentsReportsFiled'])) {
                     $dayHistory->setIncidentReportsFiled(1);
                 } else {
-                    $dayHistory->setIncidentReportsFiled($dayHistory->getIncidentReportsFiled() + 1);
+                    $dayHistory->setIncidentReportsFiled(
+                        $originalDayHistory['totalIncidentsReportsFiled'] + 1);
                 }
 
                 if ($validator->validIncidentReport($clientIncReportNum)) {
@@ -326,13 +343,12 @@ class Controller
             } else {
                 $incident->setFiledIncidentReport("No");
 
-                if (is_null($dayHistory->getIncidentReportsFiled())) {
+                if (empty($originalDayHistory['totalIncidentsReportsFiled'])) {
                     $dayHistory->setIncidentReportsFiled(0);
                 } else {
-                    $dayHistory->setIncidentReportsFiled($dayHistory->getIncidentReportsFiled());
+                    $dayHistory->setIncidentReportsFiled($originalDayHistory['totalIncidentsReportsFiled']);
                 }
             }
-
             if (isset($comments)) {
                 $incident->setComments($comments);
             }
@@ -344,8 +360,7 @@ class Controller
                 $database->insertIncident($incident);
                 $_SESSION['incident'] = $incident;
 
-                $database->insertDayHistory($dayHistory);
-                $database->updateDayHistory($dayHistory, $_SESSION['currentDate']);
+                $database->updateDayHistory($dayHistory);
 
                 $_SESSION['dayHistory'] = $dayHistory;
 
