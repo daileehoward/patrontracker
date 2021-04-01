@@ -414,7 +414,7 @@ class Database
     function getTotalPatronsWeek($dayDate)
     {
         //Define the query
-        $sql = "SELECT totalIncidents FROM dayHistory WHERE YEARWEEK(:dayDate)";
+        $sql = "SELECT totalIncidents FROM dayHistory WHERE YEARWEEK(:dayDate) = YEARWEEK(dayDate)";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -425,11 +425,11 @@ class Database
         //Execute the statement
         $statement->execute();
 
-        $results = $statement->fetch(PDO::FETCH_ASSOC);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
         $totalPatrons = 0;
 
         foreach ($results as $result) {
-            $totalPatrons += $result;
+            $totalPatrons += (int)($result['totalIncidents']);
         }
 
         return $totalPatrons;
