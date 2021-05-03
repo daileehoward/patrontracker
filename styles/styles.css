@@ -201,6 +201,22 @@ input.submit-login, input.submit-form {
     }
 }
 
+/***** Register Styles ******/
+form#registration {
+    width: 30em;
+    border: 13px solid #000000d9;
+    background-color: #2c882bc4;
+}
+
+div.registration {
+    padding: 7em 0 7em 0;
+    height: 100%;
+    background-image: url(../images/grc.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
 
 /***** Logout Styles ******/
 

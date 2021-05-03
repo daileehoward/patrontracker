@@ -1,12 +1,11 @@
-<!DOCTYPE html>
+<!--header.html header file for app-->
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>New Account</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/styles.css">
@@ -16,5 +15,66 @@
 </head>
 <body>
 
+<nav class="navbar navbar-expand-md navbar-dark green-color fixed-top" id="navbar-site">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img id="grLogo" class="rounded pr-3" src="images/green-river-logo.png"
+                                              alt="Green River College Logo">GRC SHD Patron Tracker</a>
+    </div>
+</nav>
+<div class="content-wrap registration">
+    <form id="registration" class="container rounded shadow pt-3 pb-2" action="#" method="post">
+        <h1 class="font-weight-bold text-center text-white">New Account Registration</h1>
+        <hr class="bg-white">
+
+        <div class="form-group">
+            <label class="font-weight-bold text-white" for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName">
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold text-white" for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName">
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold text-white" for="email">Employee Email</label>
+            <input type="text" class="form-control" id="email" name="email">
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold text-white" for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username">
+        </div>
+
+        <label class="font-weight-bold text-white" for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        <br>
+
+        <div class="form-group">
+            <label class="font-weight-bold text-white" for="manager">
+                Are you registering as a manager?
+                <input class="pl-4" type="checkbox" id="manager" name="manager">
+            </label>
+        </div>
+
+        <div id="extensionDiv" class="form-group d-none">
+            <label class="font-weight-bold text-white" for="managerExtension">Work Phone Extension</label>
+            <input type="text" class="form-control" id="managerExtension" name="managerExtension" placeholder="1234">
+        </div>
+        <br>
+
+        <input type="submit" class="btn btn-primary submit-login rounded text-decoration-none" value="Create Account!">
+        <br>
+    </form>
+</div>
 </body>
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+<script src="scripts/register.js"></script>
 </html>

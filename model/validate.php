@@ -44,6 +44,21 @@ class Validate
             || preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $name);
     }
 
+    function validString($string)
+    {
+        return !empty($text) && preg_match("^[a-zA-Z0-9_.-]*$", $string);
+    }
+
+    function validEmail($employeeEmail)
+    {
+        return !empty($employeeEmail) && preg_match("@greenriver.edu$", $employeeEmail);
+    }
+
+    function validExtension($extension)
+    {
+        return !empty($extension) && preg_match("\d{4}", $extension);
+    }
+
     /**
      * @param $employeeName
      * @param $verifiedEmployeeName

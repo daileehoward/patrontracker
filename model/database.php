@@ -129,9 +129,8 @@ class Database
         /* INSERT QUERY */
 
         //Define the query
-        $sql = "INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, manager, 
-                workPhoneExtension) VALUES (:firstName, :lastName, :username, :userPassword, :employeeEmail, :manager, 
-                :workPhoneExtension)";
+        $sql = "INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail) 
+                VALUES (:firstName, :lastName, :username, :userPassword, :employeeEmail)";
 
         //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -143,12 +142,31 @@ class Database
         $statement->bindParam(':userPassword', $employee->getPassword(), PDO::PARAM_STR);
         $statement->bindParam(':employeeEmail', $employee->getEmail(), PDO::PARAM_STR);
 
+        //Execute
+        $statement->execute();
+    }
 
-        $manager = $employee instanceof Manager ? 1 : 0;
-        $statement->bindParam(':manager', $manager, PDO::PARAM_BOOL);
-        if ($manager == 1) {
-            $statement->bindParam(':workPhoneExtension', $employee->getWorkPhoneExtension(), PDO::PARAM_INT);
-        }
+    function insertManager($manager)
+    {
+        /* INSERT QUERY */
+
+        //Define the query
+        $sql = "INSERT INTO employees (firstName, lastName, username, userPassword, employeeEmail, workPhoneExtension) 
+                VALUES (:firstName, :lastName, :username, :userPassword, :employeeEmail, :workPhoneExtension)";
+
+        //Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':firstName', $manager->getFirstName(), PDO::PARAM_STR);
+        $statement->bindParam(':lastName', $manager->getLastName(), PDO::PARAM_STR);
+        $statement->bindParam(':username', $manager->getUsername(), PDO::PARAM_STR);
+        $statement->bindParam(':userPassword', $manager->getPassword(), PDO::PARAM_STR);
+        $statement->bindParam(':employeeEmail', $manager->getEmail(), PDO::PARAM_STR);
+        $statement->bindParam(':workPhoneExtension', $manager->getWorkPhoneExtension(), PDO::PARAM_INT);
+
+        //$manager = $employee instanceof Manager ? 1 : 0;
+        //$statement->bindParam(':manager', $manager, PDO::PARAM_BOOL);
 
         //Execute
         $statement->execute();

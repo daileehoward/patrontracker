@@ -77,6 +77,108 @@ class Controller
     /** Display dashboard page */
     function register()
     {
+        global $database;
+        global $dataLayer;
+        global $validator;
+        global $employee;
+        global $manager;
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //Get the data from the POST array
+            $employeeFirstName = trim($_POST['firstName']);
+            $employeeLastName = trim($_POST['lastName']);
+            $employeeEmail = trim($_POST['email']);
+            $employeeUsername = trim($_POST['username']);
+            $employeePassword = trim($_POST['password']);
+
+            if ($_POST['manager']) {
+                $managerExtension = trim($_POST['managerExtension']);
+
+                if ($validator->validExtension($managerExtension)) {
+                    $manager->setWorkPhoneExtension($managerExtension);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validName($employeeFirstName)) {
+                    $manager->setFirstName($employeeFirstName);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validName($employeeLastName)) {
+                    $manager->setLastName($employeeLastName);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validEmail($employeeEmail)) {
+                    $manager->setEmail($employeeEmail);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validString($employeeUsername)) {
+                    $manager->setUsername($employeeUsername);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validString($employeePassword)) {
+                    $employeePasswordHashed = password_hash($employeePassword, PASSWORD_DEFAULT);
+                    $manager->setPassword($employeePasswordHashed);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+            } else {
+                if ($validator->validName($employeeFirstName)) {
+                    $employee->setFirstName($employeeFirstName);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validName($employeeLastName)) {
+                    $employee->setLastName($employeeLastName);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validEmail($employeeEmail)) {
+                    $employee->setEmail($employeeEmail);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validString($employeeUsername)) {
+                    $employee->setUsername($employeeUsername);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+
+                if ($validator->validString($employeePassword)) {
+                    $employeePasswordHashed = password_hash($employeePassword, PASSWORD_DEFAULT);
+                    $employee->setPassword($employeePasswordHashed);
+                } else {
+                    //$this->_f3->set("errors[time]", "*Time is required and needs to follow the correct format");
+                }
+            }
+
+            if (empty($this->_f3->get('errors'))) {
+                if ($employee->getUsername()) {
+                    $database->insertEmployee($employee);
+                } else {
+                    $database->insertManager($manager);
+                }
+
+                // TODO If work email matches approved ones in database, create account
+                // TODO Look into valid email regex code
+                // TODO Set proper errors
+
+                //Redirect to login page
+                $this->_f3->reroute('/');
+            }
+        }
+
         //Display a view
         $view = new Template();
         echo $view->render('views/register.html');
