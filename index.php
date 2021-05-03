@@ -41,6 +41,12 @@ $f3->route('GET|POST /', function () {
 });
 
 //Define a "dashboard" route
+$f3->route('GET|POST /register', function () {
+    global $controller;
+    $controller->register();
+});
+
+//Define a "dashboard" route
 $f3->route('GET|POST /dashboard', function () {
     global $controller;
     $controller->dashboard();

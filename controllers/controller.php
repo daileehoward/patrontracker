@@ -75,6 +75,14 @@ class Controller
     }
 
     /** Display dashboard page */
+    function register()
+    {
+        //Display a view
+        $view = new Template();
+        echo $view->render('views/register.html');
+    }
+
+    /** Display dashboard page */
     function dashboard()
     {
         global $database;
