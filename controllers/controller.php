@@ -26,33 +26,40 @@ class Controller
             $employeeUsername = trim($_POST['username']);
             $employeePassword = trim($_POST['password']);
 
+            $employeePasswordHashed = password_hash($employeePassword, PASSWORD_DEFAULT);
+
             //get employee associated with input username and password using query from Database class
-            if ($database->getEmployee($employeeUsername, $employeePassword)) {
+            if ($database->getEmployee($employeeUsername, $employeePasswordHashed)) {
                 //Login is valid -> Store the employee data to a class and proceed to the dashboard page
-                $employeeAccountRow = $database->getEmployee($employeeUsername, $employeePassword);
+                $employeeAccountRow = $database->getEmployee($employeeUsername, $employeePasswordHashed);
 
-                if (is_null($employeeAccountRow['workPhoneExtension'])) {
-                    $employee->setEmployeeID($employeeAccountRow['employeeID']);
-                    $employee->setFirstName($employeeAccountRow['firstName']);
-                    $employee->setLastName($employeeAccountRow['lastName']);
-                    $employee->setEmail($employeeAccountRow['username']);
-                    $employee->setUsername($employeeAccountRow['userPassword']);
-                    $employee->setPassword($employeeAccountRow['employeeEmail']);
+                if (password_verify($employeePasswordHashed, $employee->getPassword())) {
+                    if (is_null($employeeAccountRow['workPhoneExtension'])) {
+                        $employee->setEmployeeID($employeeAccountRow['employeeID']);
+                        $employee->setFirstName($employeeAccountRow['firstName']);
+                        $employee->setLastName($employeeAccountRow['lastName']);
+                        $employee->setEmail($employeeAccountRow['employeeEmail']);
+                        $employee->setUsername($employeeAccountRow['username']);
+                        $employee->setPassword($employeeAccountRow['userPassword']);
 
-                    $_SESSION['employee'] = $employee;
+                        $_SESSION['employee'] = $employee;
+                    } else {
+                        $manager->setEmployeeID($employeeAccountRow['employeeID']);
+                        $manager->setFirstName($employeeAccountRow['firstName']);
+                        $manager->setLastName($employeeAccountRow['lastName']);
+                        $manager->setEmail($employeeAccountRow['employeeEmail']);
+                        $manager->setUsername($employeeAccountRow['userPassword']);
+                        $manager->setPassword($employeeAccountRow['userPassword']);
+                        $manager->setWorkPhoneExtension($employeeAccountRow['workPhoneExtension']);
+
+                        $_SESSION['employee'] = $manager;
+                    }
+
+                    $this->_f3->reroute('/dashboard');
                 } else {
-                    $manager->setEmployeeID($employeeAccountRow['employeeID']);
-                    $manager->setFirstName($employeeAccountRow['firstName']);
-                    $manager->setLastName($employeeAccountRow['lastName']);
-                    $manager->setEmail($employeeAccountRow['username']);
-                    $manager->setUsername($employeeAccountRow['userPassword']);
-                    $manager->setPassword($employeeAccountRow['employeeEmail']);
-                    $manager->setWorkPhoneExtension($employeeAccountRow['workPhoneExtension']);
-
-                    $_SESSION['employee'] = $manager;
+                    //Login is not valid -> Set an error in F3 hive
+                    $this->_f3->set('errors["login"]', "*Incorrect password");
                 }
-
-                $this->_f3->reroute('/dashboard');
             } else {
                 //Login is not valid -> Set an error in F3 hive
                 $this->_f3->set('errors["login"]', "*Incorrect username and/or password");
@@ -93,13 +100,13 @@ class Controller
 
         for ($startHour = $startOfDay; $startHour < $endOfDay; $startHour++) {
             $sessionName = $sessionHourNames[$sessionHourNamesIndex];
+
             if ($startHour <= 9) {
-                $startHour = "0" . (string)($startHour);
                 $hourHistorySHD1 =
-                    $database->getHourHistory($currentDateSQL, 1, ($startHour));
+                    $database->getHourHistory($currentDateSQL, 1, ("0" . (string)($startHour)));
                 $this->_f3->set($sessionName . 'SHD1', $hourHistorySHD1);
                 $hourHistorySHD2 =
-                    $database->getHourHistory($currentDateSQL, 2, ($startHour));
+                    $database->getHourHistory($currentDateSQL, 2, ("0" . (string)($startHour)));
                 $this->_f3->set($sessionName . 'SHD2', $hourHistorySHD2);
             }
 
